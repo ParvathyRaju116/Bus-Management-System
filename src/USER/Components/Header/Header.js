@@ -44,7 +44,7 @@ function Header() {
          <AppBar position="static" className="navbar">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+            <img className='logo ' src="https://i.postimg.cc/8z0KPDs6/13a15b0b31789ed21fc556c11f01cd04-removebg-preview.png" alt="" />
             <Typography
               variant="h6"
               noWrap
@@ -56,11 +56,11 @@ function Header() {
                 fontFamily: "monospace",
                 fontWeight: 700,
                 letterSpacing: ".3rem",
-                color: "Black",
+                color: "White",
                 textDecoration: "none",
               }}
             >
-              LOGO
+              TRANSITEASE
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -109,7 +109,7 @@ function Header() {
                 </MenuItem>
               </Menu>
             </Box>
-            <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+
             <Typography
               variant="h5"
               noWrap
@@ -126,7 +126,7 @@ function Header() {
                 textDecoration: "none",
               }}
             >
-              LOGO
+              TRANSITEASE
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               <Button

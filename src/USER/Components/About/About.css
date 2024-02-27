@@ -1,0 +1,24 @@
+.about{
+    text-align: justify;
+}
+.abtImg{
+    height: 400px;
+}
+.featurs{
+    height: 100px;
+    width: 100px;
+    /* background: linear-gradient(45deg, #FF4B2B, #FF416C); */
+    border:#FF416C 2px solid ;
+    opacity: 80%;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.feat{
+    text-align: justify;
+}
+.FImg{
+    height: 50px;
+   
+}
