@@ -21,30 +21,24 @@ function About() {
             <div className='d-flex justify-content-center align-items-center '>
 
 
-                <Row className="justify-content-center w-75">
-                    <Col className='text-center'>
-                        <div className="featurs">
+                <Row className="justify-content-center w-100 ms-5 ps-5 me-5 pe-5">
+                    <Col className='text-center  justify-content-center align-items-center '>
                             <img className='FImg' src="https://i.postimg.cc/50JQmjnv/bus-2.png" alt="" /> <br />
-                        </div>
-                    </Col>
-                    <Col>
-                        <div className="featurs">
-                            <img className='FImg' src="https://i.postimg.cc/50JQmjnv/bus-2.png" alt="" /> <br />
-                        </div>
-                    </Col>
-                    <Col>
-                        <div className="featurs">
-                        <img className='FImg' src="https://i.postimg.cc/50JQmjnv/bus-2.png" alt="" /> <br />
-
-                        </div>
+                        <p className='text'>Our system offers live, real-time tracking of buses on your route.</p>
 
                     </Col>
-                    <Col>
-                        <div className="featurs">
-                        <img className='FImg' src="https://i.postimg.cc/50JQmjnv/bus-2.png" alt="" /> <br />
-
-                        </div>
-
+                    <Col className='text-center  justify-content-center align-items-center '>
+                            <img className='FImg' src="https://i.postimg.cc/xdqhm5N7/bus-schedule.png" alt="" /> <br />
+                            <p className='text'>Get precise arrival time estimates based on current traffic conditions and bus speeds</p>
+                    </Col >
+                    <Col className='text-center  justify-content-center align-items-center '>
+                        <img className='FImg' src="https://i.postimg.cc/50bzG75K/bus-schedule-2.png" alt="" /> <br />
+                        <p className='text'>Our system helps optimize bus routes, ensuring efficient and timely service</p>
+                    </Col>
+                    <Col className='text-center  justify-content-center align-items-center '>
+                        <img className='FImg' src="https://i.postimg.cc/mDpQH3Md/map-1.png" alt="" /> <br />
+                        <p className='text'>
+                        Access detailed route maps, stops, schedules, and deviations for a clear understanding of the entire journey..</p>
                     </Col>
                 </Row>
 

@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import './Header.css'
+import { Link } from 'react-router-dom';
 
 
 const pages = ["Products", "Pricing", "Blog"];
@@ -102,7 +103,7 @@ function Header() {
                   <Typography textAlign="center">Blog</Typography>
                 </MenuItem>
                 <MenuItem>
-                  <Typography textAlign="center">About</Typography>
+                  <Typography textAlign="center"><a h>About</a></Typography>
                 </MenuItem>
                 <MenuItem>
                   <Typography textAlign="center">Contact</Typography>
@@ -193,11 +194,13 @@ function Header() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
+                   <MenuItem>
+                  <Typography textAlign="center"><Link to={"/profile"}>Profile</Link></Typography>
+                </MenuItem>
+                <MenuItem >
+                  <Typography textAlign="center">Logout</Typography>
+                </MenuItem>
+
               </Menu>
             </Box>
           </Toolbar>

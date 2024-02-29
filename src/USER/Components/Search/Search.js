@@ -1,6 +1,8 @@
 import React from 'react'
 import './Search.css'
-import { TextField } from '@mui/material'
+import { Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+
 
 function Search() {
     return (
@@ -9,9 +11,10 @@ function Search() {
             <div className="searchBody  text-center ">
                 <h1 className='m-4 searchHead'>Find My Bus</h1>
                 <div className='d-flex w-100 justify-content-center align-item-center'>
-                    <input type="text" className='form-control w-75  ' placeholder='Search' />
+                    <Link to={'/find-bus'}><button className=' searchBtn'>Search</button></Link>
 
-                </div>            </div>
+                </div>            
+                </div>
 
         </div>
     )

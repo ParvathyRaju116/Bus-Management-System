@@ -1,0 +1,17 @@
+.bustopLogo{
+    height: 30px;
+}
+.bustopBody{
+
+}
+.nearbusHead{
+    
+        background: linear-gradient(45deg, #FF4B2B, #FF416C);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        
+}
+h6{
+    color: rgb(185, 185, 185);
+}
