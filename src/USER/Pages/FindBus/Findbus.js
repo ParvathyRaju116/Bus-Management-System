@@ -11,7 +11,7 @@ function Findbus() {
                 <div className='input text-center w-75'>
                     <div className='d-flex'>
                         <i class="fa-solid fa-circle-dot locationIcon fs-3 m-3 " style={{ color: '#FF4B2B' }} ></i>
-                        <input type="text" placeholder='Youre Location' className='form-control shadow' />
+                        <input type="text" placeholder='Your Location' className='form-control shadow' />
                     </div>
                     <br />
                     <div className='d-flex'>
