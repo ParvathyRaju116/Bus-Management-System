@@ -167,7 +167,7 @@ function Header() {
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 <MenuItem>
-                  <Typography textAlign="center">Conact</Typography>
+                  <Typography textAlign="center">Contact</Typography>
                 </MenuItem>
               </Button>
             </Box>
