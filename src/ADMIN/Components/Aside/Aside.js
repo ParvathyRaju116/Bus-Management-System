@@ -8,6 +8,9 @@ import {
     CDBSidebarMenuItem,
     CDBSidebarFooter,
   } from 'cdbreact';
+  import Avatar from '@mui/material/Avatar';
+  import Stack from '@mui/material/Stack';
+
 function Aside() {
     
   return (
@@ -29,10 +32,12 @@ function Aside() {
 
         <CDBSidebarFooter style={{ textAlign: 'center' }}>
           <div
-            className="sidebar-btn-wrapper"
+            className="sidebar-btn-wrapper ms-3"
             style={{padding: '20px 5px'}}
           >
-            Sidebar Footer
+            <Stack direction="row" spacing={2}>
+      <Avatar alt="Admin" src="/static/images/avatar/1.jpg" /> <h5 className='mt-2'>Admin</h5>
+    </Stack>
           </div>
         </CDBSidebarFooter>
       </CDBSidebar>

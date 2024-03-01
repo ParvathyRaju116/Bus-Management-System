@@ -12,6 +12,9 @@ function Auth() {
     setIsSignUpActive(false);
   };
 
+
+
+
   return (
     <div className='auth-Container'>
       <div className={`container ${isSignUpActive ? 'right-panel-active' : ''}`}>
@@ -24,7 +27,7 @@ function Auth() {
               <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
             </div>
             <span>or use your email for registration</span>
-            <input type="text" placeholder="Name" />
+            <input type="text" placeholder="Name"/>
             <input type="email" placeholder="Email" />
             <input type="password" placeholder="Password" />
             <button>Sign Up</button>
