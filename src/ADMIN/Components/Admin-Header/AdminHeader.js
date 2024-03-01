@@ -12,12 +12,9 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 import { Badge } from '@mui/material';
 import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 
 
 const pages = ["Products", "Pricing", "Blog"];
@@ -26,14 +23,6 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 function AdminHeader() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const handleProfileMenuOpen = (event) => {
-        setAnchorEl(event.currentTarget);
-      };
-    
-      const menuId = 'primary-search-account-menu';
-
       
   
     const handleOpenNavMenu = (event) => {
@@ -105,7 +94,9 @@ function AdminHeader() {
                 }}
               >
                 <MenuItem>
-                  <Typography textAlign="center">Home</Typography>
+                 <Link to={"/admin-dashbord"} >
+                   <Typography textAlign="center text-white" style={{color:"white"}}>Home</Typography>
+                   </Link>
                 </MenuItem>
                 <MenuItem>
                   <Typography textAlign="center">Listing</Typography>
@@ -146,7 +137,7 @@ function AdminHeader() {
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 <MenuItem>
-                  <Typography textAlign="center">Home</Typography>
+                 <Link to={"/admin-dashbord"}> <Typography textAlign="center text-white" style={{textDecoration:'none',color:"white"}}>Home</Typography></Link>
                 </MenuItem>
               </Button>
               <Button
@@ -215,7 +206,7 @@ function AdminHeader() {
                 onClose={handleCloseUserMenu}
               >
                    <MenuItem>
-                  <Typography textAlign="center"><Link to={"/profile"}>Profile</Link></Typography>
+                  <Typography textAlign="center"><Link to={"/admin-profile"}>Profile</Link></Typography>
                 </MenuItem>
                 <MenuItem >
                   <Typography textAlign="center">Logout</Typography>

@@ -3,8 +3,7 @@ import './AdminDashboard.css'
 import { Col, Row } from 'react-bootstrap'
 import Aside from '../../Components/Aside/Aside'
 import ListOfBus from '../../Components/List of bus/ListOfBus'
-import Verification from '../../Components/Verification List/Verification'
-
+import Verification from '../../Components/Verification List on dashboard/Verification'
 
 function AdminDashboard() {
   return (

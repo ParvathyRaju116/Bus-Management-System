@@ -8,7 +8,7 @@ function About() {
             <div className='m-5 ps-5 pt-5'>
                 <Row>
                     <Col>
-                        <h1 className='mt-5'>About Us</h1>
+                        <h1 className='mt-5 aboutHead'>About Us</h1>
                         <p className='about'>
                             Welcome to our Bus Tracking Management System, your one-stop solution for real-time bus tracking, scheduling, and route management. We pride ourselves on offering a comprehensive platform that allows you to effortlessly monitor bus locations, check arrival times, and plan your journey with ease. Whether you're a commuter, a transportation manager, or a curious traveler, our system provides up-to-the-minute updates on bus locations, departure times, and estimated arrival rates. With user-friendly interfaces and precise GPS technology, we ensure that you're always in the know, enhancing your travel experience and making your daily commute more efficient. Join us in revolutionizing the way you navigate the city, empowering you with the information you need to make informed travel decisions
                         </p>

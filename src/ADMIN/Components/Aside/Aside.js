@@ -10,6 +10,7 @@ import {
   } from 'cdbreact';
   import Avatar from '@mui/material/Avatar';
   import Stack from '@mui/material/Stack';
+import { Link } from 'react-router-dom';
 
 function Aside() {
     
@@ -31,14 +32,17 @@ function Aside() {
         </CDBSidebarContent>
 
         <CDBSidebarFooter style={{ textAlign: 'center' }}>
-          <div
-            className="sidebar-btn-wrapper ms-3"
-            style={{padding: '20px 5px'}}
-          >
-            <Stack direction="row" spacing={2}>
-      <Avatar alt="Admin" src="/static/images/avatar/1.jpg" /> <h5 className='mt-2'>Admin</h5>
-    </Stack>
-          </div>
+         <Link to={"/admin-profile"}>
+            <div
+              className="sidebar-btn-wrapper ms-3"
+              style={{padding: '20px 5px',color:"white"}}
+
+            >
+              <Stack direction="row" spacing={2}>
+        <Avatar alt="Admin" src="/static/images/avatar/1.jpg" /> <h5 className='mt-2'>Admin</h5>
+      </Stack>
+            </div>
+         </Link>
         </CDBSidebarFooter>
       </CDBSidebar>
     </div>
