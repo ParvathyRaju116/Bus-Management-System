@@ -8,7 +8,7 @@ function About() {
       <div className="m-5 ps-5 pt-5">
         <Row>
           <Col>
-            <h1 className="mt-5">About Us</h1>
+            <h1 className="mt-5 aboutHead">About Us</h1>
             <p className="about">
               Welcome to our Bus Tracking Management System, your one-stop
               solution for real-time bus tracking, scheduling, and route

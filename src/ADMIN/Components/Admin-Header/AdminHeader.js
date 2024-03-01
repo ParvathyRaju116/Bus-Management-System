@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React from 'react'
+import './AdminHeader.css'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,34 +12,34 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import './Header.css'
 import { Link } from 'react-router-dom';
+import { Badge } from '@mui/material';
+import MailIcon from '@mui/icons-material/Mail';
 
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-function Header() {
-    
+function AdminHeader() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
-
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
+      
+  
+    const handleOpenNavMenu = (event) => {
+      setAnchorElNav(event.currentTarget);
+    };
+    const handleOpenUserMenu = (event) => {
+      setAnchorElUser(event.currentTarget);
+    };
+  
+    const handleCloseNavMenu = () => {
+      setAnchorElNav(null);
+    };
+  
+    const handleCloseUserMenu = () => {
+      setAnchorElUser(null);
+    };
+  
   return (
     <div>
          <AppBar position="static" className="navbar">
@@ -93,7 +94,9 @@ function Header() {
                 }}
               >
                 <MenuItem>
-                  <Typography textAlign="center">Home</Typography>
+                 <Link to={"/admin-dashbord"} >
+                   <Typography textAlign="center text-white" style={{color:"white"}}>Home</Typography>
+                   </Link>
                 </MenuItem>
                 <MenuItem>
                   <Typography textAlign="center">Listing</Typography>
@@ -134,7 +137,7 @@ function Header() {
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 <MenuItem>
-                  <Typography textAlign="center">Home</Typography>
+                 <Link to={"/admin-dashbord"}> <Typography textAlign="center text-white" style={{textDecoration:'none',color:"white"}}>Home</Typography></Link>
                 </MenuItem>
               </Button>
               <Button
@@ -166,10 +169,19 @@ function Header() {
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 <MenuItem>
-                  <Typography textAlign="center">Contact</Typography>
+                  <Typography textAlign="center">Conact</Typography>
                 </MenuItem>
               </Button>
             </Box>
+
+            <Box className="me-3" sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+              <Badge badgeContent={4} color="error">
+                <MailIcon />
+              </Badge>
+            </IconButton>
+          
+          </Box>
 
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
@@ -194,7 +206,7 @@ function Header() {
                 onClose={handleCloseUserMenu}
               >
                    <MenuItem>
-                  <Typography textAlign="center"><Link to={"/profile"}>Profile</Link></Typography>
+                  <Typography textAlign="center"><Link to={"/admin-profile"}>Profile</Link></Typography>
                 </MenuItem>
                 <MenuItem >
                   <Typography textAlign="center">Logout</Typography>
@@ -209,5 +221,4 @@ function Header() {
   )
 }
 
-export default Header
-
+export default AdminHeader

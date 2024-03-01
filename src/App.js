@@ -7,6 +7,9 @@ import Findbus from './USER/Pages/FindBus/Findbus';
 import Profile from './USER/Pages/Profile/Profile';
 import AdminAuth from './ADMIN/Pages/Admin_Auth/AdminAuth';
 import AdminDashboard from './ADMIN/Pages/Admin_Dashboard/AdminDashboard';
+import Request from './ADMIN/Pages/Request/Request';
+import BusDetails from './ADMIN/Pages/Bus Details/BusDetails';
+import AdminProfile from './ADMIN/Pages/Admin Profile/AdminProfile';
 
 
 
@@ -23,7 +26,9 @@ function App() {
         {/* ADMIN */}
         <Route path='/admin-auth' element={<AdminAuth></AdminAuth>}></Route>
         <Route path='/admin-dashbord' element={<AdminDashboard></AdminDashboard>}></Route>
-
+        <Route path='/admin-request' element={<Request></Request>}></Route>
+        <Route path='/admin-bus-details' element={<BusDetails></BusDetails>}></Route>
+        <Route path='/admin-profile' element={<AdminProfile></AdminProfile>}></Route>
       </Routes>
 
     </div>

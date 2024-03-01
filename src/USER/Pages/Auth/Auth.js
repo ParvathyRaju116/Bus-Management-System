@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Auth.css';
+
 import axios from 'axios';
 import { registerApi } from '../../../SERVICES/AllAPI';
 import { useNavigate } from 'react-router-dom';
@@ -17,6 +18,7 @@ function Auth() {
   const handleSignInClick = () => {
     setIsSignUpActive(false);
   };
+
 
   const [authData, setAuthData] = useState({
     name: "",
@@ -39,12 +41,24 @@ function Auth() {
     console.log(response);
   }
 
+
+  // login
+  const handleLogin=async(e)=>{
+    e.preventDefault()
+
+  }
+
+
+
+
+
   return (
     <div className='auth-Container'>
       <div className={`container ${isSignUpActive ? 'right-panel-active' : ''}`}>
         <div className="form-container sign-up-container">
           <form action="" onSubmit={handleRegister}>
             <h1>Create Account</h1>
+
             <input type="text" placeholder="Name" value={authData.name} onChange={(e) => setAuthData({ ...authData, name: e.target.value })} required/>
             <input type="tel" placeholder='Phone' value={authData.phone} onChange={(e) => setAuthData({ ...authData, phone: e.target.value })} required/>
             <input type="text" placeholder='Address' value={authData.address} onChange={(e) => setAuthData({ ...authData, address: e.target.value })} required/>
@@ -52,20 +66,16 @@ function Auth() {
             <input type="text" placeholder='Username' value={authData.username} onChange={(e) => setAuthData({ ...authData, username: e.target.value })} required/>
             <input type="password" placeholder="Password" value={authData.password} onChange={(e) => setAuthData({ ...authData, password: e.target.value })} required/>
             <button type='submit'>Sign Up</button>
+
           </form>
         </div>
         <div className="form-container sign-in-container">
-          <form action="#">
+          <form action="" onSubmit={handleRegister}>
             <h1>Sign in</h1>
-            <div className="social-container">
-              <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-              <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-              <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
-            </div>
-            <span>or use your account</span>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <a href="#">Forgot your password?</a>
+          
+            <input type="text" placeholder="User Name" value={authData.email_address} onChange={(e)=>setAuthData({...authData,email_address:e.target.value})} required />
+            <input type="password" placeholder="Password" value={authData.password} onChange={(e)=>setAuthData({...authData,password:e.target.value})} required/>
+            {/* <a href="#">Forgot your password?</a> */}
             <button>Sign In</button>
           </form>
         </div>
