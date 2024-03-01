@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import './Auth.css';
+
+import axios from 'axios';
 import { registerApi } from '../../../SERVICES/AllAPI';
+import { useNavigate } from 'react-router-dom';
+
 
 function Auth() {
+
+  const navigate=useNavigate()
   const [isSignUpActive, setIsSignUpActive] = useState(false);
 
   const handleSignUpClick = () => {
@@ -13,22 +19,25 @@ function Auth() {
     setIsSignUpActive(false);
   };
 
-  const [authData , setAuthData]=useState({
-     name:"",
-     phone:"",
-     address:"",
-     email_address:"",
-     username:"",
-     password:""
-  })
 
+  const [authData, setAuthData] = useState({
+    name: "",
+    phone: "",
+    address: "",
+    email_address: "",
+    username: "",
+    password: ""
+  })
   console.log(authData);
 
-  // register
-  const handleRegister=async(e)=>{
-    e.preventDefault()
-    const {name,phone,address,email_address,username,password}=authData
-    const response = registerApi(authData)
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const response = await registerApi(authData);
+    if(response.status==200){
+      setAuthData({name:"",phone:"",address:"",email_address:"",username:"",password:""})
+      navigate('/')
+
+    }
     console.log(response);
   }
 
@@ -42,19 +51,22 @@ function Auth() {
 
 
 
+
   return (
     <div className='auth-Container'>
       <div className={`container ${isSignUpActive ? 'right-panel-active' : ''}`}>
         <div className="form-container sign-up-container">
           <form action="" onSubmit={handleRegister}>
             <h1>Create Account</h1>
-            <input type="text" placeholder="Name" value={authData.name} onChange={(e)=>setAuthData({...authData,name:e.target.value})} required/>
-            <input type="tel" placeholder='Phone Number' value={authData.phone} onChange={(e)=>setAuthData({...authData,phone:e.target.value})} required/>
-            <input type="text" placeholder='Address' value={authData.address} onChange={(e)=>setAuthData({...authData,address:e.target.value})} required/>
-            <input type="email" placeholder="Email" value={authData.email_address} onChange={(e)=>setAuthData({...authData,email_address:e.target.value})} required/>
-            <input type="text" placeholder='UserName' value={authData.username} onChange={(e)=>setAuthData({...authData,username:e.target.value})} required/>
-            <input type="password" placeholder="Password" value={authData.password} onChange={(e)=>setAuthData({...authData,password:e.target.value})} required/>
-            <button >Sign Up</button>
+
+            <input type="text" placeholder="Name" value={authData.name} onChange={(e) => setAuthData({ ...authData, name: e.target.value })} required/>
+            <input type="tel" placeholder='Phone' value={authData.phone} onChange={(e) => setAuthData({ ...authData, phone: e.target.value })} required/>
+            <input type="text" placeholder='Address' value={authData.address} onChange={(e) => setAuthData({ ...authData, address: e.target.value })} required/>
+            <input type="email" placeholder="Email" value={authData.email_address} onChange={(e) => setAuthData({ ...authData, email_address: e.target.value })} required/>
+            <input type="text" placeholder='Username' value={authData.username} onChange={(e) => setAuthData({ ...authData, username: e.target.value })} required/>
+            <input type="password" placeholder="Password" value={authData.password} onChange={(e) => setAuthData({ ...authData, password: e.target.value })} required/>
+            <button type='submit'>Sign Up</button>
+
           </form>
         </div>
         <div className="form-container sign-in-container">
@@ -82,7 +94,7 @@ function Auth() {
           </div>
         </div>
       </div>
-      
+
     </div>
   );
 }
