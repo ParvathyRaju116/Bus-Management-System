@@ -3,6 +3,8 @@ import "./Profile.css";
 import Header from "../../Components/Header/Header";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
+import { Button } from "react-bootstrap";
+
 
 function Profile() {
   const [fullscreen, setFullscreen] = useState(true);
@@ -25,13 +27,13 @@ function Profile() {
             alt=""
           />
           <div className="text-start ps-5 me-5 pe-5 ms-5">
-            <p className="">Username :  </p>
+            <p className="">Username : </p>
             <hr />
             <p>Email :</p>
             <hr />
-            <p>Gender :</p>
+            <p>Phone :</p>
             <hr />
-            <p>Date Of Birth :</p>
+            <p>Address :</p>
             <hr />
           </div>
           <div className="text-end me-5 pe-5">
@@ -76,56 +78,35 @@ function Profile() {
                           aria-label="Email"
                         />
                       </Form.Group>
-                      {/* Gender */}
-                      <div className="">
-                        <Form.Group
-                          className="w-100 p-2 "
-                          controlId="exampleForm.ControlInput1"
-                        >
-                          <Form.Label>Gender</Form.Label>
-                          <div className="d-flex flex-row">
-                            <Form.Check className="ms-2">
-                              <Form.Check.Label
-                                htmlFor="genderRadios1"
-                                className="ms-2"
-                              >
-                                Male
-                              </Form.Check.Label>
-                              <Form.Check.Input
-                                type="radio"
-                                id="genderRadios1"
-                                name="genderRadios"
-                              />
-                            </Form.Check>
-                            <Form.Check className="ms-4">
-                              <Form.Check.Label
-                                htmlFor="Female"
-                                className="ms-2 "
-                              >
-                                Female
-                              </Form.Check.Label>
-                              <Form.Check.Input
-                                type="radio"
-                                id="Female"
-                                name="genderRadios"
-                              />
-                            </Form.Check>
-                          </div>
-                        </Form.Group>
-                      </div>
-                      {/* Date of Birth */}
-                      <Form.Group
-                        className=""
+                  
+                   {/* phone */}
+                   <Form.Group
+                        className="w-50 m-2"
                         controlId="exampleForm.ControlInput1"
                       >
-                        <Form.Label>Date of Birth</Form.Label>
+                        <Form.Label>Phone</Form.Label>
                         <Form.Control
-                          type="date"
-                          className="form-control  focus-ring focus-ring-danger"
-                          placeholder="Date of Birth"
-                          aria-label="Date of Birth"
+                          className="form-control d-inline-flex focus-ring focus-ring-danger"
+                          placeholder="Phone"
+                          aria-label="Phone"
                         />
-                      </Form.Group>
+                         </Form.Group>
+                          {/* Address */}
+                   <Form.Group
+                        className="w-50 m-2"
+                        controlId="exampleForm.ControlInput1"
+                      >
+                        <Form.Label>Address</Form.Label>
+                        <Form.Control
+                          className="form-control d-inline-flex focus-ring focus-ring-danger"
+                          placeholder="Address"
+                          aria-label="address"
+                        />
+                         </Form.Group>
+                    
+                    <Button>Save</Button>
+
+
                     </Form>
                   </div>
                 </div>
