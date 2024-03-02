@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './Auth.css';
-import axios from 'axios';
 import { loginApi, registerApi } from '../../../SERVICES/AllAPI';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -18,6 +17,7 @@ function Auth() {
   const handleSignInClick = () => {
     setIsSignUpActive(false);
   };
+
 
   const [authData, setAuthData] = useState({
     name: "",
@@ -77,12 +77,14 @@ function Auth() {
 
 
 
+
   return (
     <div className='auth-Container'>
       <div className={`container ${isSignUpActive ? 'right-panel-active' : ''}`}>
         <div className="form-container sign-up-container">
           <form action="" onSubmit={handleRegister}>
             <h1>Create Account</h1>
+
             <input type="text" placeholder="Name" value={authData.name} onChange={(e) => setAuthData({ ...authData, name: e.target.value })} required/>
             <input type="tel" placeholder='Phone' value={authData.phone} onChange={(e) => setAuthData({ ...authData, phone: e.target.value })} required/>
             <input type="text" placeholder='Address' value={authData.address} onChange={(e) => setAuthData({ ...authData, address: e.target.value })} required/>
@@ -90,6 +92,7 @@ function Auth() {
             <input type="text" placeholder='Username' value={authData.username} onChange={(e) => setAuthData({ ...authData, username: e.target.value })} required/>
             <input type="password" placeholder="Password" value={authData.password} onChange={(e) => setAuthData({ ...authData, password: e.target.value })} required/>
             <button type='submit'>Sign Up</button>
+
           </form>
         </div>
         <div className="form-container sign-in-container">
@@ -100,6 +103,12 @@ function Auth() {
             <input type="password" placeholder="Password" value={authData.password} onChange={(e) => setAuthData({ ...authData, password: e.target.value })} required />
             <a href="#">Forgot your password?</a>
             <button type='submit'>Sign In</button>
+          <form action="" onSubmit={handleRegister}>
+            <h1>Sign in</h1>
+          
+            <input type="text" placeholder="User Name" value={authData.email_address} onChange={(e)=>setAuthData({...authData,email_address:e.target.value})} required />
+            <input type="password" placeholder="Password" value={authData.password} onChange={(e)=>setAuthData({...authData,password:e.target.value})} required/>
+            <button>Sign In</button>
           </form>
         </div>
         <div className="overlay-container">

@@ -1,11 +1,18 @@
 .dashboardBody{
 
 }
-.head{
-    height: 200px;
-    /* background-color: rgba(146, 146, 146, 0.718); */
-}
+
 .number{
-    height: 100px;
-    width: 100px;
+ justify-content: center;
+ align-items: center;
+  height: 230px;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  border-left: 10px solid;
+  border-image: linear-gradient(to bottom, #ff4b2b, #ff416d) 1;
+  border-radius: 0px 20px 20px 0px !important;
+
+}
+p{
+    
 }
