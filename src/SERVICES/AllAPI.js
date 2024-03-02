@@ -7,3 +7,16 @@ export const registerApi=async(body)=>{
 }
 
 // login api
+export const loginApi=async(body)=>{
+  return await commonApi('POST',`${BASE_URL}passenger/token/`,body,"")
+}
+
+// register for bus owner
+export const busOwnerregisterApi=async(body)=>{
+  return await commonApi('POST',`${BASE_URL}owner/register/`,body,"")
+}
+
+// login for bus owner
+export const busOwnerloginApi=async(body)=>{
+  return await commonApi('POST',`${BASE_URL}owner/token/`,body,"")
+}

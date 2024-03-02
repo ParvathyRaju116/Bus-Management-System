@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './Auth.css';
 import axios from 'axios';
-import { registerApi } from '../../../SERVICES/AllAPI';
+import { loginApi, registerApi } from '../../../SERVICES/AllAPI';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 function Auth() {
@@ -28,16 +29,53 @@ function Auth() {
   })
   console.log(authData);
 
+  // register
   const handleRegister = async (e) => {
     e.preventDefault();
     const response = await registerApi(authData);
     if(response.status==200){
-      setAuthData({name:"",phone:"",address:"",email_address:"",username:"",password:""})
-      navigate('/')
+      if(response.status==200){
+        setIsSignUpActive(false);
+        setAuthData({
+          name: "",
+          phone: "",
+          address: "",
+          username: "",
+          password: "",
+        });
+      }
+      else{
+        alert("Register API failed")
+      }      
 
     }
     console.log(response);
   }
+
+  // login
+  const handleLogin=async(e)=>{
+    e.preventDefault()
+      const response= await loginApi (authData)
+      if(response.status==200){
+        toast('Login success', {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+        navigate('/')
+        console.log(response.data);
+      }
+      else{
+        alert('incorrect password or username')
+      }     
+    }
+
+
 
   return (
     <div className='auth-Container'>
@@ -55,18 +93,13 @@ function Auth() {
           </form>
         </div>
         <div className="form-container sign-in-container">
-          <form action="#">
+          <form action="" onSubmit={handleLogin}>
             <h1>Sign in</h1>
-            <div className="social-container">
-              <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-              <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-              <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
-            </div>
-            <span>or use your account</span>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+         
+            <input type="text" placeholder="Username" value={authData.username} onChange={(e) => setAuthData({ ...authData, username: e.target.value })} required />
+            <input type="password" placeholder="Password" value={authData.password} onChange={(e) => setAuthData({ ...authData, password: e.target.value })} required />
             <a href="#">Forgot your password?</a>
-            <button>Sign In</button>
+            <button type='submit'>Sign In</button>
           </form>
         </div>
         <div className="overlay-container">
@@ -84,7 +117,7 @@ function Auth() {
           </div>
         </div>
       </div>
-
+<ToastContainer/>
     </div>
   );
 }
