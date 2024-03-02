@@ -103,6 +103,7 @@ function Auth() {
             <input type="password" placeholder="Password" value={authData.password} onChange={(e) => setAuthData({ ...authData, password: e.target.value })} required />
             <a href="#">Forgot your password?</a>
             <button type='submit'>Sign In</button>
+            </form>
           <form action="" onSubmit={handleRegister}>
             <h1>Sign in</h1>
           
