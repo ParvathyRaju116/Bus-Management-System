@@ -1,14 +1,54 @@
 import React, { useState } from 'react'
 import './AdminAuth.css'
+import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { AdminLoginApi } from '../../../SERVICES/AllAPI';
+
 
 function AdminAuth() {
     const [isSignUpActive, setIsSignUpActive] = useState(false);
+    const navigate=useNavigate()
 
   
   
     const handleSignInClick = () => {
       setIsSignUpActive(false);
     };
+
+    const [authData, setAuthData] = useState({
+      username: "",
+      password: ""
+    })
+
+    // function for admin login
+    const handleLogin=async(e)=>{
+      e.preventDefault()
+        const response= await AdminLoginApi(authData)
+        if(response.status==200){
+          toast('Login success', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+          navigate('/admin-dashbord')
+          localStorage.setItem("token",response.data.token)
+          console.log(response);
+        }
+        else{
+          alert('incorrect password or username')
+        }     
+      }
+
+      
+  
+  
+  
+  
   return (
   <>
 
@@ -16,17 +56,12 @@ function AdminAuth() {
       <div className={`container ${isSignUpActive ? 'right-panel-active' : ''}`}>
        
         <div className="form-container sign-in-container">
-          <form action="#">
+          <form action="" onSubmit={handleLogin}>
             <h1>Sign in</h1>
-            <div className="social-container">
-              <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-              <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-              <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
-            </div>
-            <span>or use your account</span>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <button>Sign In</button>
+          
+            <input type="text" placeholder='Username' value={authData.username} onChange={(e) => setAuthData({ ...authData, username: e.target.value })} required/>
+            <input type="password" placeholder="Password" value={authData.password} onChange={(e) => setAuthData({ ...authData, password: e.target.value })} required/>
+            <button type='submit'>Sign In</button>
           </form>
         </div>
         <div className="overlay-container">

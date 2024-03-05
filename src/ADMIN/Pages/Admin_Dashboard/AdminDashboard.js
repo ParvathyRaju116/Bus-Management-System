@@ -1,58 +1,92 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './AdminDashboard.css'
 import { Col, Row } from 'react-bootstrap'
 import Aside from '../../Components/Aside/Aside'
 import ListOfBus from '../../Components/List of bus/ListOfBus'
 import Verification from '../../Components/Verification List on dashboard/Verification'
+import { busOwnerViewApi, passengerviewApi } from '../../../SERVICES/AllAPI'
 
 function AdminDashboard() {
+
+  const token = localStorage.getItem("token")
+  const[totalBusOwners,setTotalbusOwners]=useState([])
+  const [totalPassenger,setTotalPassenger]=useState([])
+
+  // bus ownerview
+  const ownerview = async () => {
+    const header = {
+      Authorization: `Token ${token}`
+    };
+    const response = await busOwnerViewApi(header)
+    setTotalbusOwners(response.data)
+    // console.log(response);
+  }
+
+  // users view
+  const passengerview = async () => {
+    const header = {
+      Authorization: `Token ${token}`
+    };
+    const response = await passengerviewApi(header)
+    setTotalPassenger(response.data)
+    // console.log(response);
+  }
+
+
+
+  useEffect(() => {
+    ownerview()
+    passengerview()
+  }, [])
+
+
   return (
     <div className='dashboardBody'>
-     <Row>
+      <Row>
         <Col lg={2} >
           <Aside></Aside>
-          </Col>
+        </Col>
         <Col lg={10} >
           <div className=' ms-5 pe-5 me-5 mt-5  w-100'>
             <Row className='mt-5 me-4'>
               <Col lg={6}>
 
                 <div className='number shadow pt-5 text-center  p-5'>
-                 
-                   <h1> <i class="fa-solid fa-users"></i></h1>
-                   
-                      <h2 className=''>No of users</h2>   
-                      <h1>10</h1>
-                
 
-                  </div>
+                  <h1> <i class="fa-solid fa-users"></i></h1>
+
+                  <h2 className=''>No of users</h2>
+                  <h1>{totalPassenger.length}</h1>
+
+
+                </div>
               </Col>
               <Col lg={6}>
-              <div className='number shadow text-center  pt-5  p-5'>
-                
-                   <h1> <i class="fa-solid fa-bus"></i></h1>
-                   
-                      <h2>No of BUS</h2> 
-                      <h1>10</h1>
-                
+                <div className='number shadow text-center  pt-5  p-5'>
 
-                  </div>
-                
-             
+                  <h1> <i class="fa-solid fa-bus"></i></h1>
+
+                  <h2>No of Bus Owners</h2>
+                  <h1>{totalBusOwners.length}</h1>
+
+
+                </div>
+
+
               </Col>
             </Row>
 
           </div>
 
-        <Row className='mt-3 pt-3'>
-          <Col lg={7}>
-       <ListOfBus></ListOfBus>
-          </Col>
+          <Row className='mt-3 pt-3'>
+            <Col lg={7}>
+              <ListOfBus owners ={totalBusOwners}></ListOfBus>
+            </Col>
 
-          <Col lg={5}>
-           <Verification></Verification>
-          </Col>
-        </Row>
+            <Col lg={5}>
+              <Verification></Verification>
+            </Col>
+          </Row>
         </Col>
       </Row>
 
