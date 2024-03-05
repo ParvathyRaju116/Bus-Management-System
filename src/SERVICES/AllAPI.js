@@ -47,6 +47,16 @@ export const acceptRequestApi=async(id,headers)=>{
   return await commonApi('POST',`${BASE_URL}Admin/ownerview/${id}/owner_approval/`,"",headers)
 }
 
+// get Routes
+export const getRouteApi=async(headers)=>{
+    return await commonApi('GET',`${BASE_URL}Admin/route/`,"",headers)
+}
+
+// add route
+export const addRouteApi=async(body,headers)=>{
+  return await commonApi('POST',`${BASE_URL}Admin/route/`,body,headers)
+}
+
 // __________________________________________________________________________________________________________________________________________________________________________
 
 

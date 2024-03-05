@@ -1,12 +1,47 @@
-.add-route-body{
+.add-route-body,.routeList{
     justify-content: center;
     align-items: center;
     display: flex;
-    border: #FF4B2B 2px solid;
+    
 }
-.profileHead{
+
+.div1{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.addDiv{
+  border: #FF4B2B 2px solid;
+
+}
+.add-route-head,.all-route-head{
     background: linear-gradient(45deg, #FF4B2B, #FF416C);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
+/* AddRoute.css */
+
+.table-custom {
+  background: linear-gradient(45deg, #FF4B2B, #FF416C);
+  /* color: white;  */
+}
+
+
+.table-custom th {
+  font-weight: bold;
+}
+
+.table-custom tbody tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 0.1); /* Optional: Add alternate row background */
+}
+
+.AddBtn {
+  background: linear-gradient(45deg, #FF4B2B, #FF416C);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+

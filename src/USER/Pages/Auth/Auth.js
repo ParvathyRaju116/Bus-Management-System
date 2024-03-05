@@ -68,6 +68,7 @@ function Auth() {
           theme: "light",
           });
         navigate('/')
+        localStorage.setItem("token",response.data.token)
         console.log(response.data);
       }
       else{

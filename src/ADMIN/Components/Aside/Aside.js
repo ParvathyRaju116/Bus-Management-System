@@ -23,7 +23,7 @@ function Aside() {
             TRANSITEASE</CDBSidebarHeader>
         <CDBSidebarContent>
           <CDBSidebarMenu>
-            <Link to={"/add-bus-route"}><CDBSidebarMenuItem icon="th-large">Add Route</CDBSidebarMenuItem></Link>
+            <Link to={"/add-bus-route"}><CDBSidebarMenuItem icon="th-large">All Routes</CDBSidebarMenuItem></Link>
             <CDBSidebarMenuItem icon="sticky-note">Components</CDBSidebarMenuItem>
             <CDBSidebarMenuItem icon="credit-card" iconType="solid">
               Metrics
