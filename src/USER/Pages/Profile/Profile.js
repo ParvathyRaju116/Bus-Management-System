@@ -59,11 +59,21 @@ function Profile() {
                         className="w-50"
                         controlId="exampleForm.ControlInput1 "
                       >
-                        <Form.Label>Username</Form.Label>
                         <Form.Control
                           className="form-control d-inline-flex focus-ring focus-ring-danger"
-                          placeholder="Username"
+                          placeholder="Name"
                           aria-label="Username"
+                        />
+                      </Form.Group>
+                        {/* Username */}
+                        <Form.Group
+                        className="w-50 m-2"
+                        controlId="exampleForm.ControlInput1"
+                      >
+                        <Form.Control
+                          className="form-control d-inline-flex focus-ring focus-ring-danger"
+                          placeholder="username"
+                          aria-label="username"
                         />
                       </Form.Group>
                       {/* Email */}
@@ -71,7 +81,6 @@ function Profile() {
                         className="w-50 m-2"
                         controlId="exampleForm.ControlInput1"
                       >
-                        <Form.Label>Email</Form.Label>
                         <Form.Control
                           className="form-control d-inline-flex focus-ring focus-ring-danger"
                           placeholder="Email"
@@ -84,7 +93,6 @@ function Profile() {
                         className="w-50 m-2"
                         controlId="exampleForm.ControlInput1"
                       >
-                        <Form.Label>Phone</Form.Label>
                         <Form.Control
                           className="form-control d-inline-flex focus-ring focus-ring-danger"
                           placeholder="Phone"
@@ -96,7 +104,6 @@ function Profile() {
                         className="w-50 m-2"
                         controlId="exampleForm.ControlInput1"
                       >
-                        <Form.Label>Address</Form.Label>
                         <Form.Control
                           className="form-control d-inline-flex focus-ring focus-ring-danger"
                           placeholder="Address"

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,36 +11,32 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import './Header.css'
 import { Link } from 'react-router-dom';
+import './BusOwnerHeader.css'
 
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
-function Header() {
-    
+function BusOwnerHeader() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
-
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
+  
+    const handleOpenNavMenu = (event) => {
+      setAnchorElNav(event.currentTarget);
+    };
+    const handleOpenUserMenu = (event) => {
+      setAnchorElUser(event.currentTarget);
+    };
+  
+    const handleCloseNavMenu = () => {
+      setAnchorElNav(null);
+    };
+  
+    const handleCloseUserMenu = () => {
+      setAnchorElUser(null);
+    };
+  
   return (
     <div>
+     <div>
          <AppBar position="static" className="navbar">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
@@ -205,9 +201,9 @@ function Header() {
           </Toolbar>
         </Container>
       </AppBar>
+    </div>   
     </div>
   )
 }
 
-export default Header
-
+export default BusOwnerHeader

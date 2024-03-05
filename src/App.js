@@ -7,12 +7,12 @@ import Findbus from './USER/Pages/FindBus/Findbus';
 import Profile from './USER/Pages/Profile/Profile';
 import AdminAuth from './ADMIN/Pages/Admin_Auth/AdminAuth';
 import AdminDashboard from './ADMIN/Pages/Admin_Dashboard/AdminDashboard';
-import BusOwnerAuth from './BUS OWNER/BusOwner Auth/BusOwnerAuth';
-import BusOwnerHome from './BUS OWNER/BusOwnerHome/BusOwnerHome';
 import Request from './ADMIN/Pages/Request/Request';
 import BusDetails from './ADMIN/Pages/Bus Details/BusDetails';
 import AdminProfile from './ADMIN/Pages/Admin Profile/AdminProfile';
-
+import BusOwnerHome from './BUS OWNER/Pages/BusOwnerHome/BusOwnerHome';
+import BusOwnerAuth from './BUS OWNER/Pages/BusOwner Auth/BusOwnerAuth';
+import AddRoute from './ADMIN/Pages/Add Route/AddRoute';
 
 
 function App() {
@@ -28,9 +28,10 @@ function App() {
         {/* ADMIN */}
         <Route path='/admin-auth' element={<AdminAuth></AdminAuth>}></Route>
         <Route path='/admin-dashbord' element={<AdminDashboard></AdminDashboard>}></Route>
-        <Route path='/admin-request' element={<Request></Request>}></Route>
+        <Route path='/admin-request/:id' element={<Request></Request>}></Route>
         <Route path='/admin-bus-details' element={<BusDetails></BusDetails>}></Route>
         <Route path='/admin-profile' element={<AdminProfile></AdminProfile>}></Route>
+        <Route path='/add-bus-route' element={<AddRoute></AddRoute>}></Route>
 
 
         {/* BUS OWNER */}

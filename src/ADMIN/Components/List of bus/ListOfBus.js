@@ -1,14 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './ListOfBus.css'
 import { Table } from 'react-bootstrap'
+import { busListApi } from '../../../SERVICES/AllAPI'
 
 
-function ListOfBus() {
+function ListOfBus({owners}) {
+  const token = localStorage.getItem("token")
+const[AllbusList,setAllBusList]=useState([])
+
+  const busList = async () => {
+    const header = {
+      Authorization: `Token ${token}`
+    };
+    const response = await busListApi(header)
+    setAllBusList(response.data)
+    // console.log(response.data);
+  }
+
+  useEffect (()=>{
+   busList()
+  },[])
   return (
     <div className='ms-5 list-table p-4 shadow' >
         <h1>List Of Bus</h1>
 
-        <Table className='table-transparent striped mt-3'>
+       <Table className='table-transparent striped mt-3'>
       <thead>
         <tr>
           <th>#</th>
@@ -17,26 +33,17 @@ function ListOfBus() {
           <th>Number</th>
         </tr>
       </thead>
+      { AllbusList ? AllbusList.map((i,index)=>(
+
       <tbody>
         <tr>
-          <td>1</td>
-          <td>Mark</td>
+         <td>{index+=1}</td>
+          <td>{i.name}</td>
           <td>Otto</td>
-          <td>KL 63 f1167</td>
+          <td>{i.Number_plate}</td>
         </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>KL 63 f1167</td>
-        </tr>
-        <tr>
-        <td>3</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>KL 63 f1167</td>
-        </tr>
-      </tbody>
+       
+      </tbody>)):<></>}
     </Table>
     </div>
   )

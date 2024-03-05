@@ -1,40 +1,77 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './Request.css'
 import AdminHeader from '../../Components/Admin-Header/AdminHeader'
-import { Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Button, Col, Row } from 'react-bootstrap'
+import { Link, useParams } from 'react-router-dom'
+import { acceptRequestApi, allRequestListApi } from '../../../SERVICES/AllAPI'
+
 
 function Request() {
+  const token = localStorage.getItem("token")
+  const [allRequest, setAllReqest] = useState([])
+  const param=useParams()
+
+  const allRequestList = async () => {
+    const header = {
+      Authorization: `Token ${token}`
+    };
+    const response = await allRequestListApi(header)
+    setAllReqest(response.data)
+    console.log(response);
+  }
+
+  useEffect(() => {
+    allRequestList()
+  }, [])
+
+  const {id}=param 
+
+  const req= allRequest.find(i=>i.id==id)
+
+  // approval
+ const acceptRequest=async ()=>{
+  const header = {
+    Authorization: `Token ${token}`
+  };
+  const response=await acceptRequestApi(id,header)
+  console.log(response);
+ }
+
   return (
     <div>
-   <AdminHeader></AdminHeader>
+      <AdminHeader></AdminHeader>
 
-   <div className=' m-5 d-flex align-item-center justify-content-center'>
+      <div className=' m-5 d-flex align-item-center justify-content-center'>
 
-   <div className='p-5 reqBody w-75'>
+        <div className='p-5 reqBody w-75'>
 
-<div className='text-center'><h1 className='mb-3 reqestHead'>Request</h1></div>
-        <h5>Name Of Owner :</h5> <p>Manu</p>
-
-      
-        <h5>Name Of Bus :</h5>
-         <p>ABCD</p>
-        <h5>Number of Bus :</h5>
-        <p>KL 63 F 1169</p>
-        <h5>Engine Number :</h5>
-        <p>789654123</p>
-
-        <br />
-        <h5>Employee Details :</h5>
+          <div className='text-center'><h1 className='mb-3 reqestHead'>Request</h1></div>
+        { req &&  <div>
+<Row>
+  <Col className='proofImg'>
+ <div  className=''> <img src="https://i.postimg.cc/GmghkXDV/download-1.png" alt="" /></div>
+  </Col>
+  <Col className='mt-5'>
     
-       <div className='text-end'>
-            <Link to={"/admin-dashbord"}><Button className='btn-danger'>Deny</Button></Link> 
-           <Link to={"/admin-bus-details"}> <Button className='btn-success ms-5'>Accept</Button></Link>
-       </div>
-    
-   </div>
+                <h5>Name Of Owner :</h5> 
+                <p>{req.name}</p>
+                <h5>Address :</h5>
+                <p>{req.address}</p>
+                <h5>Phone Number</h5>
+                <p>{req.phone}</p>
+  </Col>
+</Row>
+          
+  
+         </div>}
+          <div className='text-end'>
+            <Link to={"/admin-dashbord"}><Button className='btn-danger'>Deny</Button></Link>
+            <Link to={"/admin-dashbord"}> <Button className='btn-success ms-5' onClick={acceptRequest}>Accept</Button></Link>
+          </div>
 
-   </div>
+        </div>
+
+      </div>
 
 
     </div>

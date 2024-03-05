@@ -45,7 +45,7 @@ function Auth() {
         });
       }
       else{
-        alert("Register API failed")
+        alert("A user with that username already exists.")
       }      
 
     }
@@ -71,7 +71,7 @@ function Auth() {
         console.log(response.data);
       }
       else{
-        alert('incorrect password or username')
+        alert('Unable to log in with provided credentials')
       }     
     }
 
@@ -101,7 +101,6 @@ function Auth() {
          
             <input type="text" placeholder="Username" value={authData.username} onChange={(e) => setAuthData({ ...authData, username: e.target.value })} required />
             <input type="password" placeholder="Password" value={authData.password} onChange={(e) => setAuthData({ ...authData, password: e.target.value })} required />
-            <a href="#">Forgot your password?</a>
             <button type='submit'>Sign In</button>
             </form>
           <form action="" onSubmit={handleRegister}>

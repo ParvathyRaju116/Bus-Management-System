@@ -1,0 +1,12 @@
+.add-route-body{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border: #FF4B2B 2px solid;
+}
+.profileHead{
+    background: linear-gradient(45deg, #FF4B2B, #FF416C);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
