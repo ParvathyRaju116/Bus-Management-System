@@ -57,6 +57,17 @@ export const addRouteApi=async(body,headers)=>{
   return await commonApi('POST',`${BASE_URL}Admin/route/`,body,headers)
 }
 
+// get route and stop
+export const getRouteAndStopeApi=async(id,headers)=>{
+   return await commonApi ('GET',`${BASE_URL}Admin/route/${id}/`,"",headers)
+}
+
+// add stop
+export const addStopApi=async(id,body,headers)=>{
+  return await commonApi('POST',`${BASE_URL}Admin/route/${id}/add_stop/`,body,headers)
+}
+
+
 // __________________________________________________________________________________________________________________________________________________________________________
 
 
