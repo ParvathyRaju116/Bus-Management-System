@@ -49,7 +49,7 @@ function Request() {
         { req &&  <div>
 <Row>
   <Col className='proofImg'>
- <div  className=''> <img src="https://i.postimg.cc/GmghkXDV/download-1.png" alt="" /></div>
+ <div  className=''> <img src={req.proof?`http://127.0.0.1:8000/${req.proof}`:"https://i.postimg.cc/GmghkXDV/download-1.png"} alt="" /></div>
   </Col>
   <Col className='mt-5'>
     

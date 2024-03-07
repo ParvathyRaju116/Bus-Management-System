@@ -38,7 +38,7 @@ function Profile() {
           </div>
           <div className="text-end me-5 pe-5">
             <button className="btn" onClick={handleShow}>
-              <i class="fa-regular fa-pen-to-square"></i>
+              <i className="fa-regular fa-pen-to-square"></i>
             </button>
             <Modal
               show={show}

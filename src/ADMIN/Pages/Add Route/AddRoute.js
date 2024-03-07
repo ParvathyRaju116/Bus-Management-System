@@ -9,6 +9,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddStop from '../../Components/AddStop/AddStop';
+import Swal from 'sweetalert2'
 
 function AddRoute() {
   const [show, setShow] = useState(false);
@@ -17,7 +18,6 @@ function AddRoute() {
 
 
   const [routeList, setRouteList] = useState([]);
-  const [stop, setStop] = useState(null)
   const [addRouteData, setAddRouteData] = useState({
     name: "",
     starts_from: "",
@@ -41,19 +41,31 @@ function AddRoute() {
   // add bus
   const addRoute = async () => {
     const response = await addRouteApi(addRouteData, header);
-    listRoutes();
-    handleClose();
-    // console.log(response);
+    if (response.status == 200) {
+      listRoutes();
+      handleClose();
+      Swal.fire({
+        icon: "success",
+        title: "Route Added",
+        timer:1200
+      });
+      setAddRouteData({
+        name: "",
+        starts_from: "",
+        ends_at: ""
+      })
+    }
+    else{
+      Swal.fire({
+          icon: "error",
+          text: "Something went wrong!",
+          timer:1200
+        });
+    }  
+
+    console.log(response);
   };
 
-  // list route and stop
-  const RouteAndStop = async (e, id) => {
-    e.preventDefault();
-    console.log(id);
-    const response = await getRouteAndStopeApi(id, header);
-    setStop(response.data.stops)
-    console.log(stop);
-  };
 
   return (
     <>
@@ -76,7 +88,6 @@ function AddRoute() {
               id="panel1-header"
               className='d-flex '
               style={{ width: '100%', justifyContent: 'space-between' }}
-              onClick={(e) => RouteAndStop(e, i.id)} // Pass id to RouteAndStop function
             >
               <div style={{ display: 'flex', width: '100%' }}>
                 <h2 style={{ textTransform: 'capitalize' }}>{i.name}</h2>
@@ -89,34 +100,7 @@ function AddRoute() {
             <AccordionDetails>
               <div>
               </div>
-              <div className='w-100 text-center d-flex justify-content-center align-item-center'>
-              
-                <Table  w-100 hover>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Stop Name</th>
-                    <th>Time Taken</th>
-                    <th>Bus Fare</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {stop ? stop.map((i,index) => (
-                  <tr>
-                    <td >{index+1}</td>
-                    <td style={{textTransform:'capitalize'}}>{i.stop_name}</td>
-                    <td>{i.time_taken}</td>
-                    <td>{i.approx_cost}</td>
-                  </tr>
-                    )) : <></>}
-                </tbody>
-              </Table>
-                
 
-                
-              
-
-              </div>
               <AddStop id={i.id} ></AddStop>
 
 

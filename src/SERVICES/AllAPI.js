@@ -49,7 +49,7 @@ export const acceptRequestApi=async(id,headers)=>{
 
 // get Routes
 export const getRouteApi=async(headers)=>{
-    return await commonApi('GET',`${BASE_URL}Admin/route/`,"",headers)
+    return await commonApi('GET',`${BASE_URL}Admin/route/`,{},headers)
 }
 
 // add route
@@ -59,12 +59,17 @@ export const addRouteApi=async(body,headers)=>{
 
 // get route and stop
 export const getRouteAndStopeApi=async(id,headers)=>{
-   return await commonApi ('GET',`${BASE_URL}Admin/route/${id}/`,"",headers)
+   return await commonApi ('GET',`${BASE_URL}Admin/route/${id}/`,{},headers)
 }
 
 // add stop
 export const addStopApi=async(id,body,headers)=>{
   return await commonApi('POST',`${BASE_URL}Admin/route/${id}/add_stop/`,body,headers)
+}
+
+// get One bus 
+export const getOnebusApi=async(id,headers)=>{
+  return await commonApi('GET',`${BASE_URL}Admin/bus/${id}/`,"",headers)
 }
 
 
