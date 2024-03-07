@@ -26,10 +26,10 @@ const[allRequest,setAllReqest]=useState([])
   },[])
 
   return (
-    <div className='p-4'>
+    <div className='p-4 listBody'>
       <h1>Request Approval</h1> <br /> <br />
-      {allRequest?allRequest.map(i=>(
-         <Link  to={`/admin-request/${i.id}`}>
+      {allRequest?allRequest.map((i, index)=>(
+         <Link key={index} to={`/admin-request/${i.id}`}>
          <Stack direction="row" spacing={2} >
           
           <Avatar

@@ -53,7 +53,7 @@ function AdminDashboard() {
 
                 <div className='number shadow pt-5 text-center  p-5'>
 
-                  <h1> <i class="fa-solid fa-users"></i></h1>
+                  <h1> <i className="fa-solid fa-users"></i></h1>
 
                   <h2 className=''>No of users</h2>
                   <h1>{totalPassenger.length}</h1>
@@ -64,7 +64,7 @@ function AdminDashboard() {
               <Col lg={6}>
                 <div className='number shadow text-center  pt-5  p-5'>
 
-                  <h1> <i class="fa-solid fa-bus"></i></h1>
+                  <h1> <i className="fa-solid fa-bus"></i></h1>
 
                   <h2>No of Bus Owners</h2>
                   <h1>{totalBusOwners.length}</h1>

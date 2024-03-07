@@ -50,7 +50,6 @@ function AdminHeader() {
               variant="h6"
               noWrap
               component="a"
-              href="#app-bar-with-responsive-menu"
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
@@ -95,7 +94,7 @@ function AdminHeader() {
               >
                 <MenuItem>
                  <Link to={"/admin-dashbord"} >
-                   <Typography textAlign="center text-white" style={{color:"white"}}>Home</Typography>
+                   <Typography textAlign="center text-white"  style={{color:"white"}}>Home</Typography>
                    </Link>
                 </MenuItem>
                 <MenuItem>
@@ -134,7 +133,7 @@ function AdminHeader() {
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{  color: "white", display: "block" }}
               >
                 <MenuItem>
                  <Link to={"/admin-dashbord"}> <Typography textAlign="center text-white" style={{textDecoration:'none',color:"white"}}>Home</Typography></Link>
@@ -142,7 +141,7 @@ function AdminHeader() {
               </Button>
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{  color: "white", display: "block" }}
               >
                 <MenuItem>
                   <Typography textAlign="center">Listing</Typography>
@@ -150,7 +149,7 @@ function AdminHeader() {
               </Button>
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{  color: "white", display: "block" }}
               >
                 <MenuItem>
                   <Typography textAlign="center">Blog</Typography>
@@ -158,7 +157,7 @@ function AdminHeader() {
               </Button>
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ color: "white", display: "block" }}
               >
                 <MenuItem>
                   <Typography textAlign="center">About</Typography>
@@ -166,7 +165,7 @@ function AdminHeader() {
               </Button>
               <Button
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{  color: "white", display: "block" }}
               >
                 <MenuItem>
                   <Typography textAlign="center">Conact</Typography>
