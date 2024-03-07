@@ -13,6 +13,9 @@ import AdminProfile from './ADMIN/Pages/Admin Profile/AdminProfile';
 import BusOwnerHome from './BUS OWNER/Pages/BusOwnerHome/BusOwnerHome';
 import BusOwnerAuth from './BUS OWNER/Pages/BusOwner Auth/BusOwnerAuth';
 import AddRoute from './ADMIN/Pages/Add Route/AddRoute';
+import BusOwnerBuses from './BUS OWNER/Components/BusOwnerBuses/BusOwnerBuses';
+import BusOwnerDrivers from './BUS OWNER/Components/BusOwnerDrivers/BusOwnerDrivers';
+import BusOwnerProfile from './BUS OWNER/Pages/BusOwnerProfile/BusOwnerProfile';
 
 
 
@@ -36,9 +39,10 @@ function App() {
         <Route path='/add-bus-route' element={<AddRoute></AddRoute>}></Route>
 
 
-              {/* BUS OWNER */}
-      <Route path='/bus-owner-auth' element={<BusOwnerAuth></BusOwnerAuth>}></Route>
-      <Route path='/bus-owner-home-page' element={<BusOwnerHome></BusOwnerHome>}></Route>
+        {/* BUS OWNER */}
+        <Route path='/bus-owner-auth' element={<BusOwnerAuth></BusOwnerAuth>}></Route>
+        <Route path='/bus-owner-home-page' element={<BusOwnerHome></BusOwnerHome>}></Route>
+        <Route path='/bus-owner-profile' element={<BusOwnerProfile></BusOwnerProfile>}></Route>
 
       </Routes>
 

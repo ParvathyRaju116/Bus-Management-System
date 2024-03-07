@@ -71,8 +71,3 @@ export const busOwnerregisterApi=async(body)=>{
 export const busOwnerloginApi=async(body)=>{
   return await commonApi('POST',`${BASE_URL}owner/token/`,body,"")
 }
-
-
-
-
-

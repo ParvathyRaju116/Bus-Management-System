@@ -1,6 +1,8 @@
 .list-table{
     background-image:linear-gradient(to right, #ff4b2b47, #ff416d4c) !important;
     border-radius: 20px;
+    height:350px;
+    overflow-y: auto;
 }
 .table-transparent {
     background-color: transparent;

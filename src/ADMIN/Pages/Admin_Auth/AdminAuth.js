@@ -8,9 +8,7 @@ import { AdminLoginApi } from '../../../SERVICES/AllAPI';
 function AdminAuth() {
     const [isSignUpActive, setIsSignUpActive] = useState(false);
     const navigate=useNavigate()
-
-  
-  
+ 
     const handleSignInClick = () => {
       setIsSignUpActive(false);
     };
