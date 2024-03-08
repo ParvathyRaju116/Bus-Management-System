@@ -91,10 +91,11 @@ function AddRoute() {
             >
               <div style={{ display: 'flex', width: '100%' }}>
                 <h2 style={{ textTransform: 'capitalize' }}>{i.name}</h2>
-                <div className='ms-auto me-5 pe-5'>
+                <div className='ms-auto text-end me-5 pe-5'>
                   <b> Starts From : </b> {i.starts_from} <br />
                   <b> Ends At : </b> {i.ends_at}
                 </div>
+                <button className='dltBtn'><i class="fa-solid fa-trash-can"></i></button>
               </div>
             </AccordionSummary>
             <AccordionDetails>

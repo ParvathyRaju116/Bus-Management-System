@@ -52,15 +52,17 @@ function AdminDashboard() {
             <Row className='mt-5 me-4'>
               <Col lg={6}>
 
-                <div  className='number shadow pt-5 text-center  p-5'>
-
-                  <h1> <i className="fa-solid fa-users"></i></h1>
-
-                  <h2 className=''>No of users</h2>
-                  <h1>{totalPassenger.length}</h1>
-
-
-                </div>
+              <Link to={"/users-list"}>
+                  <div  className='number shadow pt-5 text-center  p-5'>
+  
+                    <h1> <i className="fa-solid fa-users"></i></h1>
+  
+                    <h2 className=''>No of users</h2>
+                    <h1>{totalPassenger.length}</h1>
+  
+  
+                  </div>
+              </Link>
               </Col>
               <Col lg={6}>
               <Link to={'/owner-list'}>

@@ -23,29 +23,30 @@ ownerview()
     <div>
         <AdminHeader></AdminHeader>
 
-     <div>
-            <Table striped bordered hover>
+     <div className='m-5'>
+       <div className='text-center'> <h1 className='assigneRouteHead'>Owners List</h1></div>
+            <Table className='mt-4'   hover>
           <thead>
             <tr>
               <th>#</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Username</th>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Phone</th>
             </tr>
           </thead>
           <tbody>
            {busOwner.length>0?busOwner.map((i,index)=>(
            <tr>
-              <td>1</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
+              <td>{index+1}</td>
+              <td>{i.name}</td>
+              <td>{i.address}</td>
+              <td>{i.phone}</td>
             </tr>
             )):<></>}
              
           </tbody>
         </Table>
-     </div>
+     </div >
        
     </div>
   )

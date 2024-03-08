@@ -51,3 +51,13 @@
   color: transparent;
 }
 
+.dltBtn{
+  background-color: transparent;
+  color: red;
+  border: 0;
+}
+.dltBtn:hover{
+  background-color: transparent;
+  color: red;
+}
+
