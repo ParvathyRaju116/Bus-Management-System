@@ -24,8 +24,8 @@ function BusOwnerAside() {
         <CDBSidebarContent>
           <CDBSidebarMenu>
             <Link to={'/bus-owner-home-page'}><CDBSidebarMenuItem icon="bar-chart">Dashboard</CDBSidebarMenuItem></Link>
-            {/* <Link to={'/bus-owner-bus-list'}><CDBSidebarMenuItem icon="bus">Buses</CDBSidebarMenuItem></Link>
-            <Link to={'/bus-owner-bus-drivers'}><CDBSidebarMenuItem icon="users">Drivers</CDBSidebarMenuItem></Link> */}
+            <Link to={'/bus-owner-routes'}><CDBSidebarMenuItem icon="road">Routes</CDBSidebarMenuItem></Link>
+            {/* <Link to={'/bus-owner-bus-drivers'}><CDBSidebarMenuItem icon="users">Drivers</CDBSidebarMenuItem></Link> */}
             <Link to={'/bus-owner-profile'}><CDBSidebarMenuItem icon="user" iconType="solid"> Profile</CDBSidebarMenuItem></Link>
           </CDBSidebarMenu>
         </CDBSidebarContent>

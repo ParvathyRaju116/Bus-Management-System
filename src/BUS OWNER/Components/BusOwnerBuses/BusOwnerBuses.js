@@ -10,14 +10,13 @@ import Bus from '../Bus/Bus'
 
 function BusOwnerBuses() {
   const [allBuses, setAllBuses] = useState([])
-  const [newBus, setNewBus] = useState({ name: "", Number_plate: "", Engine_no: "", image: "" })
-  const naviagate = useNavigate()
+  const [newBus, setNewBus] = useState({ name: "", Number_plate: "", Engine_no: "", image: "",RC_book:""})
   const dummyImage = "https://content.hostgator.com/img/weebly_image_sample.png"
   const [preview, setPreview] = useState(dummyImage)
   const [show, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);
-    setNewBus({ name: "", Number_plate: "", Engine_no: "", image: "" })
+    setNewBus({ name: "", Number_plate: "", Engine_no: "", image: "",RC_book:"" })
     setPreview(dummyImage)
   }
   const handleShow = () => setShow(true);
@@ -32,11 +31,6 @@ function BusOwnerBuses() {
       setAllBuses(result.data.data)
       console.log("result.data.data", result.data.data);
     }
-    else {
-      naviagate('/bus-owner-auth')
-      toast.warning('Please login')
-    }
-
   }
   useEffect(() => { getData() }, [])
   const handleUploadImage = (e) => {
@@ -51,8 +45,8 @@ function BusOwnerBuses() {
     }
   }
   const handleAdd = async () => {
-    let { name, Number_plate, Engine_no, image } = newBus
-    if (!name || !Number_plate || !Engine_no || !image) {
+    let { name, Number_plate, Engine_no, image, RC_book} = newBus
+    if (!name || !Number_plate || !Engine_no || !image || !RC_book) {
       alert("Please fill the form completely")
     }
     else {
@@ -61,6 +55,7 @@ function BusOwnerBuses() {
       reqBody.append("Number_plate", Number_plate)
       reqBody.append("Engine_no", Engine_no)
       reqBody.append("image", image)
+      reqBody.append("RC_book",RC_book)
       let token = localStorage.getItem('token')
       const reqHeader = {
         "Content-Type": "multipart/form-data",
@@ -72,6 +67,7 @@ function BusOwnerBuses() {
         console.log(result);
         if (result.status>=200 && result.status<300){
           alert("New bus added successfully")
+          getData()
           handleClose()
         }
         else{
@@ -121,6 +117,10 @@ function BusOwnerBuses() {
           <FloatingLabel label="Engine No.">
             <Form.Control value={newBus.Engine_no} onChange={e => setNewBus({ ...newBus, Engine_no: e.target.value })} type="text" placeholder="Engine No." />
           </FloatingLabel>
+          <Form.Group controlId="formFile" className="mb-3">
+            <Form.Label className='mb-0'>Upload RC book</Form.Label>
+            <Form.Control type="file" className='mt=0' onChange={e =>setNewBus({...newBus,RC_book:e.target.files[0]})} />
+          </Form.Group>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>Close</Button>
