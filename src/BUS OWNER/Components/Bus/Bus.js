@@ -12,26 +12,29 @@ function Bus({ data, index }) {
     <>
       <tr>
         <td>{index}</td>
-        <td >{data?.name}&nbsp;<sup>{data?.is_active?<Badge pill bg="success">Active</Badge>:<Badge pill bg="danger">Inactive</Badge>}</sup></td>
+        <td >{data?.name}&nbsp;<sup>{data?.is_active ? <Badge pill bg="success">Active</Badge> : <Badge pill bg="danger">Inactive</Badge>}</sup></td>
         <td>{data?.Number_plate}</td>
         <td>
           <Button variant="primary" className='more' onClick={handleShow}>
-          More
-        </Button></td>
+            More
+          </Button></td>
       </tr>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>{data?.name}&nbsp;{data?.is_active?<Badge pill bg="success">Active</Badge>:<Badge pill bg="danger">Inactive</Badge>}</Modal.Title>
+          <Modal.Title>{data?.name}&nbsp;{data?.is_active ? <Badge pill bg="success">Active</Badge> : <Badge pill bg="danger">Inactive</Badge>}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <img src={`${BASE_URL}/${data?.image}`} alt={data?.name} className='img-fluid' /><br/>
+          {data?.image ? <img src={`${BASE_URL}/${data?.image}`} alt={data?.name} className='img-fluid' /> : "No image provided"}<br />
 
           <ListGroup>
             <ListGroup.Item> Vehicle no. : {data?.Number_plate}</ListGroup.Item>
             <ListGroup.Item>Engine no. :{data?.Engine_no}</ListGroup.Item>
-
+            RC_book:
           </ListGroup>
-        </Modal.Body>
+          <div className='w-100 text-center'>
+            {data?.RC_book ? <img src={`${BASE_URL}/${data?.RC_book}`} alt={`${data?.name} RC Book`} className='img-fluid' /> : "Not provided"}
+          </div>        
+          </Modal.Body>
       </Modal>
     </>
   )

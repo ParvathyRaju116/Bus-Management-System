@@ -8,11 +8,8 @@ import { toast } from 'react-toastify'
 import Driver from '../Driver/Driver'
 
 
-
 function BusOwnerDrivers() {
   const [allDrivers, setAllDrivers] = useState([])
-  const [driverUpdate,setDriverUpdate]=useState(false)
-  const naviagate = useNavigate()
   const [newDriver, setNewDriver] = useState({ name: "", phone: "", address: "", age: "", dob: "", license: "" })
   const [show, setShow] = useState(false);
   const handleClose = () => {
@@ -31,10 +28,7 @@ console.log(newDriver);
     if (result.status >= 200 && result.status < 300) {
       setAllDrivers(result.data.data)
     }
-    else {
-      naviagate('/bus-owner-auth')
-      toast.warning('Please login')
-    }
+
   }
   useEffect(() => { getData() }, [])
   const handleAdd = async () => {
@@ -55,12 +49,12 @@ console.log(newDriver);
         "Content-Type": "multipart/form-data",
         "Authorization": `Token ${token}`
       }
-      console.log(reqHeader);
       try {
         let result = await addDriverApi(reqBody, reqHeader)
         console.log(result);
         if (result.status>=200 && result.status<300){
           alert("New driver added successfully")
+          getData()
           handleClose()
         }
         else{

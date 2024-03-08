@@ -4,23 +4,17 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './BusOwnerAuth.css'
 import { busOwnerloginApi } from '../../../SERVICES/AllAPI';
-import {busOwnerRegistrationApi} from '../../BUS_OWNER_SERVICES/busOwnerApis'
-
-
+import { busOwnerRegistrationApi } from '../../BUS_OWNER_SERVICES/busOwnerApis'
 function BusOwnerAuth() {
   const [isSignUpActive, setIsSignUpActive] = useState(false);
-  const [photo, setPhoto] = useState(null)
-
+  // const [photo, setPhoto] = useState(null)
   const handleSignUpClick = () => {
     setIsSignUpActive(true);
   };
-
   const handleSignInClick = () => {
     setIsSignUpActive(false);
   };
-
   const navigate = useNavigate()
-
   const [authData, setAuthData] = useState({
     name: "",
     phone: "",
@@ -31,25 +25,21 @@ function BusOwnerAuth() {
   })
 
   console.log(authData);
-
-  const HandelImgChange = (e) => {
-    const file = e.target.files[0];
-    setPhoto(file);
-    setAuthData((prevDetails) => ({
-      ...prevDetails,
-      image: file,
-    }));
-  };
-
+  // const HandelImgChange = (e) => {
+  //   const file = e.target.files[0];
+  //   // setPhoto(file);
+  //   setAuthData((prevDetails) => ({
+  //     ...prevDetails,
+  //     image: file,
+  //   }));
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault()
     const token = localStorage.getItem("token")
     console.log(token);
-
     if (!token) {
       navigate('/bus-owner-auth')
     }
-
     const formData = new FormData()
     formData.append("name", authData.name)
     formData.append("phone", authData.phone)
@@ -57,20 +47,26 @@ function BusOwnerAuth() {
     formData.append("username", authData.username)
     formData.append("password", authData.password)
     formData.append("proof", authData.proof)
-
+    console.log("FormData",formData);
     // headers 
     try {
-      //   const response = await axios.post(`http://127.0.0.1:8000/Admin/register/`,formData,{
-      //   headers:{
-      //     "Content-Type":"multipart/form-data",
-      //     Authorization: `Token ${token}`
-      //   }
-      // });
       const headers = {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Token ${token}`
+        "Content-Type": "multipart/form-data"
       }
-      const response=await busOwnerRegistrationApi(formData,headers)
+      const response = await busOwnerRegistrationApi(formData, headers)
+      if (response.status>=200 && response.status<300){
+        alert("Registration successful. Please login.")
+        setAuthData({name: "",
+        phone: "",
+        address: "",
+        username: "",
+        password: "",
+        proof: ""})
+        setIsSignUpActive(false)
+      }
+      else{
+        alert(response.response.data.msg)
+      }
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -78,50 +74,30 @@ function BusOwnerAuth() {
 
   }
 
-  // register
-  // const handleRegister = async (e) => {
-  //   e.preventDefault();
-  //     const response = await busOwnerregisterApi(authData);
-  //     console.log(response);
-  // if(response.status==200){
-  //   setIsSignUpActive(false);
-  //   setAuthData({
-  //     name: "",
-  //     phone: "",
-  //     address: "",
-  //     username: "",
-  //     password: "",
-  //     proof:""
-  //   });
-  // }
-  // else{
-  //   alert("Register API failed")
-  // }
-
-
-  // };
 
   //   // login
   const handleLogin = async (e) => {
     e.preventDefault()
     const response = await busOwnerloginApi(authData)
     if (response.status == 200) {
-      toast('Login success', {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      // toast('Login success', {
+      //   position: "top-center",
+      //   autoClose: 2000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light",
+      // });
+      console.log(response);
+      alert("Login successful")
       navigate('/bus-owner-home-page')
       localStorage.setItem("token", response.data.token)
       console.log(response.data);
     }
     else {
-      alert('incorrect password or username')
+      alert('Incorrect password or username')
     }
   }
 
@@ -138,7 +114,11 @@ function BusOwnerAuth() {
             <input type="text" placeholder='Address' value={authData.address} onChange={(e) => setAuthData({ ...authData, address: e.target.value })} required />
             <input type="text" placeholder='UserName' value={authData.username} onChange={(e) => setAuthData({ ...authData, username: e.target.value })} required />
             <input type="password" placeholder="Password" value={authData.password} onChange={(e) => setAuthData({ ...authData, password: e.target.value })} required />
-            <input type="file" placeholder='' onChange={HandelImgChange} required />
+            <div className='d-flex align-items-center'>
+              <label htmlFor="proof"><small>Proof:</small></label>
+              <input type="file" id='proof' placeholder='' onChange={e => setAuthData({ ...authData, proof: e.target.files[0] })} required />
+            </div>
+
             <button type='submit'>Sign Up</button>
           </form>
         </div>

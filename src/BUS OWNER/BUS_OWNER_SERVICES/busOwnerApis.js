@@ -13,7 +13,7 @@ export const getOwnerDriversApi = async (headers) => {
 
 //bus owner registration
 export const busOwnerRegistrationApi = async (formdata, headers) => {
-    return await commonApi('POST', `${BASE_URL}Admin/register/`, formdata, headers)
+    return await commonApi('POST', `${BASE_URL}owner/register/`, formdata, headers)
 }
 //add bus
 export const addBusApi = async (body, headers) => {
@@ -22,4 +22,12 @@ export const addBusApi = async (body, headers) => {
 // add driver 
 export const addDriverApi = async (body, headers) => {
     return await commonApi('POST', `${BASE_URL}owner/busdriver/`, body, headers)
+}
+
+// get route list 
+export const getRoutesApi = async ( headers) => {
+    return await commonApi('GET', `${BASE_URL}owner/routes/`, "", headers)
+}
+export const getStopsApi = async ( id,headers) => {
+    return await commonApi('GET', `${BASE_URL}owner/routes/${id}/`, "", headers)
 }
