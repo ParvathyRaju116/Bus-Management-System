@@ -72,6 +72,14 @@ export const getOnebusApi=async(id,headers)=>{
   return await commonApi('GET',`${BASE_URL}Admin/bus/${id}/`,"",headers)
 }
 
+// get assignedROutes
+
+export const getAssignedRouteApi =async(headers)=>{
+  return await commonApi ('GET',`${BASE_URL}Admin/assignedroutes/`,"",headers)
+}
+
+
+
 
 // __________________________________________________________________________________________________________________________________________________________________________
 

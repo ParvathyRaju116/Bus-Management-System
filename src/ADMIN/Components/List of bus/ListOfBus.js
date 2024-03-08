@@ -17,7 +17,7 @@ function ListOfBus({ owners }) {
   const busList = async () => {
     const response = await busListApi(header);
     setAllBusList(response.data);
-    console.log(response.data);
+    // console.log(response.data);
   };
 
   const getOneBus = async (id) => {
@@ -25,7 +25,7 @@ function ListOfBus({ owners }) {
     setShow(true);
     const response = await getOnebusApi(id, header);
     setOneBus(response.data);
-    console.log(response);
+    // console.log(response);
   };
 
   useEffect(() => {
@@ -46,7 +46,7 @@ function ListOfBus({ owners }) {
             <th>Action</th>
           </tr>
         </thead>
-        {AllbusList ? AllbusList.map((i, index) => (
+        {AllbusList.length>0 ? AllbusList.map((i, index) => (
           <tbody key={i.id}>
             <tr>
               <td>{index + 1}</td>

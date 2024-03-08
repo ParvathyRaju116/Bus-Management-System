@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import "./AddRoute.css";
 import AdminHeader from '../../Components/Admin-Header/AdminHeader';
-import { addRouteApi, getRouteAndStopeApi, getRouteApi } from '../../../SERVICES/AllAPI';
-import { Button, Col, Modal, Row, Table } from 'react-bootstrap';
+import { addRouteApi,  getRouteApi } from '../../../SERVICES/AllAPI';
+import { Button,  Modal } from 'react-bootstrap';
 import Accordion from '@mui/material/Accordion';
-import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -42,6 +41,7 @@ function AddRoute() {
   const addRoute = async () => {
     const response = await addRouteApi(addRouteData, header);
     if (response.status == 200) {
+      console.log(response);
       listRoutes();
       handleClose();
       Swal.fire({
@@ -81,7 +81,7 @@ function AddRoute() {
       </div>
 
       <div className='list-routes  m-5 ps-5 pe-5'>
-        {routeList ? routeList.map((i, index) => (
+        {routeList.length>0? routeList.map((i, index) => (
           <Accordion className='ps-5 w-100' key={i.id}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}

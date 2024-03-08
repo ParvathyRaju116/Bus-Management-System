@@ -18,7 +18,7 @@ const[allRequest,setAllReqest]=useState([])
     };
     const response = await allRequestListApi(header)
     setAllReqest(response.data)
-    console.log(response);
+    // console.log(response);
   }
 
   useEffect (()=>{

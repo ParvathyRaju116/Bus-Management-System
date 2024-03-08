@@ -3,6 +3,7 @@ import Header from '../../Components/Header/Header'
 import './FindBus.css'
 import NearestBusstop from '../../Components/NearestBusStop/NearestBusstop'
 
+
 function Findbus() {
     return (
         <>
@@ -20,7 +21,6 @@ function Findbus() {
                 </div>
             </div>
             <NearestBusstop></NearestBusstop>
-
         </>
     )
 }

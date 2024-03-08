@@ -4,6 +4,7 @@ import { Col, Container, Row } from 'react-bootstrap'
 import './Home.css'
 import Search from '../../Components/Search/Search'
 import About from '../../Components/About/About'
+import Footer from '../../Components/Footer/Footer'
 
 
 
@@ -28,6 +29,7 @@ function Home() {
 
       <About/>
 
+   <Footer></Footer>
     </>
   )
 }

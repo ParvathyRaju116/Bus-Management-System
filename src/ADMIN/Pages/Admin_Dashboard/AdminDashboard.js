@@ -5,6 +5,7 @@ import Aside from '../../Components/Aside/Aside'
 import ListOfBus from '../../Components/List of bus/ListOfBus'
 import Verification from '../../Components/Verification List on dashboard/Verification'
 import { busOwnerViewApi, passengerviewApi } from '../../../SERVICES/AllAPI'
+import { Link } from 'react-router-dom'
 
 function AdminDashboard() {
 
@@ -19,7 +20,7 @@ function AdminDashboard() {
     };
     const response = await busOwnerViewApi(header)
     setTotalbusOwners(response.data)
-    // console.log(response);
+    // console.log(response.data.data);
   }
 
   // users view
@@ -51,7 +52,7 @@ function AdminDashboard() {
             <Row className='mt-5 me-4'>
               <Col lg={6}>
 
-                <div className='number shadow pt-5 text-center  p-5'>
+                <div  className='number shadow pt-5 text-center  p-5'>
 
                   <h1> <i className="fa-solid fa-users"></i></h1>
 
@@ -62,15 +63,17 @@ function AdminDashboard() {
                 </div>
               </Col>
               <Col lg={6}>
-                <div className='number shadow text-center  pt-5  p-5'>
-
-                  <h1> <i className="fa-solid fa-bus"></i></h1>
-
-                  <h2>No of Bus Owners</h2>
-                  <h1>{totalBusOwners.length}</h1>
-
-
-                </div>
+              <Link to={'/owner-list'}>
+                  <div className='number shadow text-center  pt-5  p-5'>
+  
+                    <h1> <i className="fa-solid fa-bus"></i></h1>
+  
+                    <h2>No of Bus Owners</h2>
+                    <h1>{totalBusOwners.length}</h1>
+  
+  
+                  </div>
+              </Link>
 
 
               </Col>
