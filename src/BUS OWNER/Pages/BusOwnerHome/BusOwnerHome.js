@@ -14,14 +14,14 @@ function BusOwnerHome() {
   const [allDrivers, setAllDrivers] = useState([])
   const [isAproved, setIsAproved] = useState(false)
   const navigate = useNavigate()
-useEffect(() => {
-  if (localStorage.getItem('token')){
-    setIsAproved(true)
-  }
-  else{
-    setIsAproved(false)
-  }
-}, [])
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      setIsAproved(true)
+    }
+    else {
+      setIsAproved(false)
+    }
+  }, [])
 
   const getData = async () => {
     const token = localStorage.getItem('token')
@@ -30,23 +30,23 @@ useEffect(() => {
     }
     const result1 = await getOwnerBusesApi(headers)
     if (result1.status >= 200 && result1.status < 300) {
-      setAllBuses(result1.data)
+      setAllBuses(result1.data.data)
     }
     const result2 = await getOwnerDriversApi(headers)
     if (result2.status >= 200 && result2.status < 300) {
-      setAllDrivers(result2.data)
+      setAllDrivers(result2.data.data)
     }
   }
   useEffect(() => { getData() }, [])
 
   return (
-    <div div className = 'dashboardBody' >
+    <div div className='dashboardBody' >
       <Row>
         <Col lg={2} >
           <BusOwnerAside></BusOwnerAside>
         </Col>
         <Col lg={10} >
-          {isAproved?<div className=' ms-5 pe-5 me-5 mt-5  w-100'>
+          {isAproved ? <div className=' ms-5 pe-5 me-5 mt-5  w-100'>
             <Row className='mt-5 me-4'>
               <Col lg={6}>
                 <div className='number shadow pt-5 text-center  p-5'>
@@ -64,20 +64,20 @@ useEffect(() => {
               </Col>
 
               <Col lg={6} className='pt-3'>
-              <BusOwnerBuses/>
+                <BusOwnerBuses />
               </Col>
               <Col lg={6} className='pt-3'>
-              <BusOwnerDrivers/>
+                <BusOwnerDrivers />
               </Col>
             </Row>
-          </div>:
-          <div className='d-flex justify-content-center align-items-center'>
-            You account is not aproved yet! Please come back later.
+          </div> :
+            <div className='d-flex justify-content-center align-items-center'>
+              You account is not aproved yet! Please come back later.
             </div>}
-          
+
         </Col>
       </Row>
-      <ToastContainer/>
+      <ToastContainer />
     </div >
   )
 }

@@ -1,26 +1,26 @@
 import React from 'react'
 import './BusOwnerAside.css'
 import {
-    CDBSidebar,
-    CDBSidebarContent,
-    CDBSidebarHeader,
-    CDBSidebarMenu,
-    CDBSidebarMenuItem,
-    CDBSidebarFooter,
-  } from 'cdbreact';
-  import Avatar from '@mui/material/Avatar';
-  import Stack from '@mui/material/Stack';
+  CDBSidebar,
+  CDBSidebarContent,
+  CDBSidebarHeader,
+  CDBSidebarMenu,
+  CDBSidebarMenuItem,
+  CDBSidebarFooter,
+} from 'cdbreact';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
 import { Link } from 'react-router-dom';
 
 function BusOwnerAside() {
-    
-  return (
-    <div  >
-        <CDBSidebar className='asideBody'>
-        <CDBSidebarHeader className='siteName' prefix={<i className="fa fa-bars" />}>
-        <img className='logo ' src="https://i.postimg.cc/8z0KPDs6/13a15b0b31789ed21fc556c11f01cd04-removebg-preview.png" alt="" />
 
-            TRANSITEASE</CDBSidebarHeader>
+  return (
+    <div className='sticky-top' >
+      <CDBSidebar className='asideBody '>
+        <CDBSidebarHeader className='siteName' prefix={<i className="fa fa-bars" />}>
+          <img className='logo ' src="https://i.postimg.cc/8z0KPDs6/13a15b0b31789ed21fc556c11f01cd04-removebg-preview.png" alt="" />
+
+          TRANSITEASE</CDBSidebarHeader>
         <CDBSidebarContent>
           <CDBSidebarMenu>
             <Link to={'/bus-owner-home-page'}><CDBSidebarMenuItem icon="bar-chart">Dashboard</CDBSidebarMenuItem></Link>
@@ -31,15 +31,15 @@ function BusOwnerAside() {
         </CDBSidebarContent>
 
         <CDBSidebarFooter style={{ textAlign: 'center' }}>
-         <Link to={"/bus-owner-profile"}>
+          <Link to={"/bus-owner-profile"}>
             <div
               className="sidebar-btn-wrapper ms-3"
-              style={{padding: '20px 5px',color:"white"}}>
+              style={{ padding: '20px 5px', color: "white" }}>
               <Stack direction="row" spacing={2}>
-        <Avatar alt="Admin" src="/static/images/avatar/1.jpg" /> <h5 className='mt-2'>Bus Owner</h5>
-      </Stack>
+                <Avatar alt="Admin" src="/static/images/avatar/1.jpg" /> <h5 className='mt-2'>Bus Owner</h5>
+              </Stack>
             </div>
-         </Link>
+          </Link>
         </CDBSidebarFooter>
       </CDBSidebar>
     </div>

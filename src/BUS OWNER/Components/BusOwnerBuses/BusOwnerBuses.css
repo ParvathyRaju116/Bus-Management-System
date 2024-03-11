@@ -14,3 +14,7 @@
     background-color: transparent;
     border-color: transparent;
   }
+  .btn-bg{
+    background: linear-gradient(45deg, #FF4B2B, #FF416C);
+    border:none;
+  }

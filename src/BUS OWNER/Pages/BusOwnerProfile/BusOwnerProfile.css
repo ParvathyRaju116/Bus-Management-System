@@ -1,10 +1,6 @@
-.number{
-    justify-content: center;
-    align-items: center;
-     height: 230px;
-     width: 100%;
-     background-color: rgb(255, 255, 255);
-     border-left: 10px solid;
-     border-image: linear-gradient(to bottom, #ff4b2b, #ff416d) 1;
-     border-radius: 0px 20px 20px 0px !important;
-   }
+.profile-box{
+  background-image:linear-gradient(to right, #ff4b2b47, #ff416d4c) !important;
+  border-radius: 20px;
+  /* height:500px;
+  overflow-y: auto; */
+}

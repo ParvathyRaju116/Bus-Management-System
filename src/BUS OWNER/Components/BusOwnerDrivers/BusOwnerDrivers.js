@@ -117,7 +117,7 @@ console.log(newDriver);
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>Close</Button>
-          <Button variant="primary" onClick={handleAdd}>Add</Button>
+          <Button className="btn-bg" variant="primary" onClick={handleAdd}>Add</Button>
         </Modal.Footer>
       </Modal>
     </>

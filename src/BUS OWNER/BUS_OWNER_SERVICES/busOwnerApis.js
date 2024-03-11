@@ -31,3 +31,8 @@ export const getRoutesApi = async ( headers) => {
 export const getStopsApi = async ( id,headers) => {
     return await commonApi('GET', `${BASE_URL}owner/routes/${id}/`, "", headers)
 }
+
+//get assigned routes
+export const getAssignedRoutesApi = async (headers) => {
+    return await commonApi('GET', `${BASE_URL}owner/assignedroutes/`, "", headers)
+}

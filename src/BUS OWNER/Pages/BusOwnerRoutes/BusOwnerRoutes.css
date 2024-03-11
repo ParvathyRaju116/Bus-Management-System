@@ -49,3 +49,19 @@
   background-clip: text;
   color: transparent;
 }
+.route-list-table{
+  background-image:linear-gradient(to right, #ff4b2b47, #ff416d4c) !important;
+  border-radius: 20px;
+  height:300px;
+  overflow-y: auto;
+}
+.table-transparent {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.table-transparent th,
+.table-transparent td {
+  background-color: transparent;
+  border-color: transparent;
+}
