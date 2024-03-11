@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import AdminHeader from '../../Components/Admin-Header/AdminHeader'
 import { busOwnerViewApi } from '../../../SERVICES/AllAPI';
-import { Table } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 
 function OwnersList() {
@@ -24,8 +25,11 @@ ownerview()
         <AdminHeader></AdminHeader>
 
      <div className='m-5'>
+     <div><Link to={"/admin-dashbord"}><Button className='back-home-button'><i class="fa-solid fa-angles-left"></i> Back To Home</Button></Link></div>
+
        <div className='text-center'> <h1 className='assigneRouteHead'>Owners List</h1></div>
-            <Table className='mt-4'   hover>
+       <hr />
+            <Table className='mt-5'   hover>
           <thead>
             <tr>
               <th>#</th>

@@ -98,10 +98,10 @@ function AdminHeader() {
                    </Link>
                 </MenuItem>
                 <MenuItem>
-                  <Typography textAlign="center">Listing</Typography>
+                 <Link to={'/add-bus-route'}> <Typography textAlign="center">Add Route</Typography></Link>
                 </MenuItem>
                 <MenuItem>
-                  <Typography textAlign="center">Blog</Typography>
+                 <Link to={'/admin-assigned-routes'}> <Typography textAlign="center">Assigned Routes</Typography></Link>
                 </MenuItem>
                 <MenuItem>
                   <Typography textAlign="center"><a h>About</a></Typography>
@@ -131,46 +131,23 @@ function AdminHeader() {
               TRANSITEASE
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{  color: "white", display: "block" }}
-              >
+             
                 <MenuItem>
                  <Link to={"/admin-dashbord"}> <Typography textAlign="center text-white" style={{textDecoration:'none',color:"white"}}>Home</Typography></Link>
                 </MenuItem>
-              </Button>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{  color: "white", display: "block" }}
-              >
+             
                 <MenuItem>
-                  <Typography textAlign="center">Listing</Typography>
-                </MenuItem>
-              </Button>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{  color: "white", display: "block" }}
-              >
                 <MenuItem>
-                  <Typography textAlign="center">Blog</Typography>
+                 <Link to={'/add-bus-route'}> <Typography textAlign="center" className='text-white'>Add Route</Typography></Link>
                 </MenuItem>
-              </Button>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ color: "white", display: "block" }}
-              >
+                </MenuItem>
+              
+            
                 <MenuItem>
-                  <Typography textAlign="center">About</Typography>
+                <Link to={'/admin-assigned-routes'}> <Typography textAlign="center" className='text-white'>Assigned Routes</Typography></Link>
                 </MenuItem>
-              </Button>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{  color: "white", display: "block" }}
-              >
-                <MenuItem>
-                  <Typography textAlign="center">Conact</Typography>
-                </MenuItem>
-              </Button>
+             
+            
             </Box>
 
             <Box className="me-3" sx={{ display: { xs: 'none', md: 'flex' } }}>

@@ -19,7 +19,7 @@ function AddStop({ id }) {
         approx_cost: ""
     });
     useEffect(() => {
-        console.log(id);
+        // console.log(id);
         getRouteAndStop()
 
     }, []);
@@ -27,8 +27,10 @@ function AddStop({ id }) {
     const getRouteAndStop = async () => {
         const response = await getRouteAndStopeApi(id, header)
         setStop(response.data.stops)
-        console.log(stop);
+        // console.log(stop);
     }
+
+    
 
 
 
@@ -40,9 +42,10 @@ function AddStop({ id }) {
             handleAddClose();
             Swal.fire({
                 icon: "success",
-                title: "Route Added",
-                timer: 1200
-            });
+                title: "Stop Added",
+                showConfirmButton: false,
+                timer: 1500
+              });
             setStop({
                 stop_name: "",
                 time_taken: "",
@@ -70,6 +73,7 @@ function AddStop({ id }) {
                                 <th>Stop Name</th>
                                 <th>Time Taken</th>
                                 <th>Bus Fare</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,6 +83,7 @@ function AddStop({ id }) {
                                     <td style={{ textTransform: 'capitalize' }}>{i.stop_name}</td>
                                     <td>{i.time_taken}</td>
                                     <td>{i.approx_cost}</td>
+                                    <td><button className='dltbtn' onClick={""}><i class="fa-solid fa-trash-can"></i></button></td>
                                 </tr>
                             ))}
                         </tbody>
@@ -90,7 +95,7 @@ function AddStop({ id }) {
             </div>
             <div className='text-end'>
                 <Button className='AddBtn me-5' onClick={handleAddShow}>
-                    <i className="fa-solid fa-plus text-white"></i>
+                    <i className="fa-solid fa-plus text-white"></i> Add Stop
                 </Button>
             </div>
             <Modal show={addshow} onHide={handleAddClose}>

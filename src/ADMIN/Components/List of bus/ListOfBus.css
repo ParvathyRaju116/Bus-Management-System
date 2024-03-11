@@ -1,7 +1,7 @@
 .list-table {
   background-image: linear-gradient(to right, #ff4b2b47, #ff416d4c) !important;
   border-radius: 10px;
-  height: 55vh;
+  height: 56vh !important ;
   overflow-y: scroll;
 }
 

@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react'
 import './Request.css'
 import AdminHeader from '../../Components/Admin-Header/AdminHeader'
 import { Button, Col, Row } from 'react-bootstrap'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { acceptRequestApi, allRequestListApi } from '../../../SERVICES/AllAPI'
+import Swal from 'sweetalert2'
+
+
 
 
 function Request() {
   const token = localStorage.getItem("token")
   const [allRequest, setAllReqest] = useState([])
   const param=useParams()
+  const navigate=useNavigate()
 
   const allRequestList = async () => {
     const header = {
@@ -34,6 +38,15 @@ function Request() {
     Authorization: `Token ${token}`
   };
   const response=await acceptRequestApi(id,header)
+  if(response.status==200){
+    Swal.fire({
+      icon: "success",
+      title: "Approved",
+      showConfirmButton: false,
+      timer: 1500
+    });
+    navigate('/')
+  }
   console.log(response);
  }
 
@@ -41,15 +54,18 @@ function Request() {
     <div>
       <AdminHeader></AdminHeader>
 
+      <div className='ms-5 mt-4'><Link to={"/admin-dashbord"}><Button className='back-home-button'><i class="fa-solid fa-angles-left"></i> Back To Home</Button></Link></div>
+
       <div className=' m-5 d-flex align-item-center justify-content-center'>
 
         <div className='p-5 reqBody w-75'>
+          
 
           <div className='text-center'><h1 className='mb-3 reqestHead'>Request</h1></div>
         { req &&  <div>
 <Row>
   <Col className='proofImg'>
- <div  className=''> <img src={req.proof?`http://127.0.0.1:8000/${req.proof}`:"https://i.postimg.cc/GmghkXDV/download-1.png"} alt="" /></div>
+ <div  className='d-flex align-item-center justify-content-center mt-3'> <img src={req.proof?`http://127.0.0.1:8000/${req.proof}`:"https://i.postimg.cc/GmghkXDV/download-1.png"} alt="" /></div>
   </Col>
   <Col className='mt-5'>
     
@@ -66,7 +82,7 @@ function Request() {
          </div>}
           <div className='text-end'>
             <Link to={"/admin-dashbord"}><Button className='btn-danger'>Deny</Button></Link>
-            <Link to={"/admin-dashbord"}> <Button className='btn-success ms-5' onClick={acceptRequest}>Accept</Button></Link>
+             <Button className='btn-success ms-5' onClick={acceptRequest}>Accept</Button>
           </div>
 
         </div>

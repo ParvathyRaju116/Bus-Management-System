@@ -25,7 +25,7 @@ function ListOfBus({ owners }) {
     setShow(true);
     const response = await getOnebusApi(id, header);
     setOneBus(response.data);
-    // console.log(response);
+    console.log(response);
   };
 
   useEffect(() => {
@@ -83,7 +83,7 @@ function ListOfBus({ owners }) {
 
               <div className='text-center'>
               <p className='fs-5' style={{ lineHeight: '1.3' }}>
-                      <b>Number Plate :</b> {oneBus.busowner.name}
+                      <b>Bus Owner :</b> {oneBus.busowner.name}
                     </p>
                   <p className='fs-5' style={{ lineHeight: '1.3' }}>
                       <b>Number Plate :</b> {oneBus.Number_plate}

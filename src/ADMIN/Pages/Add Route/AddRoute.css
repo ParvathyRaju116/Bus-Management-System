@@ -1,7 +1,8 @@
-.add-route-body,.routeList{
+.add-route-body{
     justify-content: center;
     align-items: center;
-    display: flex;
+    /* border: 2px solid #ff4b2b; */
+
     
 }
 
@@ -54,10 +55,17 @@
 .dltBtn{
   background-color: transparent;
   color: red;
-  border: 0;
+  border: 1px solid #FF416C;
+  border-radius: 0px !important;
 }
 .dltBtn:hover{
   background-color: transparent;
   color: red;
+  border: 1px solid #FF416C;
+}
+.dltbtn{
+  background-color: transparent;
+  color: red;
+  border: 0;
 }
 

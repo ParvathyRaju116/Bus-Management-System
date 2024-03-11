@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import "./AddRoute.css";
 import AdminHeader from '../../Components/Admin-Header/AdminHeader';
-import { addRouteApi,  getRouteApi } from '../../../SERVICES/AllAPI';
-import { Button,  Modal } from 'react-bootstrap';
+import { addRouteApi, deleleRouteApi, getRouteApi } from '../../../SERVICES/AllAPI';
+import { Button, Modal } from 'react-bootstrap';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddStop from '../../Components/AddStop/AddStop';
 import Swal from 'sweetalert2'
+import { Link } from 'react-router-dom';
+
 
 function AddRoute() {
   const [show, setShow] = useState(false);
@@ -31,6 +33,17 @@ function AddRoute() {
   const listRoutes = async () => {
     const response = await getRouteApi(header);
     setRouteList(response.data);
+    console.log(response.data);
+  };
+
+  const inactiveRoute = async (e, id) => {
+    console.log(id);
+    e.preventDefault();
+    const response = await deleleRouteApi(id, header);
+    if (response.status === 200) {
+      listRoutes();
+    }
+    console.log(response);
   };
 
   useEffect(() => {
@@ -40,28 +53,28 @@ function AddRoute() {
   // add bus
   const addRoute = async () => {
     const response = await addRouteApi(addRouteData, header);
-    if (response.status == 200) {
+    if (response.status === 200) {
       console.log(response);
       listRoutes();
       handleClose();
       Swal.fire({
         icon: "success",
         title: "Route Added",
-        timer:1200
+        showConfirmButton: false,
+        timer: 1500
       });
       setAddRouteData({
         name: "",
         starts_from: "",
         ends_at: ""
-      })
-    }
-    else{
+      });
+    } else {
       Swal.fire({
-          icon: "error",
-          text: "Something went wrong!",
-          timer:1200
-        });
-    }  
+        icon: "error",
+        text: "Something went wrong!",
+        timer: 1200
+      });
+    }
 
     console.log(response);
   };
@@ -70,46 +83,54 @@ function AddRoute() {
   return (
     <>
       <AdminHeader />
-      <div className='div1 mt-5'>
-        <h1 className='all-route-head'>All Routes</h1>
-      </div>
+      <div className='mt-5 ms-5'><Link to={"/admin-dashbord"}><Button className='back-home-button'><i class="fa-solid fa-angles-left"></i> Back To Home</Button></Link></div>
 
-      <div className='text-end m-5'>
-        <Button className='AddBtn' onClick={handleShow}>
-          Add Route
-        </Button>
-      </div>
+      <div className='add-route-body m-5'>
+        <div className='div1 mt-5'>
+          <h1 className='all-route-head'>All Routes</h1>
+        </div>
+        <hr />
 
-      <div className='list-routes  m-5 ps-5 pe-5'>
-        {routeList.length>0? routeList.map((i, index) => (
-          <Accordion className='ps-5 w-100' key={i.id}>
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              id="panel1-header"
-              className='d-flex '
-              style={{ width: '100%', justifyContent: 'space-between' }}
-            >
-              <div style={{ display: 'flex', width: '100%' }}>
-                <h2 style={{ textTransform: 'capitalize' }}>{i.name}</h2>
-                <div className='ms-auto text-end me-5 pe-5'>
-                  <b> Starts From : </b> {i.starts_from} <br />
-                  <b> Ends At : </b> {i.ends_at}
+
+        <div className='text-end m-5'>
+          <Button className='AddBtn' onClick={handleShow}>
+            <i className="fa-solid fa-plus text-white"></i> Add Route
+          </Button>
+        </div>
+
+        <div className='list-routes  m-5 ps-5 pe-5'>
+          {routeList.length > 0 ? routeList.filter((route) => route.is_active === true).map((i, index) => (
+            <Accordion className='ps-5 w-100' key={i.id}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                id="panel1-header"
+                className='d-flex '
+                style={{ width: '100%', justifyContent: 'space-between' }}
+              >
+                <div style={{ display: 'flex', width: '100%' }}>
+                  <h2 style={{ textTransform: 'capitalize' }}>{i.name}</h2>
+                  <div className='ms-auto text-end me-5 pe-5'>
+                    <b> Starts From : </b> {i.starts_from} <br />
+                    <b> Ends At : </b> {i.ends_at}
+                  </div>
                 </div>
-                <button className='dltBtn'><i class="fa-solid fa-trash-can"></i></button>
-              </div>
-            </AccordionSummary>
-            <AccordionDetails>
-              <div>
-              </div>
+              </AccordionSummary>
+              <div className='text-end me-3'> <button className='dltBtn' onClick={(e) => inactiveRoute(e, i.id)}>DELETE ROUTE</button></div>
 
-              <AddStop id={i.id} ></AddStop>
+              <AccordionDetails>
+
+                <div>
+                </div>
+
+                <AddStop id={i.id}></AddStop>
 
 
-            </AccordionDetails>
-          </Accordion>
-        )) : <></>}
+              </AccordionDetails>
+            </Accordion>
+          )) : <></>}
+        </div>
+
       </div>
-
 
       {/* modal for add route */}
       <Modal show={show} onHide={handleClose}>
@@ -141,7 +162,6 @@ function AddRoute() {
       </Modal>
 
 
-      {/* modal for add stop */}
 
     </>
 

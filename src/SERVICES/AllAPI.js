@@ -78,9 +78,10 @@ export const getAssignedRouteApi =async(headers)=>{
   return await commonApi ('GET',`${BASE_URL}Admin/assignedroutes/`,"",headers)
 }
 
-// delete Route
-
-
+// delete route
+export const deleleRouteApi =async(id,headers)=>{
+  return await commonApi('DELETE',`${BASE_URL}Admin/route/${id}/`,"",headers)
+}
 
 // __________________________________________________________________________________________________________________________________________________________________________
 
