@@ -10,13 +10,18 @@ import {
 } from 'cdbreact';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 function BusOwnerAside() {
-
+  const navigate = useNavigate()
+  const handleLogout = () => {
+    localStorage.clear()
+    navigate('/')
+  }
   return (
     <div className='sticky-top' >
-      <CDBSidebar className='asideBody '>
+      <CDBSidebar className='asideBody ' breakpoint={768}>
         <CDBSidebarHeader className='siteName' prefix={<i className="fa fa-bars" />}>
           <img className='logo ' src="https://i.postimg.cc/8z0KPDs6/13a15b0b31789ed21fc556c11f01cd04-removebg-preview.png" alt="" />
 
@@ -25,8 +30,9 @@ function BusOwnerAside() {
           <CDBSidebarMenu>
             <Link to={'/bus-owner-home-page'}><CDBSidebarMenuItem icon="bar-chart">Dashboard</CDBSidebarMenuItem></Link>
             <Link to={'/bus-owner-routes'}><CDBSidebarMenuItem icon="road">Routes</CDBSidebarMenuItem></Link>
-            {/* <Link to={'/bus-owner-bus-drivers'}><CDBSidebarMenuItem icon="users">Drivers</CDBSidebarMenuItem></Link> */}
             <Link to={'/bus-owner-profile'}><CDBSidebarMenuItem icon="user" iconType="solid"> Profile</CDBSidebarMenuItem></Link>
+            <CDBSidebarMenuItem onClick={handleLogout} icon="arrow-right-from-bracket">Logout</CDBSidebarMenuItem>
+
           </CDBSidebarMenu>
         </CDBSidebarContent>
 

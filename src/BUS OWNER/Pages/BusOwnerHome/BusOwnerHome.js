@@ -41,22 +41,21 @@ function BusOwnerHome() {
 
   return (
     <div div className='dashboardBody' >
-      <Row>
-        <Col lg={2} >
-          <BusOwnerAside></BusOwnerAside>
-        </Col>
-        <Col lg={10} >
-          {isAproved ? <div className=' ms-5 pe-5 me-5 mt-5  w-100'>
-            <Row className='mt-5 me-4'>
+      <div className='main-grid'>
+        <BusOwnerAside></BusOwnerAside>
+
+        <div>
+          {isAproved ? <div className='m-2 w-100'>
+            <Row className='m-2'>
               <Col lg={6}>
-                <div className='number shadow pt-5 text-center  p-5'>
+                <div className='number-bus-owner shadow pt-5 text-center  p-lg-5 p-2 mb-1'>
                   <h1> <i className="fa-solid fa-bus"></i></h1>
                   <h2 className=''>No of buses</h2>
                   <h1>{allBuses?.length}</h1>
                 </div>
               </Col>
               <Col lg={6}>
-                <div className='number shadow text-center  pt-5  p-5'>
+                <div className='number-bus-owner shadow text-center  pt-5  p-lg-5 p-2'>
                   <h1> <i className="fa-solid fa-user-group"></i></h1>
                   <h2>No of Bus drivers</h2>
                   <h1>{allDrivers?.length}</h1>
@@ -74,9 +73,8 @@ function BusOwnerHome() {
             <div className='d-flex justify-content-center align-items-center'>
               You account is not aproved yet! Please come back later.
             </div>}
-
-        </Col>
-      </Row>
+        </div>
+      </div>
       <ToastContainer />
     </div >
   )

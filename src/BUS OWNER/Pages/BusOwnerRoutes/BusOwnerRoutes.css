@@ -54,7 +54,27 @@
   border-radius: 20px;
   height:300px;
   overflow-y: auto;
+  overflow-x: auto;
+  max-width: 80vw;
 }
+.route-list-table::-webkit-scrollbar {
+  width: 10px;
+  background: transparent;
+}
+
+.route-list-table::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.route-list-table::-webkit-scrollbar-thumb {
+  background: linear-gradient(to right, #ff4b2b47, #ff416d4c);
+  border-radius: 10px;
+}
+
+.route-list-table::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to right, #ff416d4c, #ff4b2b47);
+}
+
 .table-transparent {
   background-color: transparent;
   border-color: transparent;
@@ -64,4 +84,13 @@
 .table-transparent td {
   background-color: transparent;
   border-color: transparent;
+}
+.main-grid {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+}
+.route-grid{
+  display: grid;
+  grid-template-columns:1fr max-content;
+  width:100%;
 }

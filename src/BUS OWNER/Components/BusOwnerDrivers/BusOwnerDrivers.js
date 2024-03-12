@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { addDriverApi, getOwnerDriversApi } from '../../BUS_OWNER_SERVICES/busOwnerApis'
 import { toast } from 'react-toastify'
 import Driver from '../Driver/Driver'
+import Swal from 'sweetalert2'
 
 
 function BusOwnerDrivers() {
@@ -34,7 +35,12 @@ console.log(newDriver);
   const handleAdd = async () => {
     let {name, phone, address, age, dob, license } = newDriver
     if (!name || !phone || !address || !age || !dob || !license) {
-      alert("Please fill the form completely")
+      Swal.fire({
+        icon: "warning",
+        title: "Please fill the form completely",
+        showConfirmButton: false,
+        timer: 1500
+      });
     }
     else {
       const reqBody = new FormData()
@@ -53,12 +59,22 @@ console.log(newDriver);
         let result = await addDriverApi(reqBody, reqHeader)
         console.log(result);
         if (result.status>=200 && result.status<300){
-          alert("New driver added successfully")
+          Swal.fire({
+            icon: "success",
+            title: "New driver added successfully",
+            showConfirmButton: false,
+            timer: 1500
+          });
           getData()
           handleClose()
         }
         else{
-          alert("Something went wrong please try again later")
+          Swal.fire({
+            icon: "success",
+            title: "Something went wrong please try again later",
+            showConfirmButton: false,
+            timer: 1500
+          });
         }
       }
       catch (err) {
@@ -68,7 +84,7 @@ console.log(newDriver);
   }
   return (
     <>
-      <div className='ms-5 list-table p-4 shadow' >
+      <div className='list-table-driver p-md-4 p-2 shadow' >
         <h1>List Of Drivers <Button className='more rounded-4' onClick={handleShow}>Add</Button></h1>
 
         <Table className='table-transparent striped mt-3'>

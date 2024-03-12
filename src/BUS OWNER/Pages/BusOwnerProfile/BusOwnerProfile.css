@@ -4,3 +4,7 @@
   /* height:500px;
   overflow-y: auto; */
 }
+.main-grid {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+}
