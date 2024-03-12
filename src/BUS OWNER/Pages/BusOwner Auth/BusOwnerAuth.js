@@ -6,7 +6,7 @@ import './BusOwnerAuth.css'
 import { busOwnerloginApi } from '../../../SERVICES/AllAPI';
 import { busOwnerRegistrationApi } from '../../BUS_OWNER_SERVICES/busOwnerApis'
 import { Dropdown } from 'react-bootstrap';
-
+import Swal from 'sweetalert2'
 
 function BusOwnerAuth() {
   const [isSignUpActive, setIsSignUpActive] = useState(false);
@@ -58,7 +58,12 @@ function BusOwnerAuth() {
       }
       const response = await busOwnerRegistrationApi(formData, headers)
       if (response.status>=200 && response.status<300){
-        alert("Registration successful. Please login.")
+        Swal.fire({
+          icon: "success",
+          title: "Registration successful. Please login.",
+          showConfirmButton: false,
+          timer: 1500
+        });
         setAuthData({name: "",
         phone: "",
         address: "",
@@ -68,7 +73,12 @@ function BusOwnerAuth() {
         setIsSignUpActive(false)
       }
       else{
-        alert(response.response.data.msg)
+        Swal.fire({
+          icon: "warning",
+          title: response.response.data.msg,
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
       console.log(response);
     } catch (error) {
@@ -94,13 +104,23 @@ function BusOwnerAuth() {
       //   theme: "light",
       // });
       console.log(response);
-      alert("Login successful")
+      Swal.fire({
+        icon: "success",
+        title: "Login successful",
+        showConfirmButton: false,
+        timer: 1500
+      });
       navigate('/bus-owner-home-page')
       localStorage.setItem("token", response.data.token)
       console.log(response.data);
     }
     else {
-      alert('Incorrect password or username')
+      Swal.fire({
+        icon: "warning",
+        title: 'Incorrect password or username',
+        showConfirmButton: false,
+        timer: 1500
+      });
     }
   }
 

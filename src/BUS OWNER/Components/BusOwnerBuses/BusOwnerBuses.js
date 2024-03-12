@@ -7,6 +7,8 @@ import {  addBusApi, getOwnerBusesApi} from '../../BUS_OWNER_SERVICES/busOwnerAp
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import Bus from '../Bus/Bus'
+import Swal from 'sweetalert2'
+
 
 function BusOwnerBuses() {
   const [allBuses, setAllBuses] = useState([])
@@ -47,7 +49,12 @@ function BusOwnerBuses() {
   const handleAdd = async () => {
     let { name, Number_plate, Engine_no, image, RC_book} = newBus
     if (!name || !Number_plate || !Engine_no || !image || !RC_book) {
-      alert("Please fill the form completely")
+      Swal.fire({
+        icon: "warning",
+        title: 'Please fill the form completely',
+        showConfirmButton: false,
+        timer: 1500
+      });
     }
     else {
       const reqBody = new FormData()
@@ -66,12 +73,22 @@ function BusOwnerBuses() {
         let result = await addBusApi(reqBody, reqHeader)
         console.log(result);
         if (result.status>=200 && result.status<300){
-          alert("New bus added successfully")
+          Swal.fire({
+            icon: "success",
+            title: "New bus added successfully",
+            showConfirmButton: false,
+            timer: 1500
+          });
           getData()
           handleClose()
         }
         else{
-          alert("Something went wrong please try again later")
+          Swal.fire({
+            icon: "error",
+            title: "Something went wrong please try again later",
+            showConfirmButton: false,
+            timer: 1500
+          });
         }
       }
       catch (err) {
@@ -81,7 +98,7 @@ function BusOwnerBuses() {
   }
   return (
     <>
-      <div className='ms-5 list-table p-4 shadow' >
+      <div className=' list-table-bus p-md-4 p-2 shadow' >
         <h1>List Of Buses  <Button onClick={handleShow} className='more rounded-4'>Add</Button></h1>
 
         <Table className='table-transparent striped mt-3'>

@@ -11,6 +11,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import dayjs from 'dayjs';
 import './AssignBusAndDriver.css'
+import Swal from 'sweetalert2';
 
 
 function AssignBusAndDriver({ id }) {
@@ -40,7 +41,12 @@ function AssignBusAndDriver({ id }) {
     const handleSubmit=async()=>{
         const {bus,busdriver,start_time,end_time}=serviceData
         if(!bus || !busdriver || !start_time || !end_time){
-            alert('Please fill the form completely')
+            Swal.fire({
+                icon: "warning",
+                title: 'Please fill the form completely',
+                showConfirmButton: false,
+                timer: 1500
+              });
         }
         else{
             alert('proceed to api call')
