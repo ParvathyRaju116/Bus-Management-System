@@ -1,7 +1,6 @@
-.add-route-body{
+.add-route--body{
     justify-content: center;
     align-items: center;
-    /* border: 2px solid #ff4b2b; */
 
     
 }
@@ -21,7 +20,6 @@
   background-clip: text;
   color: transparent;
 }
-/* AddRoute.css */
 
 .table-custom {
   background: linear-gradient(45deg, #FF4B2B, #FF416C);

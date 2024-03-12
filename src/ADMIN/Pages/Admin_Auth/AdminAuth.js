@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import './AdminAuth.css'
 import { ToastContainer, toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AdminLoginApi } from '../../../SERVICES/AllAPI';
+import { Dropdown } from 'react-bootstrap';
+
 
 
 function AdminAuth() {
@@ -49,10 +51,23 @@ function AdminAuth() {
   
   return (
   <>
-
+ 
 <div className='auth-Container'>
+<div className=' mb-3 drop'>
+     <Dropdown className=''>
+        <Dropdown.Toggle className=' '  id="dropdown-basic">
+         Select User
+        </Dropdown.Toggle>
+  
+        <Dropdown.Menu>
+        <Dropdown.Item as={Link} to={'/auth'}>User</Dropdown.Item>
+            <Dropdown.Item as={Link} to={'/bus-owner-auth'}>Bus Owner</Dropdown.Item>
+            <Dropdown.Item as={Link} to={'/admin-auth'}>Admin</Dropdown.Item>        </Dropdown.Menu>
+      </Dropdown>
+ </div>
+  
       <div className={`container ${isSignUpActive ? 'right-panel-active' : ''}`}>
-       
+      
         <div className="form-container sign-in-container">
           <form action="" onSubmit={handleLogin}>
             <h1>Sign in</h1>

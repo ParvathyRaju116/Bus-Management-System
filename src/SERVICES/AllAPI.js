@@ -19,68 +19,68 @@ export const loginApi=async(body)=>{
 
 // api for admin login
 export const AdminLoginApi=async(body)=>{
-  return await commonApi('POST',`${BASE_URL}Admin/token/`,body,"")
+  return await commonApi('POST',`${BASE_URL}adminapi/token/`,body,"")
 }
 
 // api for list bus owners
 export const busOwnerViewApi=async(headers)=>{
-  return await commonApi('GET',`${BASE_URL}Admin/ownerview/`,"",headers)
+  return await commonApi('GET',`${BASE_URL}adminapi/ownerview/`,"",headers)
 }
 
-// api for list bus users
-export const passengerviewApi=async(headers)=>{
-  return await commonApi('GET',`${BASE_URL}Admin/passengerview/`,"",headers)
-}
 
 // api for list of bus
 export const busListApi=async(headers)=>{
-  return await commonApi('GET',`${BASE_URL}Admin/bus/`,"",headers)
+  return await commonApi('GET',`${BASE_URL}adminapi/bus/`,"",headers)
 }
 
 // api for list of Request
 export const allRequestListApi=async(headers)=>{
-  return await commonApi('GET',`${BASE_URL}Admin/pendingowner/`,"",headers)
+  return await commonApi('GET',`${BASE_URL}adminapi/pendingowners/`,"",headers)
 }
 
 // accept request
 export const acceptRequestApi=async(id,headers)=>{
-  return await commonApi('POST',`${BASE_URL}Admin/ownerview/${id}/owner_approval/`,"",headers)
+  return await commonApi('POST',`${BASE_URL}adminapi/ownerview/${id}/owner_approval/`,"",headers)
 }
 
 // get Routes
 export const getRouteApi=async(headers)=>{
-    return await commonApi('GET',`${BASE_URL}Admin/route/`,{},headers)
+    return await commonApi('GET',`${BASE_URL}adminapi/route/`,{},headers)
 }
 
 // add route
 export const addRouteApi=async(body,headers)=>{
-  return await commonApi('POST',`${BASE_URL}Admin/route/`,body,headers)
+  return await commonApi('POST',`${BASE_URL}adminapi/route/`,body,headers)
 }
 
 // get route and stop
 export const getRouteAndStopeApi=async(id,headers)=>{
-   return await commonApi ('GET',`${BASE_URL}Admin/route/${id}/`,{},headers)
+   return await commonApi ('GET',`${BASE_URL}adminapi/route/${id}/`,{},headers)
 }
 
 // add stop
 export const addStopApi=async(id,body,headers)=>{
-  return await commonApi('POST',`${BASE_URL}Admin/route/${id}/add_stop/`,body,headers)
+  return await commonApi('POST',`${BASE_URL}adminapi/route/${id}/add_stop/`,body,headers)
+}
+// get users list
+export const passengerviewApi=async(headers)=>{
+  return await commonApi('GET',`${BASE_URL}adminapi/passenger/`,"",headers)
 }
 
 // get One bus 
 export const getOnebusApi=async(id,headers)=>{
-  return await commonApi('GET',`${BASE_URL}Admin/bus/${id}/`,"",headers)
+  return await commonApi('GET',`${BASE_URL}adminapi/bus/${id}/`,"",headers)
 }
 
 // get assignedROutes
 
 export const getAssignedRouteApi =async(headers)=>{
-  return await commonApi ('GET',`${BASE_URL}Admin/assignedroutes/`,"",headers)
+  return await commonApi ('GET',`${BASE_URL}adminapi/assignedroutes/`,"",headers)
 }
 
 // delete route
 export const deleleRouteApi =async(id,headers)=>{
-  return await commonApi('DELETE',`${BASE_URL}Admin/route/${id}/`,"",headers)
+  return await commonApi('DELETE',`${BASE_URL}adminapi/route/${id}/`,"",headers)
 }
 
 // __________________________________________________________________________________________________________________________________________________________________________

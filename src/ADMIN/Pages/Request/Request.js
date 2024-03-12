@@ -24,9 +24,9 @@ function Request() {
     console.log(response);
   }
 
-  useEffect(() => {
-    allRequestList()
-  }, [])
+  // useEffect(() => {
+  //   allRequestList()
+  // }, [])
 
   const {id}=param 
 
@@ -45,7 +45,7 @@ function Request() {
       showConfirmButton: false,
       timer: 1500
     });
-    navigate('/')
+    navigate('/admin-dashbord')
   }
   console.log(response);
  }

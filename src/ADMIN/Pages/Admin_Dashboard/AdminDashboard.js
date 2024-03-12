@@ -20,7 +20,6 @@ function AdminDashboard() {
     };
     const response = await busOwnerViewApi(header)
     setTotalbusOwners(response.data)
-    // console.log(response.data.data);
   }
 
   // users view
@@ -30,15 +29,14 @@ function AdminDashboard() {
     };
     const response = await passengerviewApi(header)
     setTotalPassenger(response.data)
-    // console.log(response);
   }
 
 
 
-  useEffect(() => {
-    ownerview()
-    passengerview()
-  }, [])
+  // useEffect(() => {
+  //   ownerview()
+  //   passengerview()
+  // }, [])
 
 
   return (

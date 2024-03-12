@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './AdminHeader.css'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,6 +15,9 @@ import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 import { Badge } from '@mui/material';
 import MailIcon from '@mui/icons-material/Mail';
+import { allRequestListApi } from '../../../SERVICES/AllAPI';
+
+
 
 
 const pages = ["Products", "Pricing", "Blog"];
@@ -39,6 +42,26 @@ function AdminHeader() {
     const handleCloseUserMenu = () => {
       setAnchorElUser(null);
     };
+
+    const token = localStorage.getItem("token")
+    const[allRequest,setAllReqest]=useState([])
+    const allRequestList= async () => {
+      const header = {
+        Authorization: `Token ${token}`
+      };
+      const response = await allRequestListApi(header)
+      if(response.status==200){
+        setAllReqest(response.data)
+
+      }
+      else{
+        setAllReqest("")
+      }
+    }
+  
+    // useEffect (()=>{
+    //  allRequestList()
+    // },[])
   
   return (
     <div>
@@ -151,12 +174,14 @@ function AdminHeader() {
             </Box>
 
             <Box className="me-3" sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-          
+           <Link to={'/admin-dashbord'}>
+              <IconButton className='text-white' size="large" aria-label="show 4 new mails" color="inherit">
+                <Badge badgeContent={allRequest.length>0?allRequest.length:"0"} color="error">
+                  <MailIcon />
+                </Badge>
+              </IconButton>
+           </Link>
+  
           </Box>
 
             <Box sx={{ flexGrow: 0 }}>

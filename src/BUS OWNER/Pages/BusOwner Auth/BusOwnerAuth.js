@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './BusOwnerAuth.css'
 import { busOwnerloginApi } from '../../../SERVICES/AllAPI';
 import { busOwnerRegistrationApi } from '../../BUS_OWNER_SERVICES/busOwnerApis'
+import { Dropdown } from 'react-bootstrap';
+
+
 function BusOwnerAuth() {
   const [isSignUpActive, setIsSignUpActive] = useState(false);
   // const [photo, setPhoto] = useState(null)
@@ -105,6 +108,18 @@ function BusOwnerAuth() {
 
   return (
     <div className='auth-Container'>
+      <div className=' mb-3 drop'>
+     <Dropdown className=''>
+        <Dropdown.Toggle className=' '  id="dropdown-basic">
+         Select User
+        </Dropdown.Toggle>
+  
+        <Dropdown.Menu>
+        <Dropdown.Item as={Link} to={'/auth'}>User</Dropdown.Item>
+            <Dropdown.Item as={Link} to={'/bus-owner-auth'}>Bus Owner</Dropdown.Item>
+            <Dropdown.Item as={Link} to={'/admin-auth'}>Admin</Dropdown.Item>        </Dropdown.Menu>
+      </Dropdown>
+ </div>
       <div className={`container ${isSignUpActive ? 'right-panel-active' : ''}`}>
         <div className="form-container sign-up-container">
           <form action="" onSubmit={handleSubmit}>

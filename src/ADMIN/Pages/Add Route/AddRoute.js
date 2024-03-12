@@ -85,7 +85,7 @@ function AddRoute() {
       <AdminHeader />
       <div className='mt-5 ms-5'><Link to={"/admin-dashbord"}><Button className='back-home-button'><i class="fa-solid fa-angles-left"></i> Back To Home</Button></Link></div>
 
-      <div className='add-route-body m-5'>
+      <div className='add-route--body m-5'>
         <div className='div1 mt-5'>
           <h1 className='all-route-head'>All Routes</h1>
         </div>
@@ -127,7 +127,7 @@ function AddRoute() {
 
               </AccordionDetails>
             </Accordion>
-          )) : <></>}
+          )) : <div className='text-center text-danger'><p><b>No Routes Added Yet</b></p></div>}
         </div>
 
       </div>

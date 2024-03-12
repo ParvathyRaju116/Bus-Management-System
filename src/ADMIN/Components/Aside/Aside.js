@@ -25,8 +25,6 @@ function Aside() {
           <CDBSidebarMenu>
             <Link to={"/add-bus-route"}><CDBSidebarMenuItem> <i class="fa-solid fa-plus me-3 ms-3"></i> All Routes</CDBSidebarMenuItem></Link>
             <Link to={"/admin-assigned-routes"}><CDBSidebarMenuItem > <i class="fa-solid fa-route me-3 ms-3"></i> Assigned Routes</CDBSidebarMenuItem></Link>
-            {/* <CDBSidebarMenuItem icon="credit-card" iconType="solid">
-            </CDBSidebarMenuItem> */}
           </CDBSidebarMenu>
         </CDBSidebarContent>
 

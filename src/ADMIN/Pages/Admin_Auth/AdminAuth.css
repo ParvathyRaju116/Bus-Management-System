@@ -2,7 +2,14 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
 
-
+#dropdown-basic{
+	background-color: transparent;
+	border: #FF4B2B solid 1px;
+	color: #FF4B2B;
+}
+.drop{
+	margin-left: 40%;
+}
 .auth-Container {
 	background: #f6f5f7;
 	display: flex;

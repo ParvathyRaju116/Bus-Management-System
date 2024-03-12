@@ -17,7 +17,6 @@ function ListOfBus({ owners }) {
   const busList = async () => {
     const response = await busListApi(header);
     setAllBusList(response.data);
-    // console.log(response.data);
   };
 
   const getOneBus = async (id) => {
@@ -28,9 +27,9 @@ function ListOfBus({ owners }) {
     console.log(response);
   };
 
-  useEffect(() => {
-    busList();
-  }, []);
+  // useEffect(() => {
+  //   busList();
+  // }, []);
 
   return (
     <div className='ms-5 list-table p-4 shadow'>
@@ -56,7 +55,7 @@ function ListOfBus({ owners }) {
               <td><Button className='text-black border-0' style={{ backgroundColor: 'transparent' }} onClick={() => getOneBus(i.id)}><i className="fa-solid fa-file-pen"></i></Button></td>
             </tr>
           </tbody>
-        )) : <></>}
+        )) : <div className='text-center text-danger'><p><b>No Buses Added Yet!!</b></p></div>}
       </Table>
 
       <>

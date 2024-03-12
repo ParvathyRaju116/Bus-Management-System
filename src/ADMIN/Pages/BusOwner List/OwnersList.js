@@ -17,7 +17,7 @@ const[busOwner,setBusOwners]=useState([])
         console.log(response);
       }
       useEffect(()=>{
-ownerview()
+// ownerview()
       },[])
     
   return (
@@ -29,7 +29,7 @@ ownerview()
 
        <div className='text-center'> <h1 className='assigneRouteHead'>Owners List</h1></div>
        <hr />
-            <Table className='mt-5'   hover>
+           { busOwner.length>0?<Table className='mt-5'   hover>
           <thead>
             <tr>
               <th>#</th>
@@ -49,7 +49,7 @@ ownerview()
             )):<></>}
              
           </tbody>
-        </Table>
+        </Table>:<div className='text-center text-danger'><p><b>No Owners Registred Yet!!</b></p></div>}
      </div >
        
     </div>

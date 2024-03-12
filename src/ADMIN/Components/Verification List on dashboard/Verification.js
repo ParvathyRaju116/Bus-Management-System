@@ -18,17 +18,16 @@ const[allRequest,setAllReqest]=useState([])
     };
     const response = await allRequestListApi(header)
     setAllReqest(response.data)
-    // console.log(response);
   }
 
-  useEffect (()=>{
-   allRequestList()
-  },[])
+  // useEffect (()=>{
+  //  allRequestList()
+  // },[])
 
   return (
     <div className='p-4 listBody'>
       <h1>Request Approval</h1> <br /> <br />
-      {allRequest?allRequest.map((i, index)=>(
+      {allRequest.length>0?allRequest.map((i, index)=>(
          <Link key={index} to={`/admin-request/${i.id}`}>
          <Stack direction="row" spacing={2} >
           
@@ -39,7 +38,7 @@ const[allRequest,setAllReqest]=useState([])
           /> <h6>{i.name}</h6>
         </Stack>
         <hr />
-        </Link>)):<></>}
+        </Link>)):<div className='text-center'><p className='text-danger'><b>No Pending Request !!</b></p></div>}
 
     </div>
   )

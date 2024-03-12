@@ -8,10 +8,10 @@ function Footer() {
   return (
     <div>
         <div className='footer-body'>
-            <Row className='m-5'>
+            <Row className='mt-5 ms-5'>
                 <Col>
-                <Typography
-                className='footerHead'
+                <Typography 
+                className='footerHead mt-5'
               variant="h6"
               noWrap
               component="a"
@@ -34,9 +34,20 @@ function Footer() {
                 
                 </Col>
                 <Col></Col>
-                <Col></Col>
+                <Col className='mt-5'>
+                <h4><b>Contact Us</b></h4>
+                <i class="fa-solid fa-envelope"></i> @transitease@gmail.com
+               
+                <div className='d-flex mt-3'>
+                <i class="fa-brands fa-instagram me-3"></i>
+                <i class="fa-brands fa-facebook me-3"></i>
+                <i class="fa-brands fa-x-twitter"></i>
+                </div>
+                </Col>
             </Row>
         </div>
+        <div className='text-center'><h6>	&#169; 2023 | All right reserved | Transitease</h6></div>
+
     </div>
   )
 }
