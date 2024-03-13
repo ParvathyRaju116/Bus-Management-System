@@ -3,8 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './BusOwnerAuth.css'
-import { busOwnerloginApi } from '../../../SERVICES/AllAPI';
-import { busOwnerRegistrationApi } from '../../BUS_OWNER_SERVICES/busOwnerApis'
+import { busOwnerLoginApi, busOwnerRegistrationApi } from '../../BUS_OWNER_SERVICES/busOwnerApis'
 import { Dropdown } from 'react-bootstrap';
 import Swal from 'sweetalert2'
 
@@ -19,7 +18,6 @@ function BusOwnerAuth() {
   };
   const navigate = useNavigate()
   const [authData, setAuthData] = useState({
-    name: "",
     phone: "",
     address: "",
     username: "",
@@ -38,51 +36,56 @@ function BusOwnerAuth() {
   // };
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const token = localStorage.getItem("token")
-    console.log(token);
-    if (!token) {
-      navigate('/bus-owner-auth')
+    if(authData.phone&&authData.address&&authData.username&&authData.password&&authData.proof){
+      const formData = new FormData()
+      formData.append("phone", authData.phone)
+      formData.append("address", authData.address)
+      formData.append("username", authData.username)
+      formData.append("password", authData.password)
+      formData.append("proof", authData.proof)
+      console.log("FormData", formData);
+      // headers 
+      try {
+        const headers = {
+          "Content-Type": "multipart/form-data"
+        }
+        const response = await busOwnerRegistrationApi(formData, headers)
+        if (response.status >= 200 && response.status < 300) {
+          Swal.fire({
+            icon: "success",
+            title: "Registration successful. Please login.",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          setAuthData({
+            phone: "",
+            address: "",
+            username: "",
+            password: "",
+            proof: ""
+          })
+          setIsSignUpActive(false)
+        }
+        else {
+          Swal.fire({
+            icon: "warning",
+            title: response.response.data.msg,
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
     }
-    const formData = new FormData()
-    formData.append("name", authData.name)
-    formData.append("phone", authData.phone)
-    formData.append("address", authData.address)
-    formData.append("username", authData.username)
-    formData.append("password", authData.password)
-    formData.append("proof", authData.proof)
-    console.log("FormData",formData);
-    // headers 
-    try {
-      const headers = {
-        "Content-Type": "multipart/form-data"
-      }
-      const response = await busOwnerRegistrationApi(formData, headers)
-      if (response.status>=200 && response.status<300){
-        Swal.fire({
-          icon: "success",
-          title: "Registration successful. Please login.",
-          showConfirmButton: false,
-          timer: 1500
-        });
-        setAuthData({name: "",
-        phone: "",
-        address: "",
-        username: "",
-        password: "",
-        proof: ""})
-        setIsSignUpActive(false)
-      }
-      else{
-        Swal.fire({
-          icon: "warning",
-          title: response.response.data.msg,
-          showConfirmButton: false,
-          timer: 1500
-        });
-      }
-      console.log(response);
-    } catch (error) {
-      console.log(error);
+    else{
+      Swal.fire({
+        icon: "warning",
+        title: "Please fill the form.",
+        showConfirmButton: false,
+        timer: 1500
+      });
     }
 
   }
@@ -91,7 +94,7 @@ function BusOwnerAuth() {
   //   // login
   const handleLogin = async (e) => {
     e.preventDefault()
-    const response = await busOwnerloginApi(authData)
+    const response = await busOwnerLoginApi(authData)
     if (response.status == 200) {
       // toast('Login success', {
       //   position: "top-center",
@@ -129,25 +132,24 @@ function BusOwnerAuth() {
   return (
     <div className='auth-Container'>
       <div className=' mb-3 drop'>
-     <Dropdown className=''>
-        <Dropdown.Toggle className=' '  id="dropdown-basic">
-         Select User
-        </Dropdown.Toggle>
-  
-        <Dropdown.Menu>
-        <Dropdown.Item as={Link} to={'/auth'}>User</Dropdown.Item>
+        <Dropdown className=''>
+          <Dropdown.Toggle className=' ' id="dropdown-basic">
+            Select User
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item as={Link} to={'/auth'}>User</Dropdown.Item>
             <Dropdown.Item as={Link} to={'/bus-owner-auth'}>Bus Owner</Dropdown.Item>
             <Dropdown.Item as={Link} to={'/admin-auth'}>Admin</Dropdown.Item>        </Dropdown.Menu>
-      </Dropdown>
- </div>
+        </Dropdown>
+      </div>
       <div className={`container ${isSignUpActive ? 'right-panel-active' : ''}`}>
         <div className="form-container sign-up-container">
           <form action="" onSubmit={handleSubmit}>
             <h1>Create Account</h1>
-            <input type="text" placeholder="Name" value={authData.name} onChange={(e) => setAuthData({ ...authData, name: e.target.value })} required />
+            <input type="text" placeholder='UserName' value={authData.username} onChange={(e) => setAuthData({ ...authData, username: e.target.value })} required />
             <input type="tel" placeholder='Phone Number' value={authData.phone} onChange={(e) => setAuthData({ ...authData, phone: e.target.value })} required />
             <input type="text" placeholder='Address' value={authData.address} onChange={(e) => setAuthData({ ...authData, address: e.target.value })} required />
-            <input type="text" placeholder='UserName' value={authData.username} onChange={(e) => setAuthData({ ...authData, username: e.target.value })} required />
             <input type="password" placeholder="Password" value={authData.password} onChange={(e) => setAuthData({ ...authData, password: e.target.value })} required />
             <div className='d-flex align-items-center'>
               <label htmlFor="proof"><small>Proof:</small></label>
