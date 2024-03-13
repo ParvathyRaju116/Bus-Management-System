@@ -16,6 +16,7 @@ import AddRoute from './ADMIN/Pages/Add Route/AddRoute';
 import BusOwnerProfile from './BUS OWNER/Pages/BusOwnerProfile/BusOwnerProfile';
 import OwnersList from './ADMIN/Pages/BusOwner List/OwnersList';
 import BusOwnerRoutes from './BUS OWNER/Pages/BusOwnerRoutes/BusOwnerRoutes';
+import AssignedRoutes from './ADMIN/Pages/Assigned Routes/AssignedRoutes';
 
 
 
@@ -38,6 +39,7 @@ function App() {
         <Route path='/admin-profile' element={<AdminProfile></AdminProfile>}></Route>
         <Route path='/add-bus-route' element={<AddRoute></AddRoute>}></Route>
         <Route path='/owner-list' element={<OwnersList></OwnersList>}></Route>
+        <Route path='/admin-assigned-routes' element={<AssignedRoutes></AssignedRoutes>}></Route>
 
 
         {/* BUS OWNER */}

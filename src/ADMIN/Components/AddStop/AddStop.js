@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Button, Form, Modal, Table } from 'react-bootstrap';
 import { addStopApi, getRouteAndStopeApi } from '../../../SERVICES/AllAPI';
 import Swal from 'sweetalert2'
+import './AddStop.css'
 
 function AddStop({ id }) {
 
     const [addshow, setaddShow] = useState(false);
     const [stop, setStop] = useState(null);
+    const [photo,setPhoto]=useState(null)
     const token = localStorage.getItem("token");
     const header = {
         Authorization: `Token ${token}`
@@ -14,10 +16,12 @@ function AddStop({ id }) {
     const handleAddClose = () => setaddShow(false);
     const handleAddShow = () => setaddShow(true);
     const [addStopData, setAddStopData] = useState({
-        stop_name: "",
-        time_taken: "",
-        approx_cost: ""
+        stop_number:"",
+        place: "",
+        link: "",
+        image:""
     });
+    console.log(addStopData);
     useEffect(() => {
         // console.log(id);
         getRouteAndStop()
@@ -27,8 +31,19 @@ function AddStop({ id }) {
     const getRouteAndStop = async () => {
         const response = await getRouteAndStopeApi(id, header)
         setStop(response.data.stops)
-        // console.log(stop);
+        console.log(response.data.stop);
     }
+
+    const handleImageChange =async(e)=>{
+        const file=e.target.files[0]
+        setPhoto(file)
+        setAddStopData((PrevDatails)=>({
+            ...PrevDatails,
+            image:file,
+        }))
+    }
+
+ 
 
     
 
@@ -36,7 +51,19 @@ function AddStop({ id }) {
 
 
     const addStop = async () => {
-        const response = await addStopApi(id, addStopData, header);
+
+        const formData= new FormData();
+        formData.append("image",addStopData.image)
+        formData.append("stop_number",addStopData.stop_number)
+        formData.append("place",addStopData.place)
+        formData.append("link",addStopData.link)
+
+
+        const reqHeaders = {
+            Authorization: `Token ${token}`,
+            "Content-Type": "multipart/form-data"
+          }
+        const response = await addStopApi(id, formData, reqHeaders);
         if (response.status == 200) {
             getRouteAndStop()
             handleAddClose();
@@ -60,6 +87,7 @@ function AddStop({ id }) {
             });
 
         }
+        console.log(response);
     };
 
     return (
@@ -69,20 +97,20 @@ function AddStop({ id }) {
                     <Table className="w-100 hover">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>Stop Number</th>
                                 <th>Stop Name</th>
-                                <th>Time Taken</th>
-                                <th>Bus Fare</th>
+                                <th>Link</th>
+                                <th>Image</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             {stop.map((i, index) => (
                                 <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td style={{ textTransform: 'capitalize' }}>{i.stop_name}</td>
-                                    <td>{i.time_taken}</td>
-                                    <td>{i.approx_cost}</td>
+                                    <td>{i.stop_number}</td>
+                                    <td style={{ textTransform: 'capitalize' }}>{i.place}</td>
+                                    <td>{i.link}</td>
+                                    <td><img className='mapImg' src={i.image?`http://127.0.0.1:8000/${i.image}`:"https://i.postimg.cc/D0ygtWYd/360-F-248426448-NVKLyw-Wq-Ar-G2-ADUx-Dq6-Qprt-Izs-F82d-MF.jpg"} alt="" /></td>
                                     <td><button className='dltbtn' onClick={""}><i class="fa-solid fa-trash-can"></i></button></td>
                                 </tr>
                             ))}
@@ -105,34 +133,42 @@ function AddStop({ id }) {
                 <Modal.Body>
                     <Form>
                         <div className='w-100'>
+                        <div className='d-flex'>
+                                <i className="fa-solid fa-file-signature mt-4"></i>
+                                <input
+                                    type="number"
+                                    placeholder='Stop Number'
+                                    className='form-control m-3'
+                                    onChange={(e) => setAddStopData({ ...addStopData, stop_number: e.target.value })}
+                                    required
+                                />
+                            </div>
                             <div className='d-flex'>
                                 <i className="fa-solid fa-file-signature mt-4"></i>
                                 <input
                                     type="text"
-                                    placeholder='Stop Name'
+                                    placeholder='Place'
                                     className='form-control m-3'
-                                    onChange={(e) => setAddStopData({ ...addStopData, stop_name: e.target.value })}
+                                    onChange={(e) => setAddStopData({ ...addStopData, place: e.target.value })}
                                     required
                                 />
                             </div>
                             <div className='d-flex'>
-                                <i className="fa-regular fa-clock mt-4"></i>
-                                <input
-                                    type="time"
+                            <i class="fa-solid fa-link mt-4"></i>                                <input
+                                    type="text"
                                     step="1"
-                                    placeholder='Time Taken'
+                                    placeholder='Link'
                                     className='form-control m-3'
-                                    onChange={(e) => setAddStopData({ ...addStopData, time_taken: e.target.value })}
+                                    onChange={(e) => setAddStopData({ ...addStopData, link: e.target.value })}
                                     required
                                 />
                             </div>
                             <div className='d-flex'>
-                                <i className="fa-solid fa-indian-rupee-sign mt-4"></i>
-                                <input
-                                    type="number"
-                                    placeholder='Bus Fare'
+                            <i class="fa-solid fa-map-location-dot mt-4"></i>                                <input
+                                    type="file"
+                                    placeholder='Image'
                                     className='form-control m-3'
-                                    onChange={(e) => setAddStopData({ ...addStopData, approx_cost: e.target.value })}
+                                    onChange={handleImageChange}
                                     required
                                 />
                             </div>

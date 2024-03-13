@@ -29,14 +29,15 @@ function AdminDashboard() {
     };
     const response = await passengerviewApi(header)
     setTotalPassenger(response.data)
+    console.log(response);
   }
 
 
 
-  // useEffect(() => {
-  //   ownerview()
-  //   passengerview()
-  // }, [])
+  useEffect(() => {
+    ownerview()
+    passengerview()
+  }, [])
 
 
   return (

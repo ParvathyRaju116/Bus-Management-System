@@ -24,18 +24,18 @@ function ListOfBus({ owners }) {
     setShow(true);
     const response = await getOnebusApi(id, header);
     setOneBus(response.data);
-    console.log(response);
+    // console.log(response);
   };
 
-  // useEffect(() => {
-  //   busList();
-  // }, []);
+  useEffect(() => {
+    busList();
+  }, []);
 
   return (
     <div className='ms-5 list-table p-4 shadow'>
       <h1>List Of Bus</h1>
 
-      <Table className='table-transparent table striped mt-3'>
+   { AllbusList.length>0?  <Table className='table-transparent table striped mt-3'>
         <thead>
           <tr>
             <th>#</th>
@@ -50,13 +50,13 @@ function ListOfBus({ owners }) {
             <tr>
               <td>{index + 1}</td>
               <td>{i.name}</td>
-              <td>{i.busowner.name}</td>
+              <td>{i.busowner.username}</td>
               <td>{i.Number_plate}</td>
               <td><Button className='text-black border-0' style={{ backgroundColor: 'transparent' }} onClick={() => getOneBus(i.id)}><i className="fa-solid fa-file-pen"></i></Button></td>
             </tr>
           </tbody>
-        )) : <div className='text-center text-danger'><p><b>No Buses Added Yet!!</b></p></div>}
-      </Table>
+        )) : <></>}
+      </Table>:<div className='text-center text-danger mt-5'><><b>No Buses Added Yet!!</b></></div>}
 
       <>
         <Modal className='' show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
@@ -66,24 +66,24 @@ function ListOfBus({ owners }) {
           <Modal.Body className='m-3 modalBody'>
             {oneBus ? (
             <>
-                <Row className='d-flex justify-content-center align-item-center ps-5 pe-5'>
-                  <Col className='d-flex justify-content-center align-item-center' lg={5}>
+                <Row className='d-flex justify-content-center align-item-center ms-5 me-5 ps-5 pe-5'>
+                  <Col className=' ps-5  justify-content-center align-item-center' lg={6}>
                    
-                    <img className='OnebusImg' src={oneBus.image ? `http://127.0.0.1:8000${oneBus.image}` : 'https://i.postimg.cc/VNPZgJJt/placeholder-image.jpg'} alt="" />
-                  </Col>
-                  <Col className='d-flex justify-content-center align-item-center' lg={7}>
+                    <img className='OnebusImg w-75 ps-5' src={oneBus.image ? `http://127.0.0.1:8000${oneBus.image}` : 'https://i.postimg.cc/VNPZgJJt/placeholder-image.jpg'} alt="" />
+                    <br /> <br />
                     <img
-                      className='OnebusImg'
+                      className='OnebusImg w-75 ps-5'
                       src={oneBus.RC_book ? `http://127.0.0.1:8000${oneBus.RC_book}` : 'https://i.postimg.cc/VNPZgJJt/placeholder-image.jpg'}
                       alt=''
                     />
                   </Col>
-                </Row>
-
-              <div className='text-center'>
+                  <Col className=' pe-5 mt-5  justify-content-center align-item-center' lg={6}>
+                  <div className='text-start' style={{textTransform:'capitalize'}}>
+                    <h1>Bus Details</h1>
               <p className='fs-5' style={{ lineHeight: '1.3' }}>
-                      <b>Bus Owner :</b> {oneBus.busowner.name}
+                      <b>Category :</b> {oneBus.buscategory.category}
                     </p>
+             
                   <p className='fs-5' style={{ lineHeight: '1.3' }}>
                       <b>Number Plate :</b> {oneBus.Number_plate}
                     </p>
@@ -91,6 +91,27 @@ function ListOfBus({ owners }) {
                       <b>Engine Number :</b> {oneBus.Engine_no}
                     </p>
               </div>
+
+              <br />
+
+              <div className='text-start' style={{textTransform:'capitalize'}}>
+                <h1>Bus Owner Details</h1>
+                <p className='fs-5' style={{ lineHeight: '1.3' }}>
+                      <b>Bus Owner :</b> {oneBus.busowner.username}
+                    </p>
+
+                    <p className='fs-5' style={{ lineHeight: '1.3' }}>
+                      <b>Phone</b> : {oneBus.busowner.phone}
+                    </p>
+
+                    <p className='fs-5' style={{ lineHeight: '1.3', }}>
+                      <b>Address</b> : {oneBus.busowner.address}
+                    </p>
+                </div>
+                  </Col>
+                </Row>
+
+  
             </>
 
               

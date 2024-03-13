@@ -45,7 +45,7 @@ export const acceptRequestApi=async(id,headers)=>{
 
 // get Routes
 export const getRouteApi=async(headers)=>{
-    return await commonApi('GET',`${BASE_URL}adminapi/route/`,{},headers)
+    return await commonApi('GET',`${BASE_URL}adminapi/route/`,"",headers)
 }
 
 // add route
@@ -64,7 +64,7 @@ export const addStopApi=async(id,body,headers)=>{
 }
 // get users list
 export const passengerviewApi=async(headers)=>{
-  return await commonApi('GET',`${BASE_URL}adminapi/passenger/`,"",headers)
+  return await commonApi('GET',`${BASE_URL}adminapi/passengerview/`,"",headers)
 }
 
 // get One bus 
@@ -75,7 +75,7 @@ export const getOnebusApi=async(id,headers)=>{
 // get assignedROutes
 
 export const getAssignedRouteApi =async(headers)=>{
-  return await commonApi ('GET',`${BASE_URL}adminapi/assignedroutes/`,"",headers)
+  return await commonApi ('GET',`${BASE_URL}adminapi/busroutes/`,"",headers)
 }
 
 // delete route
