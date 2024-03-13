@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import { AdminLoginApi } from '../../../SERVICES/AllAPI';
 import { Dropdown } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 
 
@@ -25,16 +26,12 @@ function AdminAuth() {
       e.preventDefault()
         const response= await AdminLoginApi(authData)
         if(response.status==200){
-          toast('Login success', {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
+          Swal.fire({
+            icon: "success",
+            title: "Login Success",
+            showConfirmButton: false,
+            timer: 1500
+          });
           navigate('/admin-dashbord')
           localStorage.setItem("token",response.data.token)
           console.log(response);

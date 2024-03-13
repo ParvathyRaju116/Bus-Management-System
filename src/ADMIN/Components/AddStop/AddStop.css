@@ -12,3 +12,7 @@
     background-clip: text;
     color: transparent;
   }
+  .mapImg{
+    height: 100px;
+    width: 100px;
+  }

@@ -38,7 +38,7 @@ const[allRequest,setAllReqest]=useState([])
           /> <h6>{i.name}</h6>
         </Stack>
         <hr />
-        </Link>)):<div className='text-center'><p className='text-danger'><b>No Pending Request !!</b></p></div>}
+        </Link>)):<div className='text-center text-danger'>< ><b>No Pending Request !!</b></></div>}
 
     </div>
   )

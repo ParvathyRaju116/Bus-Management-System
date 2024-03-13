@@ -19,6 +19,7 @@ function AddRoute() {
 
 
   const [routeList, setRouteList] = useState([]);
+
   const [addRouteData, setAddRouteData] = useState({
     name: "",
     starts_from: "",
@@ -43,7 +44,7 @@ function AddRoute() {
     if (response.status === 200) {
       listRoutes();
     }
-    console.log(response);
+    // console.log(response);
   };
 
   useEffect(() => {
@@ -76,7 +77,7 @@ function AddRoute() {
       });
     }
 
-    console.log(response);
+    // console.log(response);
   };
 
 
@@ -98,8 +99,8 @@ function AddRoute() {
           </Button>
         </div>
 
-        <div className='list-routes  m-5 ps-5 pe-5'>
-          {routeList.length > 0 ? routeList.filter((route) => route.is_active === true).map((i, index) => (
+    {routeList.length > 0 ?  <div className='list-routes  m-5 ps-5 pe-5'>
+          {routeList ?  routeList.map((i, index) => (
             <Accordion className='ps-5 w-100' key={i.id}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -108,7 +109,7 @@ function AddRoute() {
                 style={{ width: '100%', justifyContent: 'space-between' }}
               >
                 <div style={{ display: 'flex', width: '100%' }}>
-                  <h2 style={{ textTransform: 'capitalize' }}>{i.name}</h2>
+                  <h2 style={{ textTransform: 'capitalize' }}>{i?.name}</h2>
                   <div className='ms-auto text-end me-5 pe-5'>
                     <b> Starts From : </b> {i.starts_from} <br />
                     <b> Ends At : </b> {i.ends_at}
@@ -127,8 +128,8 @@ function AddRoute() {
 
               </AccordionDetails>
             </Accordion>
-          )) : <div className='text-center text-danger'><p><b>No Routes Added Yet</b></p></div>}
-        </div>
+          )):<></>}
+        </div>:<div className='text-center text-danger'><p><b>No Routes Added Yet</b></p></div>}
 
       </div>
 
