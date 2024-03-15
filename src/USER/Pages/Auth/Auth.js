@@ -19,7 +19,6 @@ function Auth() {
   };
 
   const [authData, setAuthData] = useState({
-    name: "",
     phone: "",
     address: "",
     email_address: "",
@@ -32,20 +31,18 @@ function Auth() {
   const handleRegister = async (e) => {
     e.preventDefault();
     const response = await registerApi(authData);
-    if (response.status == 200) {
       if (response.status == 200) {
         setIsSignUpActive(false);
         setAuthData({
-          name: "",
           phone: "",
           address: "",
           username: "",
           password: "",
         });
       } else {
-        alert("A user with that username already exists.");
+        alert(response.data);
       }
-    }
+    
     console.log(response);
   };
 
@@ -54,22 +51,13 @@ function Auth() {
     e.preventDefault();
     const response = await loginApi(authData);
     if (response.status == 200) {
-      toast("Login success", {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
       navigate("/");
       localStorage.setItem("token", response.data.token);
       console.log(response.data);
     } else {
       alert("Unable to log in with provided credentials");
     }
+    console.log(response);
   };
 
   return (
@@ -93,13 +81,12 @@ function Auth() {
         <div className="form-container sign-up-container">
           <form action="" onSubmit={handleRegister}>
             <h1>Create Account</h1>
-
             <input
               type="text"
-              placeholder="Name"
-              value={authData.name}
+              placeholder="Username"
+              value={authData.username}
               onChange={(e) =>
-                setAuthData({ ...authData, name: e.target.value })
+                setAuthData({ ...authData, username: e.target.value })
               }
               required
             />
@@ -130,15 +117,7 @@ function Auth() {
               }
               required
             />
-            <input
-              type="text"
-              placeholder="Username"
-              value={authData.username}
-              onChange={(e) =>
-                setAuthData({ ...authData, username: e.target.value })
-              }
-              required
-            />
+       
             <input
               type="password"
               placeholder="Password"

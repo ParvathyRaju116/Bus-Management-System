@@ -4,7 +4,7 @@ import "./About.css";
 
 function About() {
   return (
-    <>
+    <div id="">
       <div className="m-5 ps-5 pt-5">
         <Row>
           <Col>
@@ -87,7 +87,7 @@ function About() {
 
         {/* </div> */}
       </div>
-    </>
+    </div>
   );
 }
 

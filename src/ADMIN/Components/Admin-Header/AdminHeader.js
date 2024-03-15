@@ -12,10 +12,11 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Badge } from '@mui/material';
 import MailIcon from '@mui/icons-material/Mail';
 import { allRequestListApi } from '../../../SERVICES/AllAPI';
+
 
 
 
@@ -26,7 +27,8 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 function AdminHeader() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-      
+    const navigate=useNavigate()
+    
   
     const handleOpenNavMenu = (event) => {
       setAnchorElNav(event.currentTarget);
@@ -62,6 +64,14 @@ function AdminHeader() {
     // useEffect (()=>{
     //  allRequestList()
     // },[])
+
+
+
+    const handleLogOut=()=>{
+        localStorage.removeItem("token")
+        navigate('/admin-auth')
+    }
+      
   
   return (
     <div>
@@ -117,7 +127,7 @@ function AdminHeader() {
               >
                 <MenuItem>
                  <Link to={"/admin-dashbord"} >
-                   <Typography textAlign="center text-white"  style={{color:"white"}}>Home</Typography>
+                   <Typography textAlign="center text-white">Home</Typography>
                    </Link>
                 </MenuItem>
                 <MenuItem>
@@ -126,12 +136,7 @@ function AdminHeader() {
                 <MenuItem>
                  <Link to={'/admin-assigned-routes'}> <Typography textAlign="center">Assigned Routes</Typography></Link>
                 </MenuItem>
-                <MenuItem>
-                  <Typography textAlign="center"><a h>About</a></Typography>
-                </MenuItem>
-                <MenuItem>
-                  <Typography textAlign="center">Contact</Typography>
-                </MenuItem>
+               
               </Menu>
             </Box>
 
@@ -156,7 +161,7 @@ function AdminHeader() {
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
              
                 <MenuItem>
-                 <Link to={"/admin-dashbord"}> <Typography textAlign="center text-white" style={{textDecoration:'none',color:"white"}}>Home</Typography></Link>
+                 <Link to={"/admin-dashbord"}> <Typography textAlign="center" className='text-white' >Home</Typography></Link>
                 </MenuItem>
              
                 <MenuItem>
@@ -169,6 +174,8 @@ function AdminHeader() {
                 <MenuItem>
                 <Link to={'/admin-assigned-routes'}> <Typography textAlign="center" className='text-white'>Assigned Routes</Typography></Link>
                 </MenuItem>
+
+             
              
             
             </Box>
@@ -206,11 +213,8 @@ function AdminHeader() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                   <MenuItem>
-                  <Typography textAlign="center"><Link to={"/admin-profile"}>Profile</Link></Typography>
-                </MenuItem>
                 <MenuItem >
-                  <Typography textAlign="center">Logout</Typography>
+                  <Typography onClick={handleLogOut} textAlign="center">Logout</Typography>
                 </MenuItem>
 
               </Menu>

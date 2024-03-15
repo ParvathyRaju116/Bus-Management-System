@@ -20,9 +20,9 @@ const[allRequest,setAllReqest]=useState([])
     setAllReqest(response.data)
   }
 
-  // useEffect (()=>{
-  //  allRequestList()
-  // },[])
+  useEffect (()=>{
+   allRequestList()
+  },[])
 
   return (
     <div className='p-4 listBody'>
@@ -32,10 +32,10 @@ const[allRequest,setAllReqest]=useState([])
          <Stack direction="row" spacing={2} >
           
           <Avatar
-            alt={i.name}
+            alt={i.username}
             src="/static/images/avatar/1.jpg"
             sx={{ width: 24, height: 24 }}
-          /> <h6>{i.name}</h6>
+          /> <h6>{i.username}</h6>
         </Stack>
         <hr />
         </Link>)):<div className='text-center text-danger'>< ><b>No Pending Request !!</b></></div>}

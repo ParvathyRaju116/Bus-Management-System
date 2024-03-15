@@ -30,10 +30,13 @@ function Footer() {
             </Typography>
             <p>Revolutionize your city navigation with Bus Tracking Management System: your go-to for real-time bus tracking, scheduling, and effortless journey planning, empowering you with precise GPS updates and user-friendly interfaces for an efficient commute.</p>
                 </Col>
-                <Col>
-                
+               
+                <Col className='mt-5 ms-5 ps-5'>
+                <h4><b>Links</b></h4>
+                <a href="/">Home</a> <br />
+                <a href="#about">About Us</a> <br />
+                <a href="/find-bus">Find Bus</a>
                 </Col>
-                <Col></Col>
                 <Col className='mt-5'>
                 <h4><b>Contact Us</b></h4>
                 <i class="fa-solid fa-envelope"></i> @transitease@gmail.com

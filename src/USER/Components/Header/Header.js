@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import './Header.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const pages = ["Products", "Pricing", "Blog"];
@@ -20,6 +20,7 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Header() {
     
+  const navigate=useNavigate()
     const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -37,6 +38,12 @@ function Header() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleLogOut=()=>{
+    localStorage.removeItem("token")
+    navigate('/admin-auth')
+}
+  
 
 
   return (
@@ -197,7 +204,7 @@ function Header() {
                   <Typography textAlign="center"><Link to={"/profile"}>Profile</Link></Typography>
                 </MenuItem>
                 <MenuItem >
-                  <Typography textAlign="center">Logout</Typography>
+                  <Typography onClick={handleLogOut} textAlign="center">Logout</Typography>
                 </MenuItem>
 
               </Menu>

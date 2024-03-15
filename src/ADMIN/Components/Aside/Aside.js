@@ -10,9 +10,17 @@ import {
   } from 'cdbreact';
   import Avatar from '@mui/material/Avatar';
   import Stack from '@mui/material/Stack';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 function Aside() {
+
+  const navigate=useNavigate()
+
+  const handleLogOut=()=>{
+      localStorage.removeItem("token")
+      navigate('/admin-auth')
+  }
     
   return (
     <div  >
@@ -25,6 +33,9 @@ function Aside() {
           <CDBSidebarMenu>
             <Link to={"/add-bus-route"}><CDBSidebarMenuItem> <i class="fa-solid fa-plus me-3 ms-3"></i> All Routes</CDBSidebarMenuItem></Link>
             <Link to={"/admin-assigned-routes"}><CDBSidebarMenuItem > <i class="fa-solid fa-route me-3 ms-3"></i> Assigned Routes</CDBSidebarMenuItem></Link>
+
+            <div onClick={handleLogOut}><CDBSidebarMenuItem > <i class="fa-solid fa-right-from-bracket me-3 ms-3"></i>Log Out</CDBSidebarMenuItem></div>
+
           </CDBSidebarMenu>
         </CDBSidebarContent>
 

@@ -27,7 +27,7 @@ function Home() {
 
       <Search/>
 
-      <About/>
+    <section id='about'>  <About/></section>
 
    <Footer></Footer>
     </>

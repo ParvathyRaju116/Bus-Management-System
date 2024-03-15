@@ -5,12 +5,12 @@ import { commonApi } from "./CommonAPI"
 // USERS
 // api for user registration
 export const registerApi=async(body)=>{
-    return await commonApi('POST',`${BASE_URL}passenger/register/`,body,"")
+    return await commonApi('POST',`${BASE_URL}passengerapi/register/`,body,"")
 }
 
 // login api
 export const loginApi=async(body)=>{
-  return await commonApi('POST',`${BASE_URL}passenger/token/`,body,"")
+  return await commonApi('POST',`${BASE_URL}passengerapi/token/`,body,"")
 }
 // ___________________________________________________________________________________________________________________________________________________________________________
 
@@ -73,7 +73,6 @@ export const getOnebusApi=async(id,headers)=>{
 }
 
 // get assignedROutes
-
 export const getAssignedRouteApi =async(headers)=>{
   return await commonApi ('GET',`${BASE_URL}adminapi/busroutes/`,"",headers)
 }
@@ -81,6 +80,16 @@ export const getAssignedRouteApi =async(headers)=>{
 // delete route
 export const deleleRouteApi =async(id,headers)=>{
   return await commonApi('DELETE',`${BASE_URL}adminapi/route/${id}/`,"",headers)
+}
+
+// get category
+export const getCategoryApi =async(headers)=>{
+  return await commonApi ('GET',`${BASE_URL}adminapi/category/`,"",headers)
+}
+
+// add new category
+export const addNewCategory=async(body,headers)=>{
+  return await commonApi('POST',`${BASE_URL}adminapi/category/`,body,headers)
 }
 
 // __________________________________________________________________________________________________________________________________________________________________________

@@ -13,7 +13,7 @@ function OwnersList() {
     };
     const response = await busOwnerViewApi(header);
     setBusOwners(response.data);
-    console.log(response);
+    // console.log(response);
   };
   useEffect(() => {
     ownerview();
@@ -26,13 +26,6 @@ function OwnersList() {
       <AdminHeader></AdminHeader>
 
       <div className="m-5">
-        <div>
-          <Link to={"/admin-dashbord"}>
-            <Button className="back-home-button">
-              <i class="fa-solid fa-angles-left"></i> Back To Home
-            </Button>
-          </Link>
-        </div>
 
         <div className="text-center">
           {" "}
@@ -54,7 +47,7 @@ function OwnersList() {
                 busOwner.map((i, index) => (
                   <tr>
                     <td>{index + 1}</td>
-                    <td>{i.name}</td>
+                    <td>{i.username}</td>
                     <td>{i.address}</td>
                     <td>{i.phone}</td>
                   </tr>

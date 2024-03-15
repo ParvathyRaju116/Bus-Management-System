@@ -24,9 +24,9 @@ function Request() {
     console.log(response);
   }
 
-  // useEffect(() => {
-  //   allRequestList()
-  // }, [])
+  useEffect(() => {
+    allRequestList()
+  }, [])
 
   const {id}=param 
 
@@ -37,24 +37,49 @@ function Request() {
   const header = {
     Authorization: `Token ${token}`
   };
+
   const response=await acceptRequestApi(id,header)
   if(response.status==200){
     Swal.fire({
       icon: "success",
-      title: "Approved",
+      title: "Approved Bus Owner",
       showConfirmButton: false,
-      timer: 1500
+      timer: 1500,
+      didClose: () => {
+        navigate('/admin-dashbord');
+      }
     });
-    navigate('/admin-dashbord')
   }
   console.log(response);
  }
+
+   // deny
+
+const denyRequest=async()=>{
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#FF4B2B",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Denyed!",
+        icon: "success",
+        timer: 1500
+      });
+    }
+  });
+  navigate('/admin-dashbord')
+}
 
   return (
     <div>
       <AdminHeader></AdminHeader>
 
-      <div className='ms-5 mt-4'><Link to={"/admin-dashbord"}><Button className='back-home-button'><i class="fa-solid fa-angles-left"></i> Back To Home</Button></Link></div>
 
       <div className=' m-5 d-flex align-item-center justify-content-center'>
 
@@ -65,23 +90,24 @@ function Request() {
         { req &&  <div>
 <Row>
   <Col className='proofImg'>
- <div  className='d-flex align-item-center justify-content-center mt-3'> <img src={req.proof?`http://127.0.0.1:8000/${req.proof}`:"https://i.postimg.cc/GmghkXDV/download-1.png"} alt="" /></div>
+ <div  className='d-flex align-item-center justify-content-center mt-3'> 
+ <img className='reqImg' src={req.proof?`http://127.0.0.1:8000/${req.proof}`:"https://i.postimg.cc/GmghkXDV/download-1.png"} alt="" /></div>
   </Col>
   <Col className='mt-5'>
     
-                <h5>Name Of Owner :</h5> 
-                <p>{req.name}</p>
-                <h5>Address :</h5>
-                <p>{req.address}</p>
-                <h5>Phone Number</h5>
-                <p>{req.phone}</p>
+                <h5>Name Of Owner : <b>{req.username}</b></h5> 
+                <br />
+                <h5>Address :  <b>{req.address}</b></h5>        
+                <br />
+                <h5>Phone Number :  <b>{req.phone}</b></h5>
+              
   </Col>
 </Row>
           
   
          </div>}
           <div className='text-end'>
-            <Link to={"/admin-dashbord"}><Button className='btn-danger'>Deny</Button></Link>
+            <Button className='btn-danger'onClick={denyRequest} >Deny</Button>
              <Button className='btn-success ms-5' onClick={acceptRequest}>Accept</Button>
           </div>
 

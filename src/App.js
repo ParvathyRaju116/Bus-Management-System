@@ -9,7 +9,6 @@ import AdminAuth from './ADMIN/Pages/Admin_Auth/AdminAuth';
 import AdminDashboard from './ADMIN/Pages/Admin_Dashboard/AdminDashboard';
 import Request from './ADMIN/Pages/Request/Request';
 import BusDetails from './ADMIN/Pages/Bus Details/BusDetails';
-import AdminProfile from './ADMIN/Pages/Admin Profile/AdminProfile';
 import BusOwnerHome from './BUS OWNER/Pages/BusOwnerHome/BusOwnerHome';
 import BusOwnerAuth from './BUS OWNER/Pages/BusOwner Auth/BusOwnerAuth';
 import AddRoute from './ADMIN/Pages/Add Route/AddRoute';
@@ -36,7 +35,6 @@ function App() {
         <Route path='/admin-dashbord' element={<AdminDashboard></AdminDashboard>}></Route>
         <Route path='/admin-request/:id' element={<Request></Request>}></Route>
         <Route path='/admin-bus-details' element={<BusDetails></BusDetails>}></Route>
-        <Route path='/admin-profile' element={<AdminProfile></AdminProfile>}></Route>
         <Route path='/add-bus-route' element={<AddRoute></AddRoute>}></Route>
         <Route path='/owner-list' element={<OwnersList></OwnersList>}></Route>
         <Route path='/admin-assigned-routes' element={<AssignedRoutes></AssignedRoutes>}></Route>

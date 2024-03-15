@@ -13,8 +13,9 @@ import axios from "axios";
 
 function AssignedRoutes() {
   const [assignedRoutes, setAssignedRoutes] = useState([]);
-  const [assignedList, setAssignedList] = useState(null);
-  const [routeList,setRouteList]=useState([])
+  const [filteredList, setFilteredList] = useState([]);
+  const [allRouteList, setAllRouteList] = useState([]);
+  const [activeRoute, setActiveRoute] = useState(null);
   const token = localStorage.getItem("token");
   const header = {
     Authorization: `Token ${token}`,
@@ -22,74 +23,55 @@ function AssignedRoutes() {
 
   const listRoutes = async () => {
     const response = await getRouteApi(header);
-    setRouteList(response.data);
-    console.log(response.data);
+    setAllRouteList(response.data);
+    if (response.data.length > 0) {
+      setActiveRoute(response.data[0].id); // Make the first route active
+    }
   };
 
-  const getassignedRoutes = async () => {
+  const getAssignedRoutes = async () => {
     const response = await getAssignedRouteApi(header);
     setAssignedRoutes(response.data);
-
-    console.log(response);
   };
 
-  const handleGetId =async (id)=>{
-    try {
-      const response = await axios.get(`http://127.0.0.1:8000/adminapi/busroutes/${id}/`,{
-        headers:{
-          Authorization:`Token ${token}`
-        }
-      })
-      if((response?.data?.route?.id == id )){
-        setAssignedList(response.data)
-        console.log(assignedList);
-      }
-      else{
-      return (<>NO Routes</>)
-      }
-    } catch (error) {
-      
-    }
-  }
-  console.log(assignedList);
-
-
+  const filterAssignedRoutes = (id) => {
+    const filteredRoutes = assignedRoutes.filter((item) => item.route.id === id);
+    setFilteredList(filteredRoutes);
+  };
 
   useEffect(() => {
-    listRoutes()
-    getassignedRoutes();
+    listRoutes();
+    getAssignedRoutes();
   }, []);
+
+  useEffect(() => {
+    if (activeRoute !== null) {
+      filterAssignedRoutes(activeRoute);
+    }
+  }, [activeRoute]);
 
   return (
     <div>
-      <AdminHeader></AdminHeader>
-      <div className="mt-5 ms-5">
-        <Link to={"/admin-dashbord"}>
-          <Button className="back-home-button">
-            <i class="fa-solid fa-angles-left"></i> Back To Home
-          </Button>
-        </Link>
-      </div>
+      <AdminHeader />
+      <div className="mt-5 ms-5"></div>
 
-      <div className="assignedRoutesBody  mt-5">
+      <div className="assignedRoutesBody  mt-3 mb-4 ">
         <h1 className="assigneRouteHead">Assigned Routes</h1>
       </div>
+      <hr />
+
       <div className="ms-5 me-5">
         <Row>
           <Col lg={2}>
             <div className="text-center divWithGradientBorder">
               <h2 className="mt-3">All Routes</h2>
             </div>
-            {routeList.length > 0 ? (
-              routeList.map((i, index) => (
-                <div
-                  className=" text-center mt-3 ps-3"
-                  key={""}
-                
-                >
-                  <p className="fs-5 " onClick={()=>handleGetId(i.id)}>
-                    <b >{i.name}</b>
-                  </p>
+            {allRouteList.length > 0 ? (
+              allRouteList.map((route, index) => (
+                <div className="text-center mt-3 ps-3" key={route.id}>
+                  <div className="fs-5" onClick={() => setActiveRoute(route.id)}>
+                    <b>{route.name}</b>
+                  </div>
                   <hr />
                 </div>
               ))
@@ -97,39 +79,54 @@ function AssignedRoutes() {
               <></>
             )}
           </Col>
-          <Col
-            lg={10}
-            className="mt-5 ps-5 justify-content-center align-item-center d-flex"
-          >
+          <Col lg={10} className="mt-5 ps-5 justify-content-center align-item-center ">
             <Row>
-              {assignedList !=null ?
-                <Col lg={""} >
-                    <Card sx={{ maxWidth: 300 }} className="mb-4">
-                      <CardActionArea>
+              {filteredList.length > 0 ? (
+                filteredList.map((route, index) => (
+                  <Col lg={4} className="" key={index}>
+                    <Card className="mb-4">
+                      <>
                         <CardMedia
                           className=""
                           component="img"
                           height="300"
-                          image={`http://127.0.0.1:8000`+assignedList?.bus?.image}
+                          image={`http://127.0.0.1:8000${route.bus.image}`}
                           alt="green iguana"
                         />
                         <CardContent>
                           <Typography gutterBottom variant="p" component="div">
-                            Bus Name : <b>{assignedList?.bus?.name}</b>
+                            <Row>
+                              <Col lg={7}>
+                                <b>{route.bus.name}</b>
+                              </Col>
+                              <Col lg={5}>Category : <b>{route.buscategory.category}</b></Col>
+                            </Row>
                           </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            <p>Bus Owner : {assignedList?.busowner?.username}</p>
+                          <Typography color="text.dark">
+                            <Row>
+                              <Col lg={7}>Route Time: <b>{route.routetime}</b></Col>
+                              <Col lg={5}>Bus Fare : <b>{route.amount}</b></Col>
+                            </Row>
+                          </Typography>
+                          <hr />
+                          <Typography color="text.dark">
+                            <>Bus Owner : <b>{route.busowner.username}</b></>
+                          </Typography>
+                          <Typography color="text.dark">
+                            <>Number Plate : <b>{route.bus.Number_plate}</b></>
                           </Typography>
                         </CardContent>
-                      </CardActionArea>
-                    </Card>{" "}
-                  </Col> 
-               : <></>
-                
-                  
-                
-
-              }
+                      </>
+                    </Card>
+                  </Col>
+                ))
+              ) : (
+                <div className="text-center text-danger mt-5 ">
+                  <h5>
+                    <b>No Buses Assigned In This Route !!!</b>
+                  </h5>
+                </div>
+              )}
             </Row>
           </Col>
         </Row>

@@ -31,7 +31,7 @@ function AddStop({ id }) {
     const getRouteAndStop = async () => {
         const response = await getRouteAndStopeApi(id, header)
         setStop(response.data.stops)
-        console.log(response.data.stop);
+        // console.log(response.data.stop);
     }
 
     const handleImageChange =async(e)=>{
@@ -42,13 +42,6 @@ function AddStop({ id }) {
             image:file,
         }))
     }
-
- 
-
-    
-
-
-
 
     const addStop = async () => {
 
@@ -111,7 +104,6 @@ function AddStop({ id }) {
                                     <td style={{ textTransform: 'capitalize' }}>{i.place}</td>
                                     <td>{i.link}</td>
                                     <td><img className='mapImg' src={i.image?`http://127.0.0.1:8000/${i.image}`:"https://i.postimg.cc/D0ygtWYd/360-F-248426448-NVKLyw-Wq-Ar-G2-ADUx-Dq6-Qprt-Izs-F82d-MF.jpg"} alt="" /></td>
-                                    <td><button className='dltbtn' onClick={""}><i class="fa-solid fa-trash-can"></i></button></td>
                                 </tr>
                             ))}
                         </tbody>

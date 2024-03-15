@@ -34,18 +34,54 @@ function AddRoute() {
   const listRoutes = async () => {
     const response = await getRouteApi(header);
     setRouteList(response.data);
-    console.log(response.data);
+    // console.log(response.data);
   };
 
-  const inactiveRoute = async (e, id) => {
-    console.log(id);
+  const deleteRoute = async (e, id) => {
+    // console.log(id);
     e.preventDefault();
-    const response = await deleleRouteApi(id, header);
-    if (response.status === 200) {
-      listRoutes();
-    }
-    // console.log(response);
-  };
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: "btn btn-success",
+          cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+      });
+      swalWithBootstrapButtons.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          const response = deleleRouteApi(id,header)
+          swalWithBootstrapButtons.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+            timer: 1200
+
+          });
+          listRoutes()
+          // console.log(response);
+        } else if (
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire({
+            title: "Cancelled",
+            icon: "error",
+            timer: 1500
+
+          });
+        }
+      });
+    
+};
+
+  
 
   useEffect(() => {
     listRoutes();
@@ -55,7 +91,7 @@ function AddRoute() {
   const addRoute = async () => {
     const response = await addRouteApi(addRouteData, header);
     if (response.status === 200) {
-      console.log(response);
+      // console.log(response);
       listRoutes();
       handleClose();
       Swal.fire({
@@ -84,7 +120,6 @@ function AddRoute() {
   return (
     <>
       <AdminHeader />
-      <div className='mt-5 ms-5'><Link to={"/admin-dashbord"}><Button className='back-home-button'><i class="fa-solid fa-angles-left"></i> Back To Home</Button></Link></div>
 
       <div className='add-route--body m-5'>
         <div className='div1 mt-5'>
@@ -116,7 +151,7 @@ function AddRoute() {
                   </div>
                 </div>
               </AccordionSummary>
-              <div className='text-end me-3'> <button className='dltBtn' onClick={(e) => inactiveRoute(e, i.id)}>DELETE ROUTE</button></div>
+              <div className='text-end me-3'> <button className='dltBtn' onClick={(e) => deleteRoute(e, i.id)}>DELETE ROUTE</button></div>
 
               <AccordionDetails>
 
