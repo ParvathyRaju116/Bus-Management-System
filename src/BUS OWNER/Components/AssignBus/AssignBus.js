@@ -5,24 +5,24 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { BASE_URL } from '../../../SERVICES/Base_Url';
-import { getOwnerBusesApi, getOwnerDriversApi } from '../../BUS_OWNER_SERVICES/busOwnerApis';
+import { getOwnerBusesApi, getCategoriesApi, assignBusApi } from '../../BUS_OWNER_SERVICES/busOwnerApis';
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import dayjs from 'dayjs';
-import './AssignBusAndDriver.css'
+import './AssignBus.css'
 import Swal from 'sweetalert2';
+import { FloatingLabel, Form } from 'react-bootstrap';
 
 
-function AssignBusAndDriver({ id }) {
+function AssignBus({ id }) {
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(true);
-    const [serviceData, setServiceData] = useState({ bus: "", busdriver: "", start_time: "", end_time: "" })
+    const [allCategories, setAllCategories] = useState([])
+    const [serviceData, setServiceData] = useState({ bus: "", buscategory: "", route: id, routetime: "", amount: "" })
     console.log(serviceData);
-    const handleClose = () => {setShow(false);setServiceData({ bus: "", busdriver: "", start_time: "", end_time: "" })}
-
+    const handleClose = () => { setShow(false); setServiceData({ bus: "", buscategory: "", route: id, routetime: "", amount: "" }) }
     const [allBuses, setAllBuses] = useState([])
-    const [allDrivers, setAllDrivers] = useState([])
     const getData = async () => {
         const token = localStorage.getItem('token')
         const headers = {
@@ -30,26 +30,59 @@ function AssignBusAndDriver({ id }) {
         }
         const result1 = await getOwnerBusesApi(headers)
         if (result1.status >= 200 && result1.status < 300) {
-            setAllBuses(result1.data.data)
+            setAllBuses(result1.data)
         }
-        const result2 = await getOwnerDriversApi(headers)
+        let result2 = await getCategoriesApi(headers)
         if (result2.status >= 200 && result2.status < 300) {
-            setAllDrivers(result2.data.data)
+            setAllCategories(result2.data)
+            console.log("result2.data", result2.data);
         }
+
     }
     useEffect(() => { getData() }, [])
-    const handleSubmit=async()=>{
-        const {bus,busdriver,start_time,end_time}=serviceData
-        if(!bus || !busdriver || !start_time || !end_time){
+    const handleSubmit = async () => {
+        const { bus, buscategory, route, routetime, amount} = serviceData
+        if (!bus || !buscategory || !route || !routetime || !amount) {
             Swal.fire({
                 icon: "warning",
                 title: 'Please fill the form completely',
                 showConfirmButton: false,
                 timer: 1500
-              });
+            });
         }
-        else{
-            alert('proceed to api call')
+        else {
+            let token = localStorage.getItem('token')
+      const reqHeader = {
+        "Content-Type": "multipart/form-data",
+        "Authorization": `Token ${token}`
+      }
+      // console.log(reqHeader);
+      try {
+        let result = await assignBusApi(serviceData, reqHeader)
+        console.log(result);
+        if (result.status >= 200 && result.status < 300) {
+          Swal.fire({
+            icon: "success",
+            title: "Route assigned successfully.",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          getData()
+          handleClose()
+          console.log(result);
+        }
+        else {
+          Swal.fire({
+            icon: "error",
+            title: result?.response?.data?.error,
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      }
+      catch (err) {
+        console.log(err);
+      }
         }
     }
 
@@ -64,7 +97,7 @@ function AssignBusAndDriver({ id }) {
                 onHide={handleClose}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Assign a bus and a driver</Modal.Title>
+                    <Modal.Title>Assign a bus to this route</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Autocomplete
@@ -97,48 +130,27 @@ function AssignBusAndDriver({ id }) {
                         onChange={(e, v) => { setServiceData({ ...serviceData, bus: v ? v.id : "" }) }}
                     // value={allBuses.find(i=>i.id==serviceData.bus)}
                     />
+                    <FloatingLabel controlId="floatingSelect" label="Select categor">
 
-                    <Autocomplete
-                        id="driver-select"
-                        sx={{ width: '100%', paddingBottom: '10px' }}
-                        options={allDrivers}
-                        autoHighlight
-                        getOptionLabel={(option) => option.name}
-                        renderOption={(props, option) => (
-                            <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-                                {option.name}
-                            </Box>
-                        )}
-                        renderInput={(params) => (
-                            <TextField
-                                {...params}
-                                label="Choose a driver"
-                                inputProps={{
-                                    ...params.inputProps,
-                                    autoComplete: 'new-password', // disable autocomplete and autofill
-                                }} />
-                        )}
-                        onChange={(e, v) => { setServiceData({ ...serviceData, busdriver: v ? v.id : "" }) }}
-                    // value={allDrivers.find(i=>i.id==serviceData.busdriver)}
+                        <Form.Select aria-label="Floating label select " value={serviceData.buscategory} onChange={e => setServiceData({ ...serviceData, buscategory: e.target.value })} className='mb-3 lg'>
+                            <option>Select category</option>
+                            {allCategories?.map(i =>
+                                <option value={i.id} key={i.id}>{i.category}</option>
+                            )}
+                        </Form.Select>
+                    </FloatingLabel>
 
-                    />
                     <LocalizationProvider dateAdapter={AdapterDayjs} >
-
-
                         <MobileTimePicker
                             label="Starting time:"
                             sx={{ width: '100%', paddingBottom: '10px' }}
-                            value={dayjs(serviceData.start_time)}
-                            onChange={(newValue) => setServiceData({ ...serviceData, start_time: newValue.format("HH:mm:ss") })}
-                        />
-
-                        <MobileTimePicker
-                            label="Ending time:"
-                            sx={{ width: '100%', paddingBottom: '10px' }}
-                            value={dayjs(serviceData.end_time)}
-                            onChange={(newValue) => setServiceData({ ...serviceData, end_time: newValue.format("HH:mm:ss") })}
+                            value={dayjs(serviceData.routetime)}
+                            onChange={(newValue) => setServiceData({ ...serviceData, routetime: newValue.format("HH:mm:ss") })}
                         />
                     </LocalizationProvider>
+                    <FloatingLabel controlId="amountFloating" label="Amount in ₹">
+                        <Form.Control value={serviceData.amount} onChange={e=>setServiceData({...serviceData,amount:e.target.value})} type="number" placeholder="" />
+                    </FloatingLabel>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
@@ -151,4 +163,4 @@ function AssignBusAndDriver({ id }) {
     )
 }
 
-export default AssignBusAndDriver
+export default AssignBus

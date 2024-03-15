@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Form, Modal, Table } from 'react-bootstrap';
 import { getStopsApi } from '../../BUS_OWNER_SERVICES/busOwnerApis';
+import { BASE_URL } from '../../../SERVICES/Base_Url';
 
 function Stops({id}) {
     const [stops,setStops]=useState([])
@@ -11,8 +12,8 @@ function Stops({id}) {
         }
         let result = await getStopsApi(id,headers)
         if (result.status >= 200 && result.status < 300) {
-          setStops(result.data.data.stops)
-          console.log("result.data.data", result.data.data);
+          setStops(result.data.stops)
+          console.log("result.data", result.data);
         }
     }
     useEffect(() => {getStops()}, [])
@@ -25,17 +26,15 @@ function Stops({id}) {
                         <tr>
                             <th>#</th>
                             <th>Stop Name</th>
-                            <th>Time Taken</th>
-                            <th>Bus Fare</th>
-                        </tr>
+                            <th>Location</th>
+=                        </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='text-center'>
                         {stops.map((i, index) => (
                             <tr key={index}>
                                 <td>{index + 1}</td>
-                                <td style={{ textTransform: 'capitalize' }}>{i.stop_name}</td>
-                                <td>{i.time_taken}</td>
-                                <td>{i.approx_cost}</td>
+                                <td className='fs-4'>{i.place}</td>
+                                <td><a href={i.link} target="_blank"><img src={`${BASE_URL}/${i.image}`} style={{height:'200px',width:'200px'}} alt={`${i.place} image`} /></a></td>
                             </tr>
                         ))}
                     </tbody>

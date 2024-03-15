@@ -94,3 +94,11 @@
   grid-template-columns:1fr max-content;
   width:100%;
 }
+.not-aproved{
+  background-image:linear-gradient(to right, #ff4b2b47, #ff416d4c) !important;
+  border-radius: 20px;
+  /* height:100px; */
+  overflow-y: auto;
+  overflow-x: auto;
+  max-width: 50vw;
+}

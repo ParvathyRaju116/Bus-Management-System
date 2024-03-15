@@ -3,10 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './BusOwnerAuth.css'
-import { busOwnerLoginApi, busOwnerRegistrationApi } from '../../BUS_OWNER_SERVICES/busOwnerApis'
+import { busOwnerLoginApi, busOwnerRegistrationApi, getProfileApi } from '../../BUS_OWNER_SERVICES/busOwnerApis'
 import { Dropdown } from 'react-bootstrap';
 import Swal from 'sweetalert2'
-
 function BusOwnerAuth() {
   const [isSignUpActive, setIsSignUpActive] = useState(false);
   // const [photo, setPhoto] = useState(null)
@@ -24,19 +23,20 @@ function BusOwnerAuth() {
     password: "",
     proof: ""
   })
-
   console.log(authData);
-  // const HandelImgChange = (e) => {
-  //   const file = e.target.files[0];
-  //   // setPhoto(file);
-  //   setAuthData((prevDetails) => ({
-  //     ...prevDetails,
-  //     image: file,
-  //   }));
-  // };
+  const getProfile = async (token) => {
+    let headers = {
+      "Authorization": `Token ${token}`
+    }
+    let result = await getProfileApi(headers)
+    if (result.status >= 200 && result.status < 300) {
+      console.log("result.data", result.data);
+      localStorage.setItem('is_approved',JSON.stringify(result.data.is_approved))
+    }
+  }
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if(authData.phone&&authData.address&&authData.username&&authData.password&&authData.proof){
+    if (authData.phone && authData.address && authData.username && authData.password && authData.proof) {
       const formData = new FormData()
       formData.append("phone", authData.phone)
       formData.append("address", authData.address)
@@ -79,7 +79,7 @@ function BusOwnerAuth() {
         console.log(error);
       }
     }
-    else{
+    else {
       Swal.fire({
         icon: "warning",
         title: "Please fill the form.",
@@ -87,25 +87,12 @@ function BusOwnerAuth() {
         timer: 1500
       });
     }
-
   }
-
-
   //   // login
   const handleLogin = async (e) => {
     e.preventDefault()
     const response = await busOwnerLoginApi(authData)
     if (response.status == 200) {
-      // toast('Login success', {
-      //   position: "top-center",
-      //   autoClose: 2000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light",
-      // });
       console.log(response);
       Swal.fire({
         icon: "success",
@@ -113,9 +100,10 @@ function BusOwnerAuth() {
         showConfirmButton: false,
         timer: 1500
       });
-      navigate('/bus-owner-home-page')
       localStorage.setItem("token", response.data.token)
+      await getProfile(response.data.token)
       console.log(response.data);
+      navigate('/bus-owner-home-page')
     }
     else {
       Swal.fire({
@@ -126,9 +114,6 @@ function BusOwnerAuth() {
       });
     }
   }
-
-
-
   return (
     <div className='auth-Container'>
       <div className=' mb-3 drop'>
@@ -136,7 +121,6 @@ function BusOwnerAuth() {
           <Dropdown.Toggle className=' ' id="dropdown-basic">
             Select User
           </Dropdown.Toggle>
-
           <Dropdown.Menu>
             <Dropdown.Item as={Link} to={'/auth'}>User</Dropdown.Item>
             <Dropdown.Item as={Link} to={'/bus-owner-auth'}>Bus Owner</Dropdown.Item>
