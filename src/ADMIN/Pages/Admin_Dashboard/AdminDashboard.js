@@ -4,10 +4,9 @@ import { Col, Row } from 'react-bootstrap'
 import Aside from '../../Components/Aside/Aside'
 import ListOfBus from '../../Components/List of bus/ListOfBus'
 import Verification from '../../Components/Verification List on dashboard/Verification'
-import { busOwnerViewApi, passengerviewApi } from '../../../SERVICES/AllAPI'
+import {  busOwnerViewApi, passengerviewApi } from '../../../SERVICES/AllAPI'
 import { Link } from 'react-router-dom'
-import AddCategory from '../../Components/Add Category/AddCategory'
-
+import AddCategory from '../../Components/Admin-Header/Add Category/AddCategory'
 
 function AdminDashboard() {
 
