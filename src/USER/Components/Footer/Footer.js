@@ -6,7 +6,7 @@ import './Footer.css'
 
 function Footer() {
   return (
-    <div>
+    <section id='footer'>
         <div className='footer-body'>
             <Row className='mt-5 ms-5'>
                 <Col>
@@ -51,7 +51,7 @@ function Footer() {
         </div>
         <div className='text-center'><h6>	&#169; 2023 | All right reserved | Transitease</h6></div>
 
-    </div>
+    </section>
   )
 }
 

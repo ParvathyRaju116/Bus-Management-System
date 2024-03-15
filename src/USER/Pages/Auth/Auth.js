@@ -4,6 +4,8 @@ import { loginApi, registerApi } from "../../../SERVICES/AllAPI";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { Dropdown } from "react-bootstrap";
+import Swal from "sweetalert2";
+
 
 
 function Auth() {
@@ -38,6 +40,13 @@ function Auth() {
           address: "",
           username: "",
           password: "",
+        });
+        Swal.fire({
+          icon: "success",
+          title: "Account Created",
+          text: "Please Login",
+          showConfirmButton: false,
+          timer: 1200
         });
       } else {
         alert(response.data);

@@ -10,9 +10,11 @@ function AddStop({ id }) {
     const [stop, setStop] = useState(null);
     const [photo,setPhoto]=useState(null)
     const token = localStorage.getItem("token");
+
     const header = {
         Authorization: `Token ${token}`
     };
+
     const handleAddClose = () => setaddShow(false);
     const handleAddShow = () => setaddShow(true);
     const [addStopData, setAddStopData] = useState({
@@ -23,7 +25,6 @@ function AddStop({ id }) {
     });
     console.log(addStopData);
     useEffect(() => {
-        // console.log(id);
         getRouteAndStop()
 
     }, []);
@@ -31,7 +32,6 @@ function AddStop({ id }) {
     const getRouteAndStop = async () => {
         const response = await getRouteAndStopeApi(id, header)
         setStop(response.data.stops)
-        // console.log(response.data.stop);
     }
 
     const handleImageChange =async(e)=>{
@@ -156,7 +156,7 @@ function AddStop({ id }) {
                                 />
                             </div>
                             <div className='d-flex'>
-                            <i class="fa-solid fa-map-location-dot mt-4"></i>                                <input
+                            <i class="fa-solid fa-map-location-dot mt-4"></i> <input
                                     type="file"
                                     placeholder='Image'
                                     className='form-control m-3'

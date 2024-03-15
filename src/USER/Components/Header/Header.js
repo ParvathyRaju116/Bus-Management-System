@@ -102,18 +102,18 @@ function Header() {
                 <MenuItem>
                   <Typography textAlign="center">Home</Typography>
                 </MenuItem>
+
                 <MenuItem>
-                  <Typography textAlign="center">Listing</Typography>
+                  <Typography textAlign="center">Find Bus</Typography>
                 </MenuItem>
+               
                 <MenuItem>
-                  <Typography textAlign="center">Blog</Typography>
-                </MenuItem>
-                <MenuItem>
-                  <Typography textAlign="center"><a h>About</a></Typography>
+                  <Typography textAlign="center"><a href='#about'>About</a></Typography>
                 </MenuItem>
                 <MenuItem>
                   <Typography textAlign="center">Contact</Typography>
                 </MenuItem>
+
               </Menu>
             </Box>
 
@@ -136,46 +136,23 @@ function Header() {
               TRANSITEASE
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
+             
                 <MenuItem>
-                  <Typography textAlign="center">Home</Typography>
+                <Link to={'/'}>  <Typography textAlign="center" className='text-white'>Home</Typography></Link>
                 </MenuItem>
-              </Button>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
+            
                 <MenuItem>
-                  <Typography textAlign="center">Listing</Typography>
+                 <Link to={'/find-bus'}> <Typography textAlign="center" className='text-white'>Find Bus</Typography></Link>
                 </MenuItem>
-              </Button>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
+            
                 <MenuItem>
-                  <Typography textAlign="center">Blog</Typography>
+                  <Typography textAlign="center" className='' ><a className='text-white' href='#about'>About</a></Typography>
                 </MenuItem>
-              </Button>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
+            
                 <MenuItem>
-                  <Typography textAlign="center">About</Typography>
+                  <Typography textAlign="center"><a className='text-white' href='#footer'>Contact</a></Typography>
                 </MenuItem>
-              </Button>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                <MenuItem>
-                  <Typography textAlign="center">Contact</Typography>
-                </MenuItem>
-              </Button>
+              
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>

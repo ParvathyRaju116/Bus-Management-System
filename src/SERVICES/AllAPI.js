@@ -12,6 +12,28 @@ export const registerApi=async(body)=>{
 export const loginApi=async(body)=>{
   return await commonApi('POST',`${BASE_URL}passengerapi/token/`,body,"")
 }
+
+// get profile
+export const getProfileApi =async(header)=>{
+  return await commonApi ('GET',`${BASE_URL}passengerapi/profile/`,"",header)
+}
+
+// get routes
+export const getRoutesApi=async(header)=>{
+  return await commonApi(`GET`,`${BASE_URL}passengerapi/route/`,"",header)
+}
+
+// get stops
+export const getStopApi=async(id,header)=>{
+  return await commonApi(`GET`,`${BASE_URL}passengerapi/route/${id}/`,"",header)
+}
+
+// search bus
+export const searchBusApi=async(body,header)=>{
+  return await commonApi(`POST`,`${BASE_URL}passengerapi/search/`,body,header)
+}
+
+
 // ___________________________________________________________________________________________________________________________________________________________________________
 
 

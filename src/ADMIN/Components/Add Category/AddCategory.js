@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./AddCategory.css";
 import { Button, Col, Modal, Row } from "react-bootstrap";
-import { addNewCategory, getCategoryApi } from "../../../../SERVICES/AllAPI";
+import { addNewCategory, getCategoryApi } from "../../../SERVICES/AllAPI";
 import Swal from "sweetalert2";
 
 

@@ -34,7 +34,6 @@ function AdminAuth() {
           });
           navigate('/admin-dashbord')
           localStorage.setItem("token",response.data.token)
-          // console.log(response);
         }
         else{
           alert('incorrect password or username')
