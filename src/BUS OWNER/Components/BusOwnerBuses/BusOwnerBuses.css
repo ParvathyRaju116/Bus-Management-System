@@ -4,7 +4,7 @@
     height:350px;
     overflow-y: auto;
     overflow-x: auto;
-    max-width: 80vw;
+    max-width: 60vw;
 }
 
 .list-table-bus::-webkit-scrollbar {

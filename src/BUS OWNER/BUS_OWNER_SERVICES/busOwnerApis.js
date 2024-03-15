@@ -3,7 +3,7 @@ import { commonApi } from "../../SERVICES/CommonAPI"
 
 //get buses of specific owner
 export const getOwnerBusesApi = async (headers) => {
-    return await commonApi('GET', `${BASE_URL}owner/bus/`, "", headers)
+    return await commonApi('GET', `${BASE_URL}busownerapi/bus/`, "", headers)
 }
 
 //get drivers of specific owner busdriver
@@ -21,11 +21,11 @@ export const busOwnerLoginApi = async (data) => {
 }
 //add bus
 export const addBusApi = async (body, headers) => {
-    return await commonApi('POST', `${BASE_URL}owner/bus/`, body, headers)
+    return await commonApi('POST', `${BASE_URL}busownerapi/bus/`, body, headers)
 }
 // add driver 
 export const addDriverApi = async (body, headers) => {
-    return await commonApi('POST', `${BASE_URL}owner/busdriver/`, body, headers)
+    return await commonApi('POST', `${BASE_URL}busownerapi/busdriver/`, body, headers)
 }
 
 // get route list 
@@ -33,10 +33,23 @@ export const getRoutesApi = async ( headers) => {
     return await commonApi('GET', `${BASE_URL}busownerapi/route/`, "", headers)
 }
 export const getStopsApi = async ( id,headers) => {
-    return await commonApi('GET', `${BASE_URL}owner/routes/${id}/`, "", headers)
+    return await commonApi('GET', `${BASE_URL}busownerapi/route/${id}/`, "", headers)
 }
 
 //get assigned routes
 export const getAssignedRoutesApi = async (headers) => {
-    return await commonApi('GET', `${BASE_URL}owner/assignedroutes/`, "", headers)
+    return await commonApi('GET', `${BASE_URL}busownerapi/routeassign/`, "", headers)
+}
+// get profile
+export const getProfileApi = async (headers) => {
+    return await commonApi('GET', `${BASE_URL}busownerapi/profile/`, "", headers)
+}
+
+// get categories
+export const getCategoriesApi = async (headers) => {
+    return await commonApi('GET', `${BASE_URL}busownerapi/category/`, "", headers)
+}
+//Assign api
+export const assignBusApi = async (body,headers) => {
+    return await commonApi('POST', `${BASE_URL}busownerapi/routeassign/`, body, headers)
 }

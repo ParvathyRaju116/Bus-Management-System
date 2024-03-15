@@ -1,19 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Bus.css'
 import { Badge, Button, ListGroup, Modal } from 'react-bootstrap';
 import { BASE_URL } from '../../../SERVICES/Base_Url';
+import { getCategoriesApi } from '../../BUS_OWNER_SERVICES/busOwnerApis';
 
 
 function Bus({ data, index }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  console.log("data",data);
+  
+  
   return (
+
     <>
       <tr>
         <td>{index}</td>
         <td >{data?.name}&nbsp;<sup>{data?.is_active ? <Badge pill bg="success">Active</Badge> : <Badge pill bg="danger">Inactive</Badge>}</sup></td>
         <td>{data?.Number_plate}</td>
+        <td>{data?.Engine_no}</td>
         <td>
           <Button variant="primary" className='more' onClick={handleShow}>
             More
@@ -24,8 +30,10 @@ function Bus({ data, index }) {
           <Modal.Title>{data?.name}&nbsp;{data?.is_active ? <Badge pill bg="success">Active</Badge> : <Badge pill bg="danger">Inactive</Badge>}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {data?.image ? <img src={`${BASE_URL}/${data?.image}`} alt={data?.name} className='img-fluid' /> : "No image provided"}<br />
-
+<div className='text-center py-2'>
+            {data?.image ? <img src={`${BASE_URL}/${data?.image}`} alt={data?.name} className='img-fluid w-75' /> : "No image provided"}<br />
+  
+</div>
           <ListGroup>
             <ListGroup.Item> Vehicle no. : {data?.Number_plate}</ListGroup.Item>
             <ListGroup.Item>Engine no. :{data?.Engine_no}</ListGroup.Item>

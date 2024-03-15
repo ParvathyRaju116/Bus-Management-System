@@ -1,20 +1,46 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Col, Container, Modal, Row, Table } from 'react-bootstrap';
+import { Col, Row, Table } from 'react-bootstrap';
 import Accordion from '@mui/material/Accordion';
-import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import BusOwnerAside from '../../Components/BusOwnerAside/BusOwnerAside';
-import { getAssignedRoutesApi, getOwnerBusesApi, getOwnerDriversApi, getRoutesApi } from '../../BUS_OWNER_SERVICES/busOwnerApis';
+import { getAssignedRoutesApi, getCategoriesApi, getOwnerBusesApi, getRoutesApi } from '../../BUS_OWNER_SERVICES/busOwnerApis';
 import Stops from '../../Components/Stops/Stops';
-import AssignBusAndDriver from '../../Components/AssignBusAndDriver/AssignBusAndDriver';
+import AssignBusAndDriver from '../../Components/AssignBus/AssignBus';
 import './BusOwnerRoutes.css'
+import { useNavigate } from 'react-router-dom';
+
 function BusOwnerRoutes() {
     const [routeList, setRoutList] = useState([])
     const [assignedRoutes, setAssignedRoutes] = useState([])
     const [allBuses, setAllBuses] = useState([])
-    const [allDrivers, setAllDrivers] = useState([])
+    // const [allDrivers, setAllDrivers] = useState([])
+    const [isAproved, setIsAproved] = useState(false)
+    const [allCategories, setAllCategories] = useState([])
+    // console.log(allCategories);
+    const getCategories = async () => {
+        let token = localStorage.getItem('token')
+        const headers = {
+            "Authorization": `Token ${token}`
+        }
+        let result2 = await getCategoriesApi(headers)
+        if (result2.status >= 200 && result2.status < 300) {
+            setAllCategories(result2.data)
+            console.log("result2.data", result2.data);
+        }
+    }
+    console.log("is approved", isAproved);
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (localStorage.getItem('is_approved')) {
+            let Aproval = JSON.parse(localStorage.getItem('is_approved'))
+            Aproval == 'True' ? setIsAproved(true) : setIsAproved(false)
+        }
+        else {
+            setIsAproved(false)
+        }
+    }, [])
     const getData = async () => {
         const token = localStorage.getItem('token')
         const headers = {
@@ -22,12 +48,13 @@ function BusOwnerRoutes() {
         }
         const result1 = await getOwnerBusesApi(headers)
         if (result1.status >= 200 && result1.status < 300) {
-            setAllBuses(result1.data.data)
+            console.log(result1.data);
+            setAllBuses(result1.data)
         }
-        const result2 = await getOwnerDriversApi(headers)
-        if (result2.status >= 200 && result2.status < 300) {
-            setAllDrivers(result2.data.data)
-        }
+        // const result2 = await getOwnerDriversApi(headers)
+        // if (result2.status >= 200 && result2.status < 300) {
+        //     setAllDrivers(result2.data)
+        // }
     }
     const getRoutes = async () => {
         const token = localStorage.getItem('token')
@@ -38,8 +65,10 @@ function BusOwnerRoutes() {
         const result = await getRoutesApi(headers)
         if (result.status >= 200 && result.status < 300) {
             console.log(result);
-            setRoutList(result.data.data)
+            setRoutList(result.data)
         }
+        console.log(result);
+
     }
     const getAssignedRoutes = async () => {
         const token = localStorage.getItem('token')
@@ -49,11 +78,11 @@ function BusOwnerRoutes() {
         const result = await getAssignedRoutesApi(headers)
         if (result.status >= 200 && result.status < 300) {
             console.log(result);
-            setAssignedRoutes(result.data.data)
+            setAssignedRoutes(result.data)
         }
     }
     useEffect(() => {
-        getRoutes(); getAssignedRoutes(); getData()
+        getRoutes(); getAssignedRoutes(); getData();getCategories()
     }, [])
 
 
@@ -63,37 +92,42 @@ function BusOwnerRoutes() {
                 <div className='p-0'>
                     <BusOwnerAside></BusOwnerAside>
                 </div>
-                <div className='px-lg-5 px-3 pt-2' style={{overflow:'auto'}}>
+                {isAproved ? <div className='px-lg-5 px-3 pt-2' style={{ overflow: 'auto' }}>
                     <h1 className='pb-3'>All routes</h1>
-                    <div className='route-grid'>
+                    <Row>
                         {routeList ? routeList.map((i, index) => (
                             <>
-                                <Accordion className='p-1 w-100' key={i?.id}>
-                                    <AccordionSummary
-                                        expandIcon={<ExpandMoreIcon />}
-                                        className='w-100'
-                                    >
-                                        <div style={{ display: 'flex', width: '100%' }}>
-                                            <h2 style={{ textTransform: 'capitalize' }}>{i?.name}</h2>
-                                            <div className='mx-auto'>
-                                                <b> Starts From : </b> {i?.starts_from} <br />
-                                                <b> Ends At : </b> {i?.ends_at}
+                                <Col md={10}>
+                                    <Accordion className='p-1' key={i?.id}>
+                                        <AccordionSummary
+                                            expandIcon={<ExpandMoreIcon />}>
+                                            <Row style={{ display: 'flex', width: '100%' }}>
+                                                <Col md={8}>
+                                                    <h2 style={{ textTransform: 'capitalize' }}>{i?.name}</h2>
+                                                </Col>
+                                                <Col md={4}>
+                                                    <div className='mx-auto'>
+                                                        <b> Starts From : </b> {i?.starts_from} <br />
+                                                        <b> Ends At : </b> {i?.ends_at}
+                                                    </div>
+                                                </Col>
+                                            </Row>
+                                        </AccordionSummary>
+                                        <AccordionDetails>
+                                            <div>
                                             </div>
-                                        </div>
-                                    </AccordionSummary>
-    
-                                    <AccordionDetails>
-                                        <div>
-                                        </div>
-                                        <Stops id={i.id} ></Stops>
-                                    </AccordionDetails>
-                                </Accordion>
-                                <div className='d-flex align-items-center p-3'><AssignBusAndDriver id={i?.id} /></div>
-    
+                                            <Stops id={i.id} ></Stops>
+                                        </AccordionDetails>
+                                    </Accordion>
+                                </Col>
+                                <Col md={2} className='text-center'>
+                                    <div className='py-2'><AssignBusAndDriver id={i?.id} /></div>
+
+                                </Col>
                             </>
-    
+
                         )) : <></>}
-                    </div>
+                    </Row>
                     <div className='me-lg-5 mt-3 route-list-table p-4 shadow'>
                         <h2 className='text-start'>Assigned routes</h2>
                         <Table className='table-transparent striped mt-3'>
@@ -102,9 +136,9 @@ function BusOwnerRoutes() {
                                     <th>#</th>
                                     <th>Route</th>
                                     <th>Bus</th>
-                                    <th>Driver</th>
-                                    <th>Start time</th>
-                                    <th>End time</th>
+                                    <th>Category</th>
+                                    <th>Route time</th>
+                                    <th>Amount</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -114,15 +148,22 @@ function BusOwnerRoutes() {
                                         <td>{index + 1}</td>
                                         <td>{routeList.find(j => j.id == i.route)?.name}</td>
                                         <td>{allBuses.find(j => j.id == i.bus)?.name}</td>
-                                        <td>{allDrivers.find(j => j.id == i.busdriver)?.name}</td>
-                                        <td>{i?.start_time.slice(0, -3)}</td>
-                                        <td>{i?.end_time.slice(0, -3)}</td>
+                                        <td>{allCategories?.find(j=>j.id==i.buscategory).category}</td>
+                                        <td>{i?.routetime}</td>
+                                        <td>{i?.amount}</td>
                                     </tr>
                                 )}
                             </tbody>
                         </Table>
                     </div>
                 </div>
+                    : <div className='p-5 d-flex justify-content-center align-items-center' style={{ height: '100vh' }}>
+                        <div className='not-aproved text-center p-5'>
+                            <h1>
+                                You account is not aproved by admin yet!<br /> Please come back later.
+                            </h1>
+                        </div>
+                    </div>}
             </div>
         </div>
 
