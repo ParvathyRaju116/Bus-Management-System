@@ -53,7 +53,7 @@ function AddStop({ id }) {
 
 
         const reqHeaders = {
-            Authorization: `Token ${token}`,
+            Authorization: `Token ${token}`, 
             "Content-Type": "multipart/form-data"
           }
         const response = await addStopApi(id, formData, reqHeaders);

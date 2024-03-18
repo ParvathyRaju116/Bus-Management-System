@@ -61,9 +61,9 @@ function AdminHeader() {
       }
     }
   
-    // useEffect (()=>{
-    //  allRequestList()
-    // },[])
+    useEffect (()=>{
+     allRequestList()
+    },[])
 
 
 

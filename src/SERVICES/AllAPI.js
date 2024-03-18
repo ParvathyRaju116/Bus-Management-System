@@ -19,8 +19,8 @@ export const getProfileApi =async(header)=>{
 }
 
 // get routes
-export const getRoutesApi=async(header)=>{
-  return await commonApi(`GET`,`${BASE_URL}passengerapi/route/`,"",header)
+export const getRoutesApi=async(reqHeader)=>{
+  return await commonApi(`GET`,`${BASE_URL}passengerapi/route/`,reqHeader)
 }
 
 // get stops

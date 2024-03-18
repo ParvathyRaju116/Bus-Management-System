@@ -76,7 +76,7 @@ if (response.status === 200) {
         <hr />
 
 <div className="">
-  {category.length>0?category.map((i,index)=>(
+  {category && category.length>0?category.map((i,index)=>(
    <div className="ps-4 ">
     {index+1})  <b>{i.category}</b>
     <hr />

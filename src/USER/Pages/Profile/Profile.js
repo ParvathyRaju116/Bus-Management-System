@@ -5,6 +5,8 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { Button } from "react-bootstrap";
 import { getProfileApi } from "../../../SERVICES/AllAPI";
+import { Avatar } from "@mui/material";
+
 
 function Profile() {
   const [fullscreen, setFullscreen] = useState(true);
@@ -29,7 +31,7 @@ function Profile() {
 
   useEffect(() => {
     getProfile();
-  }, []); // Pass an empty dependency array to run this effect only once after the initial render
+  }, []); 
 
   return (
     <>
@@ -43,9 +45,10 @@ function Profile() {
           <img
             className="avatarImg"
             src="https://i.postimg.cc/Yqrt88b9/360-F-633547842-Aug-Yzex-Tp-MJ9z1-Ycp-TKUBoq-BF0-CUCk10.jpg"
-            alt=""
+            alt={profile&&profile.username}
           />
-          {profile && ( // Check if profile is not null
+
+          {profile && (
             <>
               <h2 className="">{profile.username}</h2>
               <div className="text-start ps-5 me-5  pe-5 ms-5 pb-5">

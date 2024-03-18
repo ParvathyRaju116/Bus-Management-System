@@ -6,6 +6,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import StopList from "../StopList/StopList";
+import axios from "axios";
 
 
 function RouteList() {
@@ -16,9 +17,18 @@ function RouteList() {
     Authorization: `Token ${token}`,
   };
   const getAllRoutes = async () => {
-    const response = await getRouteApi(header);
-    console.log(response.data);
-    setAllRoutes(response.data);
+try {
+   const response =  await axios.get(`http://127.0.0.1:8000/passengerapi/route/`,{
+      headers:{
+        Authorization:`Token ${token}`
+      }
+    })
+  console.log(response.data);
+  setAllRoutes(response.data);
+} catch (error) {
+  console.log(error);
+}   
+    
   };
 
   useEffect(() => {
@@ -47,10 +57,12 @@ function RouteList() {
                     src="https://i.postimg.cc/DwB1WWDp/bus-station.png"
                     alt=""
                   />
-                    <h3 style={{ textTransform: 'capitalize' }} className="ms-4">{i?.name}</h3>
+                  <div className="ms-5 catDiv pt-2 ">{i.buscategory}</div>
+                  
+                    <h3 style={{ textTransform: 'capitalize' }} className="ms-4 ">{i?.route.name}</h3> 
                     <div className='ms-auto text-end me-5 pe-5'>
-                      <b> Starts From : </b> {i.starts_from} <br />
-                      <b> Ends At : </b> {i.ends_at}
+                      <b> Starts From : </b> {i.route.starts_from} <br />
+                      <b> Ends At : </b> {i.route.ends_at}
                     </div>
                   </div>
                 </AccordionSummary>

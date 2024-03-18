@@ -24,7 +24,7 @@ function ListOfBus({ owners }) {
     setShow(true);
     const response = await getOnebusApi(id, header);
     setOneBus(response.data);
-    // console.log(response);
+    console.log(response);
   };
 
   useEffect(() => {
@@ -35,7 +35,7 @@ function ListOfBus({ owners }) {
     <div className='ms-5 list-table p-4 shadow'>
       <h1>List Of Bus</h1>
 
-   { AllbusList.length>0?  <Table className='table-transparent table striped mt-3'>
+   { AllbusList && AllbusList.length>0?  <Table className='table-transparent table striped mt-3'>
         <thead>
           <tr>
             <th>#</th>

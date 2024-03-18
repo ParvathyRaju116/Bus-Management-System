@@ -16,6 +16,7 @@ import BusOwnerProfile from './BUS OWNER/Pages/BusOwnerProfile/BusOwnerProfile';
 import OwnersList from './ADMIN/Pages/BusOwner List/OwnersList';
 import BusOwnerRoutes from './BUS OWNER/Pages/BusOwnerRoutes/BusOwnerRoutes';
 import AssignedRoutes from './ADMIN/Pages/Assigned Routes/AssignedRoutes';
+import PageNotFound from './PageNotFound';
 
 
 
@@ -24,6 +25,9 @@ function App() {
   return (
     <div className="App">
       <Routes>
+       
+       <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
+
         {/* USER */}
         <Route path='/auth' element={<Auth />} ></Route>
         <Route path='/' element={<Home />}></Route>

@@ -13,6 +13,10 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import './Header.css'
 import { Link, useNavigate } from 'react-router-dom';
+import { getProfileApi } from '../../../SERVICES/AllAPI';
+import { useEffect } from 'react';
+import { useState } from 'react';
+
 
 
 const pages = ["Products", "Pricing", "Blog"];
@@ -43,6 +47,26 @@ function Header() {
     localStorage.removeItem("token")
     navigate('/admin-auth')
 }
+
+const [profile, setProfile] = useState(null);
+
+
+
+const token = localStorage.getItem("token");
+
+const getProfile = async () => {
+  const header = {
+    Authorization: `Token ${token}`,
+  };
+  const response = await getProfileApi(header);
+  console.log(response.data);
+  setProfile(response.data);
+};
+
+useEffect(() => {
+  getProfile();
+}, []); 
+
   
 
 
@@ -121,7 +145,7 @@ function Header() {
               variant="h5"
               noWrap
               component="a"
-              href="#app-bar-with-responsive-menu"
+              href=""
               sx={{
                 mr: 2,
                 display: { xs: "flex", md: "none" },
@@ -158,7 +182,7 @@ function Header() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt={profile&&profile.username} src="/static/images/avatar/2.jpg" />
                 </IconButton>
               </Tooltip>
               <Menu

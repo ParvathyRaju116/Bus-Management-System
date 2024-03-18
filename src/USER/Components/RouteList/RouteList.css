@@ -15,3 +15,8 @@
 h6{
     color: rgb(185, 185, 185);
 }
+.catDiv{
+    border: 1px solid #FF4B2B;
+    width: 7%;
+    border-radius: 5%;
+}
