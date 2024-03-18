@@ -22,7 +22,7 @@ function Stops({id}) {
         <div>
             {stops?.length > 0 ? (
                 <Table className="w-100 hover">
-                    <thead>
+                    <thead className='text-center'>
                         <tr>
                             <th>#</th>
                             <th>Stop Name</th>
@@ -34,7 +34,7 @@ function Stops({id}) {
                             <tr key={index}>
                                 <td>{index + 1}</td>
                                 <td className='fs-4'>{i.place}</td>
-                                <td><a href={i.link} target="_blank"><img src={`${BASE_URL}/${i.image}`} style={{height:'200px',width:'200px'}} alt={`${i.place} image`} /></a></td>
+                                <td><a href={i.link} target="_blank" style={{cursor:'zoom-in'}}><img src={`${BASE_URL}/${i.image}`} style={{height:'200px',width:'200px'}} alt={`${i.place} image`} /></a></td>
                             </tr>
                         ))}
                     </tbody>

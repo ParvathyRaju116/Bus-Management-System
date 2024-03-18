@@ -1,10 +1,31 @@
-.profile-box{
-  background-image:linear-gradient(to right, #ff4b2b47, #ff416d4c) !important;
-  border-radius: 20px;
-  /* height:500px;
-  overflow-y: auto; */
+.profileBody{
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
-.main-grid {
-  display: grid;
-  grid-template-columns: max-content 1fr;
+.profileHead{
+  background: linear-gradient(45deg, #FF4B2B, #FF416C);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
+}
+.avatar{
+ border: 2px solid #FF4B2B;
+ width: 70%;
+}
+.avatarImg{
+  height: 200px;
+  border-radius: 50%;
+}
+.fa-pen-to-square{
+  font-size: 30px;
+}
+
+.test{
+  color: #FF4B2B;
+}
+
+.modalcolor{
+  background-color: #FF4B2B;
+  color: white;
 }

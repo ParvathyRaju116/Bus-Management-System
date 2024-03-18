@@ -7,9 +7,12 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import BusOwnerAside from '../../Components/BusOwnerAside/BusOwnerAside';
 import { getAssignedRoutesApi, getCategoriesApi, getOwnerBusesApi, getRoutesApi } from '../../BUS_OWNER_SERVICES/busOwnerApis';
 import Stops from '../../Components/Stops/Stops';
-import AssignBusAndDriver from '../../Components/AssignBus/AssignBus';
+import AssignBus from '../../Components/AssignBus/AssignBus';
 import './BusOwnerRoutes.css'
 import { useNavigate } from 'react-router-dom';
+import ManageStops from '../../Components/ManageStops/ManageStops';
+import DeleteAssignedRoute from '../../Components/DeleteAssignedRoute/DeleteAssignedRoute';
+import dayjs from 'dayjs';
 
 function BusOwnerRoutes() {
     const [routeList, setRoutList] = useState([])
@@ -18,7 +21,8 @@ function BusOwnerRoutes() {
     // const [allDrivers, setAllDrivers] = useState([])
     const [isAproved, setIsAproved] = useState(false)
     const [allCategories, setAllCategories] = useState([])
-    // console.log(allCategories);
+    const [update,setUpdate]=useState("")
+    console.log(allCategories);
     const getCategories = async () => {
         let token = localStorage.getItem('token')
         const headers = {
@@ -83,7 +87,7 @@ function BusOwnerRoutes() {
     }
     useEffect(() => {
         getRoutes(); getAssignedRoutes(); getData();getCategories()
-    }, [])
+    }, [update])
 
 
     return (
@@ -121,7 +125,7 @@ function BusOwnerRoutes() {
                                     </Accordion>
                                 </Col>
                                 <Col md={2} className='text-center'>
-                                    <div className='py-2'><AssignBusAndDriver id={i?.id} /></div>
+                                    <div className='py-2'><AssignBus id={i?.id} setUpdate={setUpdate}/></div>
 
                                 </Col>
                             </>
@@ -146,11 +150,14 @@ function BusOwnerRoutes() {
                                     <tr key={i.id}>
                                         {/* <Bus data={i} index={index + 1} /> */}
                                         <td>{index + 1}</td>
-                                        <td>{routeList.find(j => j.id == i.route)?.name}</td>
-                                        <td>{allBuses.find(j => j.id == i.bus)?.name}</td>
-                                        <td>{allCategories?.find(j=>j.id==i.buscategory).category}</td>
-                                        <td>{i?.routetime}</td>
-                                        <td>{i?.amount}</td>
+                                        <td>{i.route?.name}</td>
+                                        <td>{i.bus?.name}</td>
+                                        <td>{i.buscategory.category}</td>
+                                        {/* <td>{allCategories?.find(j=>j.id==i.buscategory).category}</td> */}
+                                        <td>{i?.routetime&&dayjs(i?.routetime, 'HH:mm:ss').format('h:mm A')}</td>
+                                        <td>₹ {i?.amount}</td>
+                                        <td><ManageStops id={i?.id}/> </td>
+                                        <td><DeleteAssignedRoute id={i?.id} setUpdate={setUpdate}/></td>
                                     </tr>
                                 )}
                             </tbody>
@@ -166,9 +173,6 @@ function BusOwnerRoutes() {
                     </div>}
             </div>
         </div>
-
-
-
     )
 }
 

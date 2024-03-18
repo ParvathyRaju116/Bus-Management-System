@@ -53,3 +53,31 @@ export const getCategoriesApi = async (headers) => {
 export const assignBusApi = async (body,headers) => {
     return await commonApi('POST', `${BASE_URL}busownerapi/routeassign/`, body, headers)
 }
+//get single Assigned route api
+export const singleAssignedRouteApi = async (id,headers) => {
+    return await commonApi('GET', `${BASE_URL}busownerapi/routeassign/${id}/`, "", headers)
+}
+//delete single Assigned route api
+export const deleteSingleAssignedRouteApi = async (id,headers) => {
+    return await commonApi('DELETE', `${BASE_URL}busownerapi/routeassign/${id}/`, "", headers)
+}
+
+//get available stops for a route api
+export const getAvailableStopsApi = async (id,headers) => {
+    return await commonApi('GET', `${BASE_URL}busownerapi/routeassign/${id}/available_stops/`, "", headers)
+}
+
+//add stops for assigned route api
+export const addStopsApi = async (id,body,headers) => {
+    return await commonApi('POST', `${BASE_URL}busownerapi/routeassign/${id}/add_routestop/`,body, headers)
+}
+
+//add time and amount stop for api
+export const addTimeAndAmountApi = async (id,body,headers) => {
+    return await commonApi('POST', `${BASE_URL}busownerapi/stops/${id}/stopdetail/`,body, headers)
+}
+
+//get stop details api
+export const getStopDetailApi = async (id,headers) => {
+    return await commonApi('GET', `${BASE_URL}busownerapi/stops/${id}/stopdetail/`,"", headers)
+}

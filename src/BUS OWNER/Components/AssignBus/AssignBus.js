@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 import { FloatingLabel, Form } from 'react-bootstrap';
 
 
-function AssignBus({ id }) {
+function AssignBus({ id ,setUpdate}) {
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(true);
     const [allCategories, setAllCategories] = useState([])
@@ -67,6 +67,8 @@ function AssignBus({ id }) {
             showConfirmButton: false,
             timer: 1500
           });
+          console.log(result.data);
+          setUpdate(result.data.id)
           getData()
           handleClose()
           console.log(result);
