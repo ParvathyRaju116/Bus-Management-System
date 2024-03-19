@@ -15,10 +15,8 @@ function DeleteAssignedRoute({ id, setUpdate }) {
             "Content-Type": "multipart/form-data",
             "Authorization": `Token ${token}`
         }
-        // console.log(reqHeader);
         try {
             let result = await deleteSingleAssignedRouteApi(id, reqHeader)
-            console.log(result);
             if (result.status >= 200 && result.status < 300) {
                 Swal.fire({
                     icon: "success",
@@ -26,7 +24,6 @@ function DeleteAssignedRoute({ id, setUpdate }) {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                console.log("Delete result",result);
                 setUpdate(result.data.id)
                 handleClose()
             }
@@ -51,7 +48,7 @@ function DeleteAssignedRoute({ id, setUpdate }) {
             <i className="fa-solid fa-trash"></i>
             </Button>
 
-            <Modal show={show} onHide={handleClose}>
+            <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Are you sure that you want to delete this assigned route? </Modal.Title>
                 </Modal.Header>

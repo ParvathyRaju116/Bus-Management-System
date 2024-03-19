@@ -20,7 +20,6 @@ function AssignBus({ id ,setUpdate}) {
     const handleShow = () => setShow(true);
     const [allCategories, setAllCategories] = useState([])
     const [serviceData, setServiceData] = useState({ bus: "", buscategory: "", route: id, routetime: "", amount: "" })
-    console.log(serviceData);
     const handleClose = () => { setShow(false); setServiceData({ bus: "", buscategory: "", route: id, routetime: "", amount: "" }) }
     const [allBuses, setAllBuses] = useState([])
     const getData = async () => {
@@ -35,7 +34,6 @@ function AssignBus({ id ,setUpdate}) {
         let result2 = await getCategoriesApi(headers)
         if (result2.status >= 200 && result2.status < 300) {
             setAllCategories(result2.data)
-            console.log("result2.data", result2.data);
         }
 
     }
@@ -56,10 +54,8 @@ function AssignBus({ id ,setUpdate}) {
         "Content-Type": "multipart/form-data",
         "Authorization": `Token ${token}`
       }
-      // console.log(reqHeader);
       try {
         let result = await assignBusApi(serviceData, reqHeader)
-        console.log(result);
         if (result.status >= 200 && result.status < 300) {
           Swal.fire({
             icon: "success",
@@ -67,11 +63,9 @@ function AssignBus({ id ,setUpdate}) {
             showConfirmButton: false,
             timer: 1500
           });
-          console.log(result.data);
           setUpdate(result.data.id)
           getData()
           handleClose()
-          console.log(result);
         }
         else {
           Swal.fire({

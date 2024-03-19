@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './BusOwnerAuth.css'
 import { busOwnerLoginApi, busOwnerRegistrationApi, getProfileApi } from '../../BUS_OWNER_SERVICES/busOwnerApis'
@@ -30,7 +29,6 @@ function BusOwnerAuth() {
     }
     let result = await getProfileApi(headers)
     if (result.status >= 200 && result.status < 300) {
-      console.log("result.data", result.data);
       localStorage.setItem('is_approved',JSON.stringify(result.data.is_approved))
     }
   }
@@ -43,7 +41,6 @@ function BusOwnerAuth() {
       formData.append("username", authData.username)
       formData.append("password", authData.password)
       formData.append("proof", authData.proof)
-      console.log("FormData", formData);
       // headers 
       try {
         const headers = {
@@ -74,7 +71,6 @@ function BusOwnerAuth() {
             timer: 1500
           });
         }
-        console.log(response);
       } catch (error) {
         console.log(error);
       }
@@ -93,7 +89,6 @@ function BusOwnerAuth() {
     e.preventDefault()
     const response = await busOwnerLoginApi(authData)
     if (response.status == 200) {
-      console.log(response);
       Swal.fire({
         icon: "success",
         title: "Login successful",
@@ -102,7 +97,6 @@ function BusOwnerAuth() {
       });
       localStorage.setItem("token", response.data.token)
       await getProfile(response.data.token)
-      console.log(response.data);
       navigate('/bus-owner-home-page')
     }
     else {
@@ -167,7 +161,6 @@ function BusOwnerAuth() {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </div>
   )
 }

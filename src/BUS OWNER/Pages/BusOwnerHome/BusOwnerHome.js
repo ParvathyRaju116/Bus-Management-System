@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import './BusOwnerHome.css'
-import BusOwnerHeader from '../../Components/Bus Owner Header/BusOwnerHeader'
-import { Button, Col, Container, Row } from 'react-bootstrap'
+import {  Col, Row } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import BusOwnerAside from '../../Components/BusOwnerAside/BusOwnerAside'
-import { getAssignedRoutesApi, getOwnerBusesApi, getOwnerDriversApi } from '../../BUS_OWNER_SERVICES/busOwnerApis'
-import { ToastContainer, toast } from 'react-toastify'
+import { getAssignedRoutesApi, getOwnerBusesApi } from '../../BUS_OWNER_SERVICES/busOwnerApis'
 import BusOwnerBuses from '../../Components/BusOwnerBuses/BusOwnerBuses'
-import BusOwnerDrivers from '../../Components/BusOwnerDrivers/BusOwnerDrivers'
 
 function BusOwnerHome() {
   const [allBuses, setAllBuses] = useState([])
   const [assignedRoutes, setAssignedRoutes] = useState([])
   const [isAproved, setIsAproved] = useState(false)
-  console.log("is approved", isAproved);
   const navigate = useNavigate()
   useEffect(() => {
     if (localStorage.getItem('is_approved')) {
@@ -44,7 +40,6 @@ function BusOwnerHome() {
     }
     const result = await getAssignedRoutesApi(headers)
     if (result.status >= 200 && result.status < 300) {
-        console.log(result);
         setAssignedRoutes(result.data)
     }
 }
@@ -90,7 +85,6 @@ function BusOwnerHome() {
             </div>}
         </div>
       </div>
-      <ToastContainer />
     </div >
   )
 }

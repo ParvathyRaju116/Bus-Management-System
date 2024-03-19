@@ -30,7 +30,6 @@ function BusOwnerAside() {
       }
       let result = await getProfileApi(headers)
       if (result.status >= 200 && result.status < 300) {
-        console.log("result.data", result.data);
         setUsername(result.data.username)
       }
     }

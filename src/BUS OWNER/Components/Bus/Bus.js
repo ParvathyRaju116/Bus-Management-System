@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import './Bus.css'
 import { Badge, Button, ListGroup, Modal } from 'react-bootstrap';
 import { BASE_URL } from '../../../SERVICES/Base_Url';
-import { getCategoriesApi } from '../../BUS_OWNER_SERVICES/busOwnerApis';
 
 
 function Bus({ data, index }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  console.log("data",data);
   
   
   return (

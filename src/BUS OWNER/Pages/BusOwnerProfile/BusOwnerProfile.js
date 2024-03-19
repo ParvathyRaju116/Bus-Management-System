@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './BusOwnerProfile.css'
-import { Col, Row } from 'react-bootstrap'
 import BusOwnerAside from '../../Components/BusOwnerAside/BusOwnerAside'
 import { getProfileApi } from '../../BUS_OWNER_SERVICES/busOwnerApis'
 import { useNavigate } from 'react-router-dom'
@@ -26,7 +25,6 @@ function BusOwnerProfile() {
       }
       let result = await getProfileApi(headers)
       if (result.status >= 200 && result.status < 300) {
-        console.log("result.data", result.data);
         setProfile(result.data)
       }
     }

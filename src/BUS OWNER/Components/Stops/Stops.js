@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Form, Modal, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { getStopsApi } from '../../BUS_OWNER_SERVICES/busOwnerApis';
 import { BASE_URL } from '../../../SERVICES/Base_Url';
 
@@ -13,7 +13,6 @@ function Stops({id}) {
         let result = await getStopsApi(id,headers)
         if (result.status >= 200 && result.status < 300) {
           setStops(result.data.stops)
-          console.log("result.data", result.data);
         }
     }
     useEffect(() => {getStops()}, [])
@@ -27,7 +26,7 @@ function Stops({id}) {
                             <th>#</th>
                             <th>Stop Name</th>
                             <th>Location</th>
-=                        </tr>
+                        </tr>
                     </thead>
                     <tbody className='text-center'>
                         {stops.map((i, index) => (

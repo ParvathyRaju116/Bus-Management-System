@@ -18,7 +18,6 @@ function ManageStops({ id }) {
     const [availableStops, setAvailableStops] = useState([])
     const [stopsToAdd, setStopsToAdd] = useState([])
     const [stopUpdate,setStopUpdate]=useState("")
-    console.log(routeInfo);
     const getAssignedRouteInfo = async () => {
         const token = localStorage.getItem('token')
         const headers = {
@@ -26,15 +25,12 @@ function ManageStops({ id }) {
         }
         const result1 = await singleAssignedRouteApi(id, headers)
         if (result1.status >= 200 && result1.status < 300) {
-            console.log(result1);
             setRouteInfo(result1.data)
         }
         const result2 = await getAvailableStopsApi(id, headers)
         if (result2.status >= 200 && result2.status < 300) {
-            console.log(result2);
             setAvailableStops(result2.data)
         }
-        console.log(result2);
     }
     const handleSelect = (e) => {
         if (e.target.checked) {
@@ -71,11 +67,9 @@ function ManageStops({ id }) {
                 });
                 getAssignedRouteInfo()
             }
-            console.log(result);
         }
     }
     useEffect(() => { getAssignedRouteInfo() }, [stopUpdate])
-    console.log(routeInfo);
     return (
         <>
             <Button variant="primary" className='btn-red' onClick={handleShow}>

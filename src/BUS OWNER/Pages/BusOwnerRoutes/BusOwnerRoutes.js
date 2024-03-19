@@ -5,11 +5,10 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import BusOwnerAside from '../../Components/BusOwnerAside/BusOwnerAside';
-import { getAssignedRoutesApi, getCategoriesApi, getOwnerBusesApi, getRoutesApi } from '../../BUS_OWNER_SERVICES/busOwnerApis';
+import { getAssignedRoutesApi, getOwnerBusesApi, getRoutesApi } from '../../BUS_OWNER_SERVICES/busOwnerApis';
 import Stops from '../../Components/Stops/Stops';
 import AssignBus from '../../Components/AssignBus/AssignBus';
 import './BusOwnerRoutes.css'
-import { useNavigate } from 'react-router-dom';
 import ManageStops from '../../Components/ManageStops/ManageStops';
 import DeleteAssignedRoute from '../../Components/DeleteAssignedRoute/DeleteAssignedRoute';
 import dayjs from 'dayjs';
@@ -20,22 +19,7 @@ function BusOwnerRoutes() {
     const [allBuses, setAllBuses] = useState([])
     // const [allDrivers, setAllDrivers] = useState([])
     const [isAproved, setIsAproved] = useState(false)
-    const [allCategories, setAllCategories] = useState([])
     const [update,setUpdate]=useState("")
-    console.log(allCategories);
-    const getCategories = async () => {
-        let token = localStorage.getItem('token')
-        const headers = {
-            "Authorization": `Token ${token}`
-        }
-        let result2 = await getCategoriesApi(headers)
-        if (result2.status >= 200 && result2.status < 300) {
-            setAllCategories(result2.data)
-            console.log("result2.data", result2.data);
-        }
-    }
-    console.log("is approved", isAproved);
-    const navigate = useNavigate()
     useEffect(() => {
         if (localStorage.getItem('is_approved')) {
             let Aproval = JSON.parse(localStorage.getItem('is_approved'))
@@ -52,13 +36,8 @@ function BusOwnerRoutes() {
         }
         const result1 = await getOwnerBusesApi(headers)
         if (result1.status >= 200 && result1.status < 300) {
-            console.log(result1.data);
             setAllBuses(result1.data)
         }
-        // const result2 = await getOwnerDriversApi(headers)
-        // if (result2.status >= 200 && result2.status < 300) {
-        //     setAllDrivers(result2.data)
-        // }
     }
     const getRoutes = async () => {
         const token = localStorage.getItem('token')
@@ -68,10 +47,8 @@ function BusOwnerRoutes() {
 
         const result = await getRoutesApi(headers)
         if (result.status >= 200 && result.status < 300) {
-            console.log(result);
             setRoutList(result.data)
         }
-        console.log(result);
 
     }
     const getAssignedRoutes = async () => {
@@ -81,12 +58,11 @@ function BusOwnerRoutes() {
         }
         const result = await getAssignedRoutesApi(headers)
         if (result.status >= 200 && result.status < 300) {
-            console.log(result);
             setAssignedRoutes(result.data)
         }
     }
     useEffect(() => {
-        getRoutes(); getAssignedRoutes(); getData();getCategories()
+        getRoutes(); getAssignedRoutes(); getData()
     }, [update])
 
 
@@ -148,12 +124,10 @@ function BusOwnerRoutes() {
                             <tbody>
                                 {assignedRoutes?.map((i, index) =>
                                     <tr key={i.id}>
-                                        {/* <Bus data={i} index={index + 1} /> */}
                                         <td>{index + 1}</td>
                                         <td>{i.route?.name}</td>
                                         <td>{i.bus?.name}</td>
                                         <td>{i.buscategory.category}</td>
-                                        {/* <td>{allCategories?.find(j=>j.id==i.buscategory).category}</td> */}
                                         <td>{i?.routetime&&dayjs(i?.routetime, 'HH:mm:ss').format('h:mm A')}</td>
                                         <td>₹ {i?.amount}</td>
                                         <td><ManageStops id={i?.id}/> </td>
