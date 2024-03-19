@@ -25,7 +25,7 @@ function Profile() {
       Authorization: `Token ${token}`,
     };
     const response = await getProfileApi(header);
-    console.log(response.data);
+    // console.log(response.data);
     setProfile(response.data);
   };
 

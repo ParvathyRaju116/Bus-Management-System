@@ -24,7 +24,7 @@ function ListOfBus({ owners }) {
     setShow(true);
     const response = await getOnebusApi(id, header);
     setOneBus(response.data);
-    console.log(response.data);
+    // console.log(response.data);
   };
 
   useEffect(() => {

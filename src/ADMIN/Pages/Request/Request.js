@@ -21,7 +21,7 @@ function Request() {
     };
     const response = await allRequestListApi(header)
     setAllReqest(response.data)
-    console.log(response);
+    // console.log(response);
   }
 
   useEffect(() => {
@@ -50,7 +50,7 @@ function Request() {
       }
     });
   }
-  console.log(response);
+  // console.log(response);
  }
 
    

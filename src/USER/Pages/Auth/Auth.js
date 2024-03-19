@@ -27,7 +27,7 @@ function Auth() {
     username: "",
     password: "",
   });
-  console.log(authData);
+  // console.log(authData);
 
   // register
   const handleRegister = async (e) => {
@@ -57,7 +57,7 @@ function Auth() {
         });
       }  
     
-    console.log(response);
+    // console.log(response);
   };
 
   // login
@@ -67,7 +67,7 @@ function Auth() {
     if (response.status == 200) {
       navigate("/home");
       localStorage.setItem("token", response.data.token);
-      console.log(response.data);
+      // console.log(response.data);
     } else {
       Swal.fire({
         icon: "error",
@@ -76,7 +76,7 @@ function Auth() {
         timer: 1500
       });
     }
-    console.log(response);
+    // console.log(response);
   };
 
   return (

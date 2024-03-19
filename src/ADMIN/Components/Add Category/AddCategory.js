@@ -16,7 +16,7 @@ function AddCategory() {
     category:""
   })
 
-  console.log(catInput);
+  // console.log(catInput);
   const token = localStorage.getItem("token");
   const header = {
     Authorization: `Token ${token}`,
@@ -25,7 +25,7 @@ function AddCategory() {
   const getCategory = async () => {
     const response = await getCategoryApi(header);
     setCategory(response.data);
-    console.log(response.data);
+    // console.log(response.data);
 };
 
 const addCategory=async()=>{

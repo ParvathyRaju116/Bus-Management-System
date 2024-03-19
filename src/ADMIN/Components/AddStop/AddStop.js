@@ -23,7 +23,7 @@ function AddStop({ id }) {
         link: "",
         image:""
     });
-    console.log(addStopData);
+    // console.log(addStopData);
     useEffect(() => {
         getRouteAndStop()
 
@@ -80,7 +80,7 @@ function AddStop({ id }) {
             });
 
         }
-        console.log(response);
+        // console.log(response);
     };
 
     return (

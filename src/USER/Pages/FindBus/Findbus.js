@@ -30,7 +30,7 @@ function Findbus() {
           },
         }
       );
-      console.log(response.data);
+      // console.log(response.data);
       setAllRoutes(response.data);
     } catch (error) {
       console.log(error);

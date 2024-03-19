@@ -22,7 +22,7 @@ function BusOwnerAuth() {
     password: "",
     proof: ""
   })
-  console.log(authData);
+  // console.log(authData);
   const getProfile = async (token) => {
     let headers = {
       "Authorization": `Token ${token}`

@@ -24,7 +24,7 @@ function StopList(id) {
       const response = await getStopApi(_id, header);
       if (response.data && response.data.bus_route_stops) {
         setStop(response.data.bus_route_stops);
-        console.log(response.data.bus_route_stops);
+        // console.log(response.data.bus_route_stops);
       } else {
         console.error('Invalid API response format:', response);
       }
