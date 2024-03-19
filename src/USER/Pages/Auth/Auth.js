@@ -48,9 +48,14 @@ function Auth() {
           showConfirmButton: false,
           timer: 1200
         });
-      } else {
-        alert(response.data);
-      }
+      }  else{
+        Swal.fire({
+          icon: "error",
+          title: "An error occurred while registering",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }  
     
     console.log(response);
   };
@@ -60,11 +65,16 @@ function Auth() {
     e.preventDefault();
     const response = await loginApi(authData);
     if (response.status == 200) {
-      navigate("/");
+      navigate("/home");
       localStorage.setItem("token", response.data.token);
       console.log(response.data);
     } else {
-      alert("Unable to log in with provided credentials");
+      Swal.fire({
+        icon: "error",
+        title: "Incorrect username or password",
+        showConfirmButton: false,
+        timer: 1500
+      });
     }
     console.log(response);
   };
@@ -78,7 +88,7 @@ function Auth() {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-          <Dropdown.Item as={Link} to={'/auth'}>User</Dropdown.Item>
+          <Dropdown.Item as={Link} to={'/'}>User</Dropdown.Item>
             <Dropdown.Item as={Link} to={'/bus-owner-auth'}>Bus Owner</Dropdown.Item>
             <Dropdown.Item as={Link} to={'/admin-auth'}>Admin</Dropdown.Item>
           </Dropdown.Menu>

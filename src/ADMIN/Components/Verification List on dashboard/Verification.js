@@ -26,7 +26,7 @@ const[allRequest,setAllReqest]=useState([])
 
   return (
     <div className='p-4 listBody'>
-      <h1>Request Approval</h1> <br /> <br />
+      <h1>Pending List</h1> <br /> <br />
       {allRequest && allRequest.length>0?allRequest.map((i, index)=>(
          <Link key={index} to={`/admin-request/${i.id}`}>
          <Stack direction="row" spacing={2} >

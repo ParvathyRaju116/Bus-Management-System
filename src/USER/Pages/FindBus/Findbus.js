@@ -4,12 +4,11 @@ import "./FindBus.css";
 import RouteList from "../../Components/RouteList/RouteList";
 import { Button } from "react-bootstrap";
 import axios from "axios";
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import StopList from "../../Components/StopList/StopList";
-
 
 function Findbus() {
   const [searchResult, setSearchResult] = useState([]);
@@ -20,7 +19,6 @@ function Findbus() {
 
   const [allRoutes, setAllRoutes] = useState([]);
   const [token, setToken] = useState("");
-  const [routeName, setRouteName] = useState([]);
 
   const getAllRoutes = async (token) => {
     try {
@@ -34,19 +32,12 @@ function Findbus() {
       );
       console.log(response.data);
       setAllRoutes(response.data);
-      allRoutes.map((i) => {
-        setRouteName(i.route);
-      });
-
-      console.log(routeName);
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(allRoutes);
 
-
-  const searchBus = async () => {
+  const searchBus = () => {
     const result = allRoutes.filter(
       (i) =>
         i.route.starts_from
@@ -58,9 +49,7 @@ function Findbus() {
           .toLowerCase()
           .includes(searchInput.ends_at.trim().toLowerCase())
     );
-    console.log(result);
-    setSearchResult(result)
-    return result;
+    setSearchResult(result);
   };
 
   useEffect(() => {
@@ -84,9 +73,10 @@ function Findbus() {
               placeholder="Your Location"
               className="form-control shadow"
               value={searchInput.starts_from}
-              onChange={(e) =>
-                setSearchInput({ ...searchInput, starts_from: e.target.value })
-              }
+              onChange={(e) => {
+                setSearchInput({ ...searchInput, starts_from: e.target.value });
+                searchBus();
+              }}
             />
           </div>
           <br />
@@ -100,57 +90,63 @@ function Findbus() {
               placeholder="Choose Destination"
               className="form-control shadow"
               value={searchInput.ends_at}
-              onChange={(e) =>
-                setSearchInput({ ...searchInput, ends_at: e.target.value })
-              }
+              onChange={(e) => {
+                setSearchInput({ ...searchInput, ends_at: e.target.value });
+                searchBus();
+              }}
             />
-          </div>
-          <div className="text-end mt-3">
-            <button onClick={searchBus} className="pe-5">
-              Search
-            </button>
           </div>
         </div>
       </div>
-      <h2 className="mt-5 nearbusHead">Routes</h2>
-
-      {searchResult && searchResult.length > 0 ? (
-  searchResult.map((i, index) => (
- <div className="m-5 ">
-      <Accordion className='ps-5 w-100' key={i.id}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          id="panel1-header"
-          className='d-flex'
-          style={{ width: '100%', justifyContent: 'space-between' }}
-        >
-          <div style={{ display: 'flex', width: '100%' }}>
-            <img
-              className="bustopLogo"
-              src="https://i.postimg.cc/DwB1WWDp/bus-station.png"
-              alt=""
-            />
-            <div className="ms-5  catDiv pt-2">{i.buscategory}</div>
-            <h3 style={{ textTransform: 'capitalize' }} className="ms-4">{i?.route.name}</h3>
-            <div className='ms-auto text-end me-5 pe-5'>
-              <b> Starts From : </b> {i.route.starts_from} <br />
-              <b> Ends At : </b> {i.route.ends_at}
+      {searchInput.starts_from.trim() === "" && searchInput.ends_at.trim() === "" ? (
+        <RouteList></RouteList>
+      ) : searchResult && searchResult.length > 0 ? (
+        <>
+          <h2 className="mt-5 nearbusHead">Search Result</h2>
+          <div className="m-5">
+            <div className="bustopBody text-center">
+              {searchResult.map((i, index) => (
+                <div key={i.id} className="ps-5 w-100">
+                  <Accordion>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      id="panel1-header"
+                      className="d-flex"
+                      style={{ width: "100%", justifyContent: "space-between" }}
+                    >
+                      <div style={{ display: "flex", width: "100%" }}>
+                        <img
+                          className="bustopLogo"
+                          src="https://i.postimg.cc/DwB1WWDp/bus-station.png"
+                          alt=""
+                        />
+                        <div className="ms-5 catDiv pt-2">{i.buscategory}</div>
+                        <h3
+                          style={{ textTransform: "capitalize" }}
+                          className="ms-4"
+                        >
+                          {i?.route.name}
+                        </h3>
+                        <div className="ms-auto text-end me-5 pe-5">
+                          <b> Starts From : </b> {i.route.starts_from} <br />
+                          <b> Ends At : </b> {i.route.ends_at}
+                        </div>
+                      </div>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <div>
+                        <StopList id={i.id}></StopList>
+                      </div>
+                    </AccordionDetails>
+                  </Accordion>
+                </div>
+              ))}
             </div>
           </div>
-        </AccordionSummary>
-  
-        <AccordionDetails>
-          <div>
-            <StopList id={i.id}></StopList>
-          </div>
-        </AccordionDetails>
-      </Accordion>
- </div>
-  ))
-) : (
-  <RouteList></RouteList>
-)}
-
+        </>
+      ) : (
+        <h2 className="mt-5 nearbusHead">No Routes Found</h2>
+      )}
     </>
   );
 }

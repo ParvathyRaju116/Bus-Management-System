@@ -50,12 +50,16 @@ function AssignedRoutes() {
     }
   }, [activeRoute]);
 
+  const handleCardClick = (id) => {
+    setActiveRoute(id);
+  };
+
   return (
     <div>
       <AdminHeader />
       <div className="mt-5 ms-5"></div>
 
-      <div className="assignedRoutesBody  mt-3 mb-4 ">
+      <div className="assignedRoutesBody mt-3 mb-4 ">
         <h1 className="assigneRouteHead">Assigned Routes</h1>
       </div>
       <hr />
@@ -69,7 +73,10 @@ function AssignedRoutes() {
             {allRouteList.length > 0 ? (
               allRouteList.map((route, index) => (
                 <div className="text-center mt-3 ps-3" key={route.id}>
-                  <div className="fs-5" onClick={() => setActiveRoute(route.id)}>
+                  <div
+                    className={`fs-5 ${activeRoute === route.id ? 'active-route' : ''}`}
+                    onClick={() => handleCardClick(route.id)}
+                  >
                     <b>{route.name}</b>
                   </div>
                   <hr />
@@ -80,11 +87,11 @@ function AssignedRoutes() {
             )}
           </Col>
           <Col lg={10} className="mt-5 ps-5 justify-content-center align-item-center ">
-            <Row>
+            <Row className="justify-content-center align-items-center">
               {filteredList.length > 0 ? (
                 filteredList.map((route, index) => (
-                  <Col lg={4} className="" key={index}>
-                    <Card className="mb-4">
+                  <Col lg={4} className="d-flex " key={index}>
+                    <Card className="mb-4" style={{height:'500px'}}>
                       <>
                         <CardMedia
                           className=""

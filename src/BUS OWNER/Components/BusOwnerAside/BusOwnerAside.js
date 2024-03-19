@@ -20,7 +20,7 @@ function BusOwnerAside() {
   const [username,setUsername]=useState("")
   const handleLogout = () => {
     localStorage.clear()
-    navigate('/')
+    navigate('/admin-auth')
   }
   const getProfile = async () => {
     let token = localStorage.getItem('token')

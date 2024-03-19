@@ -29,8 +29,8 @@ function App() {
        <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
 
         {/* USER */}
-        <Route path='/auth' element={<Auth />} ></Route>
-        <Route path='/' element={<Home />}></Route>
+        <Route path='/' element={<Auth />} ></Route>
+        <Route path='/home' element={<Home />}></Route>
         <Route path='/find-bus' element={<Findbus></Findbus>}></Route>
         <Route path='/profile' element={<Profile></Profile>}></Route>
 

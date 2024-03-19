@@ -41,7 +41,6 @@ try {
       {" "}
       <div className="m-5   ">
         <div className="m-5 bustopBody shadow text-center">
-          <h2 className="mt-5 nearbusHead">All Routes</h2>
           {allRoutes && allRoutes.length > 0 ? (
             allRoutes.map((i, index) => (
                 <Accordion className='ps-5 w-100 ' key={i.id}>

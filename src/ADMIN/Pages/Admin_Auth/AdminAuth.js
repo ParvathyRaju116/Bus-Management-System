@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 
 
 
+
 function AdminAuth() {
     const [isSignUpActive, setIsSignUpActive] = useState(false);
     const navigate=useNavigate()
@@ -36,7 +37,12 @@ function AdminAuth() {
           localStorage.setItem("token",response.data.token)
         }
         else{
-          alert('incorrect password or username')
+          Swal.fire({
+            icon: "error",
+            title: "Incorrect username or password",
+            showConfirmButton: false,
+            timer: 1500
+          });
         }     
       }
 
@@ -56,7 +62,7 @@ function AdminAuth() {
         </Dropdown.Toggle>
   
         <Dropdown.Menu>
-        <Dropdown.Item as={Link} to={'/auth'}>User</Dropdown.Item>
+        <Dropdown.Item as={Link} to={'/'}>User</Dropdown.Item>
             <Dropdown.Item as={Link} to={'/bus-owner-auth'}>Bus Owner</Dropdown.Item>
             <Dropdown.Item as={Link} to={'/admin-auth'}>Admin</Dropdown.Item>        </Dropdown.Menu>
       </Dropdown>

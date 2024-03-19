@@ -20,10 +20,19 @@ function StopList(id) {
 
   // get stop function
   const getStops = async () => {
-    const response = await getStopApi(_id, header);
-    setStop(response.data.bus_route_stops);
-    // console.log(response);
+    try {
+      const response = await getStopApi(_id, header);
+      if (response.data && response.data.bus_route_stops) {
+        setStop(response.data.bus_route_stops);
+        console.log(response.data.bus_route_stops);
+      } else {
+        console.error('Invalid API response format:', response);
+      }
+    } catch (error) {
+      console.error('Error fetching stops:', error);
+    }
   };
+  
 
   useEffect(() => {
     getStops();

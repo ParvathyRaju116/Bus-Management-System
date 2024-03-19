@@ -116,7 +116,7 @@ function BusOwnerAuth() {
             Select User
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item as={Link} to={'/auth'}>User</Dropdown.Item>
+            <Dropdown.Item as={Link} to={'/'}>User</Dropdown.Item>
             <Dropdown.Item as={Link} to={'/bus-owner-auth'}>Bus Owner</Dropdown.Item>
             <Dropdown.Item as={Link} to={'/admin-auth'}>Admin</Dropdown.Item>        </Dropdown.Menu>
         </Dropdown>

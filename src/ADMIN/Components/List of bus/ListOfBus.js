@@ -24,7 +24,7 @@ function ListOfBus({ owners }) {
     setShow(true);
     const response = await getOnebusApi(id, header);
     setOneBus(response.data);
-    console.log(response);
+    console.log(response.data);
   };
 
   useEffect(() => {
@@ -59,7 +59,7 @@ function ListOfBus({ owners }) {
       </Table>:<div className='text-center text-danger mt-5'><><b>No Buses Added Yet!!</b></></div>}
 
       <>
-        <Modal className='' show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
+     { oneBus &&  <Modal className='' show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
           <Modal.Header closeButton className='m-5'>
             <Modal.Title><h1 className='busHead'>{oneBus?oneBus.name:""}</h1></Modal.Title>
           </Modal.Header>
@@ -80,9 +80,7 @@ function ListOfBus({ owners }) {
                   <Col className=' pe-5 mt-5  justify-content-center align-item-center' lg={6}>
                   <div className='text-start' style={{textTransform:'capitalize'}}>
                     <h1>Bus Details</h1>
-              <p className='fs-5' style={{ lineHeight: '1.3' }}>
-                      <b>Category :</b> {oneBus.buscategory.category}
-                    </p>
+            
              
                   <p className='fs-5' style={{ lineHeight: '1.3' }}>
                       <b>Number Plate :</b> {oneBus.Number_plate}
@@ -119,7 +117,7 @@ function ListOfBus({ owners }) {
               <p>Loading...</p>
             )}
           </Modal.Body>
-        </Modal>
+        </Modal>}
       </>
     </div>
   );

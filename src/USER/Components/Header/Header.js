@@ -162,7 +162,7 @@ useEffect(() => {
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
              
                 <MenuItem>
-                <Link to={'/'}>  <Typography textAlign="center" className='text-white'>Home</Typography></Link>
+                <Link to={'/home'}>  <Typography textAlign="center" className='text-white'>Home</Typography></Link>
                 </MenuItem>
             
                 <MenuItem>

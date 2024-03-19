@@ -33,30 +33,34 @@ function OwnersList() {
         </div>
         <hr />
         {busOwner.length > 0 ? (
-          <Table className="mt-5" hover>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Phone</th>
-              </tr>
-            </thead>
-            <tbody>
-              {busOwner.length > 0 ? (
-                busOwner.map((i, index) => (
-                  <tr>
-                    <td>{index + 1}</td>
-                    <td>{i.username}</td>
-                    <td>{i.address}</td>
-                    <td>{i.phone}</td>
-                  </tr>
-                ))
-              ) : (
-                <></>
-              )}
-            </tbody>
-          </Table>
+       <div className="d-flex justify-content-center align-item-center">
+            <Table className="mt-5  ms-5 me-5 text-center" hover>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Phone</th>
+                  <th>Poof</th>
+                </tr>
+              </thead>
+              <tbody>
+                {busOwner.length > 0 ? (
+                  busOwner.map((i, index) => (
+                    <tr>
+                      <td>{index + 1}</td>
+                      <td>{i.username}</td>
+                      <td>{i.address}</td>
+                      <td>{i.phone}</td>
+                      <td><img height={50} width={100} src={`http://127.0.0.1:8000/${i.proof}`} alt="" /></td>
+                    </tr>
+                  ))
+                ) : (
+                  <></>
+                )}
+              </tbody>
+            </Table>
+       </div>
         ) : (
           <div className="text-center text-danger">
             <p>

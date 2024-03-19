@@ -53,29 +53,8 @@ function Request() {
   console.log(response);
  }
 
-   // deny
    
 
-const denyRequest=async()=>{
-  Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#FF4B2B",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes"
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire({
-        title: "Denyed!",
-        icon: "success",
-        timer: 1500
-      });
-    }
-  });
-  navigate('/admin-dashbord')
-}
 
   return (
     <div>
@@ -108,7 +87,7 @@ const denyRequest=async()=>{
   
          </div>}
           <div className='text-end'>
-            <Button className='btn-danger'onClick={denyRequest} >Deny</Button>
+           <Link to={'/admin-dashbord'}> <Button className='btn-danger' >Back to Home</Button></Link>
              <Button className='btn-success ms-5' onClick={acceptRequest}>Accept</Button>
           </div>
 
