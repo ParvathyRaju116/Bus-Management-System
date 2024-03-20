@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./RouteList.css";
-import { getRouteApi } from "../../../SERVICES/AllAPI";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -55,10 +54,12 @@ function RouteList() {
                     />
                     <div className="ms-5 catDiv pt-2">{route.busroute.buscategory.category}</div>
                     <h3 style={{ textTransform: 'capitalize' }} className="ms-4">{route.busroute.route.name}</h3>
-                    <div className='ms-auto text-end me-5 pe-5'>
-                      <b>Starts From: </b> {route.busroute.route.starts_from} <br />
-                      <b>Ends At: </b> {route.busroute.route.ends_at}
-                    </div>
+                      <div className='ms-auto text-end me-5 pe-5' style={{textTransform:'capitalize'}}>
+                        <b>Starts From: </b> {route.busroute.route.starts_from} <br />
+                        <b>Ends At: </b> {route.busroute.route.ends_at}
+                   </div>
+                  <p className="me-5"> <b>Time </b> {route.busroute.routetime} <br /></p>
+
                   </div>
                 </AccordionSummary>
 

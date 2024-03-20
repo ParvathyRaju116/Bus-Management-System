@@ -12,7 +12,7 @@ import StopList from "../../Components/StopList/StopList";
 
 function Findbus() {
   const [searchResult, setSearchResult] = useState([]);
-  const [stops,setStops]=useState([])
+  const [stops, setStops] = useState([]);
   const [searchInput, setSearchInput] = useState({
     starts_from: "",
     ends_at: "",
@@ -38,10 +38,9 @@ function Findbus() {
     }
   };
 
-
-
-
   const searchBus = () => {
+    console.log('Search input:', searchInput);
+  
     const result = allRoutes.filter((i) => {
       const startsFromMatch = i.busroute.route.starts_from
         .trim()
@@ -57,26 +56,30 @@ function Findbus() {
         stop.stop.stop.place
           .trim()
           .toLowerCase()
-          .includes(searchInput.starts_from.trim().toLowerCase()) &&
+          .includes(searchInput.starts_from.trim().toLowerCase())
+      );
+  
+      const stopEndsAtMatch = i.bus_route_stops.some((stop) =>
         stop.stop.stop.place
           .trim()
           .toLowerCase()
           .includes(searchInput.ends_at.trim().toLowerCase())
       );
-  
-      return (startsFromMatch && endsAtMatch) || stopStartsFromMatch;
+    
+      return (startsFromMatch && endsAtMatch) || (stopStartsFromMatch && stopEndsAtMatch);
     });
+  
+    console.log('Search result:', result);
   
     if (result.length > 0) {
       setSearchResult(result);
     } else {
       setSearchResult([]);
     }
-  
-    console.log(searchResult, "hgfhg");
   };
-    
-  useEffect(() => {
+
+
+      useEffect(() => {
     const token = localStorage.getItem("token");
     setToken(token);
     getAllRoutes(token);
@@ -124,11 +127,10 @@ function Findbus() {
       </div>
 
       {searchInput.starts_from.trim() === "" && searchInput.ends_at.trim() === "" ? (
-       <div> 
-              <h2 className="mt-5 nearbusHead">All Route </h2>
-
-        <RouteList></RouteList>
-       </div>
+        <div>
+          <h2 className="mt-5 nearbusHead">All Route</h2>
+          <RouteList></RouteList>
+        </div>
       ) : searchResult && searchResult.length > 0 ? (
         <>
           <h2 className="mt-5 nearbusHead">Search Result</h2>
