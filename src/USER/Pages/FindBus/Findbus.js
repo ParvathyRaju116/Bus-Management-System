@@ -12,6 +12,7 @@ import StopList from "../../Components/StopList/StopList";
 
 function Findbus() {
   const [searchResult, setSearchResult] = useState([]);
+  const [stops,setStops]=useState([])
   const [searchInput, setSearchInput] = useState({
     starts_from: "",
     ends_at: "",
@@ -37,21 +38,44 @@ function Findbus() {
     }
   };
 
+
+
+
   const searchBus = () => {
-    const result = allRoutes.filter(
-      (i) =>
-        i.route.starts_from
+    const result = allRoutes.filter((i) => {
+      const startsFromMatch = i.busroute.route.starts_from
+        .trim()
+        .toLowerCase()
+        .includes(searchInput.starts_from.trim().toLowerCase());
+  
+      const endsAtMatch = i.busroute.route.ends_at
+        .trim()
+        .toLowerCase()
+        .includes(searchInput.ends_at.trim().toLowerCase());
+  
+      const stopStartsFromMatch = i.bus_route_stops.some((stop) =>
+        stop.stop.stop.place
           .trim()
           .toLowerCase()
           .includes(searchInput.starts_from.trim().toLowerCase()) &&
-        i.route.ends_at
+        stop.stop.stop.place
           .trim()
           .toLowerCase()
           .includes(searchInput.ends_at.trim().toLowerCase())
-    );
-    setSearchResult(result);
+      );
+  
+      return (startsFromMatch && endsAtMatch) || stopStartsFromMatch;
+    });
+  
+    if (result.length > 0) {
+      setSearchResult(result);
+    } else {
+      setSearchResult([]);
+    }
+  
+    console.log(searchResult, "hgfhg");
   };
-
+    
   useEffect(() => {
     const token = localStorage.getItem("token");
     setToken(token);
@@ -98,8 +122,13 @@ function Findbus() {
           </div>
         </div>
       </div>
+
       {searchInput.starts_from.trim() === "" && searchInput.ends_at.trim() === "" ? (
+       <div> 
+              <h2 className="mt-5 nearbusHead">All Route </h2>
+
         <RouteList></RouteList>
+       </div>
       ) : searchResult && searchResult.length > 0 ? (
         <>
           <h2 className="mt-5 nearbusHead">Search Result</h2>
@@ -120,22 +149,22 @@ function Findbus() {
                           src="https://i.postimg.cc/DwB1WWDp/bus-station.png"
                           alt=""
                         />
-                        <div className="ms-5 catDiv pt-2">{i.buscategory}</div>
+                        <div className="ms-5 catDiv pt-2">{i.busroute.buscategory.category}</div>
                         <h3
                           style={{ textTransform: "capitalize" }}
                           className="ms-4"
                         >
-                          {i?.route.name}
+                          {i?.busroute?.route.name}
                         </h3>
                         <div className="ms-auto text-end me-5 pe-5">
-                          <b> Starts From : </b> {i.route.starts_from} <br />
-                          <b> Ends At : </b> {i.route.ends_at}
+                          <b> Starts From : </b> {i.busroute?.route?.starts_from} <br />
+                          <b> Ends At : </b> {i.busroute?.route?.ends_at}
                         </div>
                       </div>
                     </AccordionSummary>
                     <AccordionDetails>
                       <div>
-                        <StopList id={i.id}></StopList>
+                        <StopList id={i?.busroute?.id}></StopList>
                       </div>
                     </AccordionDetails>
                   </Accordion>

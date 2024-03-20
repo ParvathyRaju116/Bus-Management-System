@@ -3,7 +3,7 @@ import { Button, Modal, Table } from "react-bootstrap";
 import { getStopApi } from "../../../SERVICES/AllAPI";
 import "./StopList.css";
 
-function StopList(id) {
+function StopList({ id }) {
   const [show, setShow] = useState(false);
   const [fullscreen, setFullscreen] = useState(true);
   const [selectedStop, setSelectedStop] = useState(null);
@@ -11,7 +11,7 @@ function StopList(id) {
   const handleShow = () => setShow(true);
 
   const [stop, setStop] = useState([]);
-  const _id = id.id;
+
   // header
   const token = localStorage.getItem("token");
   const header = {
@@ -21,7 +21,7 @@ function StopList(id) {
   // get stop function
   const getStops = async () => {
     try {
-      const response = await getStopApi(_id, header);
+      const response = await getStopApi(id, header);
       if (response.data && response.data.bus_route_stops) {
         setStop(response.data.bus_route_stops);
         // console.log(response.data.bus_route_stops);
@@ -32,11 +32,10 @@ function StopList(id) {
       console.error('Error fetching stops:', error);
     }
   };
-  
 
   useEffect(() => {
     getStops();
-  }, []);
+  }, [id]);
 
   const mapView = (selectedStop) => {
     setSelectedStop(selectedStop);
@@ -54,70 +53,72 @@ function StopList(id) {
                 <th>Stop Name</th>
                 <th>Link</th>
                 <th>Map</th>
-                <th> Time </th>
+                <th>Time</th>
                 <th>Fare</th>
               </tr>
             </thead>
             <tbody>
               {stop.map((i, index) => (
                 <tr key={index}>
-                  <td>{i.stop.stop.stop_number}</td>
+                  <td>{i.stop?.stop?.stop_number}</td>
                   <td style={{ textTransform: "capitalize" }}>
-                    {i.stop.stop.place}
+                    {i.stop?.stop?.place}
                   </td>
                   <td>
-                    <a href={i.stop.stop.link}>{i.stop.stop.link}</a>
+                    <a href={i.stop?.stop?.link}>{i.stop?.stop?.link}</a>
                   </td>
                   <td onClick={() => mapView(i)}>
                     <img
                       className="mapImg"
                       src={
-                        i.stop.stop.image
+                        i.stop?.stop?.image
                           ? `http://127.0.0.1:8000/${i.stop.stop.image}`
                           : "https://i.postimg.cc/D0ygtWYd/360-F-248426448-NVKLyw-Wq-Ar-G2-ADUx-Dq6-Qprt-Izs-F82d-MF.jpg"
                       }
                       alt=""
                     />
                   </td>
-                  <td>{i.stop.stop_detail.time}</td>
-                  <td>{i.stop.stop_detail.amount}</td>
+                  <td>{i.stop?.stop_detail?.time}</td>
+                  <td>{i.stop?.stop_detail?.amount}</td>
                 </tr>
               ))}
             </tbody>
           </Table>
         ) : (
           <div className="text-danger">
-            <h5>No Stops Added !!</h5>
+            <h5>No Stops Added!!</h5>
           </div>
         )}
       </div>
 
       <Modal fullscreen={fullscreen} show={show} onHide={handleClose}>
-  <Modal.Header closeButton>
-    <Modal.Title>Map</Modal.Title>
-  </Modal.Header>
-  <Modal.Body className="modalBody">
-    {selectedStop && selectedStop.stop && selectedStop.stop.stop && selectedStop.stop.stop.image ? (
-      <img
-        className="mapSinglView"
-        src={`http://127.0.0.1:8000/${selectedStop.stop.stop.image}`}
-        alt=""
-      />
-    ) : (
-      <img
-        className="mapSinglView"
-        src="https://i.postimg.cc/D0ygtWYd/360-F-248426448-NVKLyw-Wq-Ar-G2-ADUx-Dq6-Qprt-Izs-F82d-MF.jpg"
-        alt=""
-      />
-    )}
-  </Modal.Body>
-  <Modal.Footer>
-    <Button variant="secondary" onClick={handleClose}>
-      Close
-    </Button>
-  </Modal.Footer>
-</Modal>
-
+        <Modal.Header closeButton>
+          <Modal.Title>Map</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="modalBody">
+          {selectedStop &&
+            selectedStop.stop &&
+            selectedStop.stop.stop &&
+            selectedStop.stop.stop.image ? (
+            <img
+              className="mapSinglView"
+              src={`http://127.0.0.1:8000/${selectedStop.stop.stop.image}`}
+              alt=""
+            />
+          ) : (
+            <img
+              className="mapSinglView"
+              src="https://i.postimg.cc/D0ygtWYd/360-F-248426448-NVKLyw-Wq-Ar-G2-ADUx-Dq6-Qprt-Izs-F82d-MF.jpg"
+              alt=""
+            />
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
