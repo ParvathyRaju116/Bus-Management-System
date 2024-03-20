@@ -1,16 +1,22 @@
 .bustopLogo{
     height: 30px;
 }
-.bustopBody{
-
+.log{
+    height: 40px;
 }
+.busIm{
+    height: 150px;
+    width: 100%;
+}
+.BoDy{
+    height: 600px !important; 
+  }
 .nearbusHead{
     
         background: linear-gradient(45deg, #FF4B2B, #FF416C);
         -webkit-background-clip: text;
         background-clip: text;
-        color: transparent;
-        
+        color: transparent;       
 }
 h6{
     color: rgb(185, 185, 185);
@@ -20,3 +26,11 @@ h6{
     width: 7%;
     border-radius: 5%;
 }
+.Btn{
+    background: linear-gradient(45deg, #FF4B2B, #FF416C);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
