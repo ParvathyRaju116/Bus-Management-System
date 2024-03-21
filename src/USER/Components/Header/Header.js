@@ -131,12 +131,7 @@ useEffect(() => {
                   <Typography textAlign="center">Find Bus</Typography>
                 </MenuItem>
                
-                <MenuItem>
-                  <Typography textAlign="center"><a href='#about'>About</a></Typography>
-                </MenuItem>
-                <MenuItem>
-                  <Typography textAlign="center">Contact</Typography>
-                </MenuItem>
+              
 
               </Menu>
             </Box>
@@ -169,13 +164,7 @@ useEffect(() => {
                  <Link to={'/find-bus'}> <Typography textAlign="center" className='text-white'>Find Bus</Typography></Link>
                 </MenuItem>
             
-                <MenuItem>
-                  <Typography textAlign="center" className='' ><a className='text-white' href='#about'>About</a></Typography>
-                </MenuItem>
-            
-                <MenuItem>
-                  <Typography textAlign="center"><a className='text-white' href='#footer'>Contact</a></Typography>
-                </MenuItem>
+             
               
             </Box>
 
