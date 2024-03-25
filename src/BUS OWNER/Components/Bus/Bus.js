@@ -15,7 +15,7 @@ function Bus({ data, index }) {
     <>
       <tr>
         <td>{index}</td>
-        <td >{data?.name}&nbsp;<sup>{data?.is_active ? <Badge pill bg="success">Active</Badge> : <Badge pill bg="danger">Inactive</Badge>}</sup></td>
+        <td >{data?.name}</td>
         <td>{data?.Number_plate}</td>
         <td>{data?.Engine_no}</td>
         <td>
@@ -25,7 +25,7 @@ function Bus({ data, index }) {
       </tr>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>{data?.name}&nbsp;{data?.is_active ? <Badge pill bg="success">Active</Badge> : <Badge pill bg="danger">Inactive</Badge>}</Modal.Title>
+          <Modal.Title>{data?.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
 <div className='text-center py-2'>
