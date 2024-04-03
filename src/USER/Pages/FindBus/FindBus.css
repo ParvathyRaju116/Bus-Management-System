@@ -14,3 +14,9 @@
     cursor: pointer;
     width: 10%;
 }
+.catDiv{
+    border: 1px solid #FF4B2B;
+    width: 7% !important;
+    border-radius: 5% !important;
+    height: 40px;
+}

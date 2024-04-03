@@ -33,6 +33,11 @@ export const searchBusApi=async(body,header)=>{
   return await commonApi(`POST`,`${BASE_URL}passengerapi/search/`,body,header)
 }
 
+// edit profile
+export const editProfileApi=async(body,headers)=>{
+  return await commonApi('PUT',`${BASE_URL}passengerapi/profile/`,body,headers)
+}
+
 
 // ___________________________________________________________________________________________________________________________________________________________________________
 
@@ -113,6 +118,8 @@ export const getCategoryApi =async(headers)=>{
 export const addNewCategory=async(body,headers)=>{
   return await commonApi('POST',`${BASE_URL}adminapi/category/`,body,headers)
 }
+
+
 
 // __________________________________________________________________________________________________________________________________________________________________________
 

@@ -86,13 +86,18 @@ function RouteList() {
           </Modal.Header>
           <Modal.Body className="BoDy">
            <Row>
-            <Col>
+            <Col className="">
             
-                <b>Name:</b> {selectedRoute.busroute.bus.name} <br />
-                <b>Number Plate:</b> {selectedRoute.busroute.bus.Number_plate} <br />
-                <b>Bus Category:</b> {selectedRoute.busroute.buscategory.category} <br />
+                <b>Name</b>  
+                <input type="text" disabled={true} placeholder={selectedRoute.busroute.bus.name} />
+
+                <b>Number Plate</b> 
+                <input type="text" disabled={true} placeholder={selectedRoute.busroute.bus.Number_plate} />
+
+                <b>Bus Category</b>
+                <input type="text" disabled={true} placeholder={selectedRoute.busroute.buscategory.category}   />
             </Col>
-           <Col>
+           <Col className="d-flex align-item-center justify-content-center mt-5">
            <img className="busIm" src={`http://127.0.0.1:8000${selectedRoute?.busroute?.bus?.image}`} alt="" />
            </Col>
            </Row>

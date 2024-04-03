@@ -34,45 +34,58 @@ function BusOwnerAuth() {
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (authData.phone && authData.address && authData.username && authData.password && authData.proof) {
-      const formData = new FormData()
-      formData.append("phone", authData.phone)
-      formData.append("address", authData.address)
-      formData.append("username", authData.username)
-      formData.append("password", authData.password)
-      formData.append("proof", authData.proof)
-      // headers 
-      try {
-        const headers = {
-          "Content-Type": "multipart/form-data"
+    if (authData.phone && authData.address && authData.username && authData.password && authData.proof ) {
+      if(authData.phone.length!==10){
+        Swal.fire({
+          icon: "error",
+          title: "Phone number must have 10 digits",
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+      else{
+
+        const formData = new FormData()
+        formData.append("phone", authData.phone)
+        formData.append("address", authData.address)
+        formData.append("username", authData.username)
+        formData.append("password", authData.password)
+        formData.append("proof", authData.proof)
+        // headers 
+        try {
+          const headers = {
+            "Content-Type": "multipart/form-data"
+          }
+          const response = await busOwnerRegistrationApi(formData, headers)
+          if (response.status >= 200 && response.status < 300) {
+            Swal.fire({
+              icon: "success",
+              title: "Registration successful. Please login.",
+              showConfirmButton: false,
+              timer: 1500
+            });
+            setAuthData({
+              phone: "",
+              address: "",
+              username: "",
+              password: "",
+              proof: ""
+            })
+            setIsSignUpActive(false)
+          }
+          else {
+            Swal.fire({
+              icon: "warning",
+              title: "Something went wrong",
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }
+        } catch (error) {
+          console.log(error);
         }
-        const response = await busOwnerRegistrationApi(formData, headers)
-        if (response.status >= 200 && response.status < 300) {
-          Swal.fire({
-            icon: "success",
-            title: "Registration successful. Please login.",
-            showConfirmButton: false,
-            timer: 1500
-          });
-          setAuthData({
-            phone: "",
-            address: "",
-            username: "",
-            password: "",
-            proof: ""
-          })
-          setIsSignUpActive(false)
-        }
-        else {
-          Swal.fire({
-            icon: "warning",
-            title: response.response.data.msg,
-            showConfirmButton: false,
-            timer: 1500
-          });
-        }
-      } catch (error) {
-        console.log(error);
+  
+        
       }
     }
     else {
@@ -88,7 +101,7 @@ function BusOwnerAuth() {
   const handleLogin = async (e) => {
     e.preventDefault()
     const response = await busOwnerLoginApi(authData)
-    if (response.status == 200) {
+    if (response.status == 200 && response.user_type=="Bus Owner") {
       Swal.fire({
         icon: "success",
         title: "Login successful",
@@ -154,7 +167,7 @@ function BusOwnerAuth() {
               <button className="ghost" onClick={handleSignInClick}>Sign In</button>
             </div>
             <div className="overlay-panel overlay-right">
-              <h1>Hello, Friend!</h1>
+              <h1>Hello, Bus Owner!</h1>
               <p>Enter your personal details and start journey with us</p>
               <button className="ghost" onClick={handleSignUpClick}>Sign Up</button>
             </div>

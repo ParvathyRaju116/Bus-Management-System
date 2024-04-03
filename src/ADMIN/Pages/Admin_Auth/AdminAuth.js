@@ -26,7 +26,7 @@ function AdminAuth() {
     const handleLogin=async(e)=>{
       e.preventDefault()
         const response= await AdminLoginApi(authData)
-        if(response.status==200){
+        if(response.status==200 && response.data.user_type=="Admin"){
           Swal.fire({
             icon: "success",
             title: "Login Success",
@@ -82,12 +82,12 @@ function AdminAuth() {
         <div className="overlay-container">
           <div className="overlay">
             <div className="overlay-panel overlay-left">
-              <h1>Welcome Back!</h1>
+              <h1>Welcome Back </h1>
               <p>To keep connected with us please login with your personal info</p>
               <button className="ghost" onClick={handleSignInClick}>Sign In</button>
             </div>
             <div className="overlay-panel overlay-right">
-              <h1>Welcome Back!</h1>
+              <h1>Welcome Back Admin!</h1>
               <p>To keep connected with us please login with sign in details.</p>
             </div>
           </div>

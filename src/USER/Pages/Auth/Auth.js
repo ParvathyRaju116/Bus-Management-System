@@ -5,8 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { Dropdown } from "react-bootstrap";
 import Swal from "sweetalert2";
-
-
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 
 function Auth() {
   const navigate = useNavigate();
@@ -32,7 +32,20 @@ function Auth() {
   // register
   const handleRegister = async (e) => {
     e.preventDefault();
-    const response = await registerApi(authData);
+
+    if (authData.phone.length > 10 || authData.phone.length<10) {
+      Swal.fire({
+        icon: "error",
+        title: "Phone number must have 10 digits",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    
+    }
+    else{
+
+      const response = await registerApi(authData);
+      console.log(response);
       if (response.status == 200) {
         setIsSignUpActive(false);
         setAuthData({
@@ -46,25 +59,30 @@ function Auth() {
           title: "Account Created",
           text: "Please Login",
           showConfirmButton: false,
-          timer: 1200
+          timer: 1200,
         });
-      }  else{
+      } else {
         Swal.fire({
           icon: "error",
           title: "An error occurred while registering",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
-      }  
-    
+      }
+
+    }
+   
+
     // console.log(response);
   };
 
   // login
   const handleLogin = async (e) => {
     e.preventDefault();
+
     const response = await loginApi(authData);
-    if (response.status == 200) {
+    console.log(response);
+    if (response.status == 200 && response.data.user_type=="Passenger") {
       navigate("/home");
       localStorage.setItem("token", response.data.token);
       // console.log(response.data);
@@ -73,7 +91,7 @@ function Auth() {
         icon: "error",
         title: "Incorrect username or password",
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       });
     }
     // console.log(response);
@@ -88,9 +106,15 @@ function Auth() {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-          <Dropdown.Item as={Link} to={'/'}>User</Dropdown.Item>
-            <Dropdown.Item as={Link} to={'/bus-owner-auth'}>Bus Owner</Dropdown.Item>
-            <Dropdown.Item as={Link} to={'/admin-auth'}>Admin</Dropdown.Item>
+            <Dropdown.Item as={Link} to={"/"}>
+              User
+            </Dropdown.Item>
+            <Dropdown.Item as={Link} to={"/bus-owner-auth"}>
+              Bus Owner
+            </Dropdown.Item>
+            <Dropdown.Item as={Link} to={"/admin-auth"}>
+              Admin
+            </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </div>
@@ -118,6 +142,14 @@ function Auth() {
               }
               required
             />
+            {/* <PhoneInput
+              placeholder="Enter phone number"
+              value={authData.phone}
+              onChange={
+                (value) => setAuthData({ ...authData, phone: value }) // Use value directly from PhoneInput
+              }
+              required
+            /> */}
             <input
               type="text"
               placeholder="Address"
@@ -136,7 +168,7 @@ function Auth() {
               }
               required
             />
-       
+
             <input
               type="password"
               placeholder="Password"
