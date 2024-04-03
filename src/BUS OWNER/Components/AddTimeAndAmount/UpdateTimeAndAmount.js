@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-import { addTimeAndAmountApi } from '../../BUS_OWNER_SERVICES/busOwnerApis';
+import { addTimeAndAmountApi, updateTimeAndAmountApi } from '../../BUS_OWNER_SERVICES/busOwnerApis';
 import { MobileTimePicker } from '@mui/x-date-pickers/MobileTimePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -11,13 +11,12 @@ import './AddTimeAndAmount.css'
 import Swal from 'sweetalert2';
 import { FloatingLabel, Form } from 'react-bootstrap';
 
-function AddTimeAndAmount({ id, setStopUpdate }) {
+function UpdateTimeAndAmount({ id, oTime, oAmount, setStopUpdate }) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const [inputData, setInputData] = useState({ time:'00:00:00', amount: "" })
+    const [inputData, setInputData] = useState({ time: oTime, amount: oAmount })
 
-    
     const handleSubmit = async () => {
         const { time, amount } = inputData
         if (!time || !amount) {
@@ -35,18 +34,21 @@ function AddTimeAndAmount({ id, setStopUpdate }) {
                 "Authorization": `Token ${token}`
             }
             try {
-                let result = await addTimeAndAmountApi(id, inputData, reqHeader)
+                let result = await updateTimeAndAmountApi(id, inputData, reqHeader)
                 if (result.status >= 200 && result.status < 300) {
                     Swal.fire({
                         icon: "success",
-                        title: "Time and amount added successfully.",
+                        title: "Time and amount updated successfully.",
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    setStopUpdate(result.data.id)
+                    setStopUpdate(result.data)
+                    console.log(result);
+
                     handleClose()
                 }
                 else {
+                    console.log(result);
                     Swal.fire({
                         icon: "error",
                         title: result?.response?.data?.error,
@@ -62,13 +64,13 @@ function AddTimeAndAmount({ id, setStopUpdate }) {
     }
     return (
         <>
-            <Button variant="primary btn-red rounded-5" onClick={handleShow}>
-                Add amount&time
+            <Button variant="primary btn-red p-1 ms-1" onClick={handleShow}>
+                <i className='fa-solid fa-pen' />
             </Button>
 
             <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Time and amount</Modal.Title>
+                    <Modal.Title>Update time and amount</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     Stop time:
@@ -76,8 +78,8 @@ function AddTimeAndAmount({ id, setStopUpdate }) {
                         <MobileTimePicker
                             label="Starting time:"
                             sx={{ width: '100%', paddingBottom: '10px' }}
-                            value={dayjs(inputData.time,"HH:mm:ss")}
-                            onChange={(newValue) => setInputData({ ...inputData, time: newValue.format("HH:mm:ss") })}
+                            value={inputData.time !== "" ? dayjs(inputData.time,"HH:mm:ss") : null}
+                            onChange={(newValue) => {console.log("New Value:", newValue);setInputData({ ...inputData, time: newValue ? newValue.format("HH:mm:ss") : "" })}}
                         />
                     </LocalizationProvider>
                     Stop amount:
@@ -91,11 +93,11 @@ function AddTimeAndAmount({ id, setStopUpdate }) {
                         Cancel
                     </Button>
                     <Button variant="primary btn-red" onClick={handleSubmit}>
-                        Add
+                        Update
                     </Button>
                 </Modal.Footer>
             </Modal>
         </>
     )
 }
-export default AddTimeAndAmount
+export default UpdateTimeAndAmount

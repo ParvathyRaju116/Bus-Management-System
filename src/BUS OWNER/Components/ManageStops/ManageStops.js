@@ -3,11 +3,12 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import './ManageStops.css'
-import { addStopsApi, getAvailableStopsApi, singleAssignedRouteApi } from '../../BUS_OWNER_SERVICES/busOwnerApis';
+import { addStopsApi, deleteStopApi, getAvailableStopsApi, singleAssignedRouteApi } from '../../BUS_OWNER_SERVICES/busOwnerApis';
 import { Form, ListGroup } from 'react-bootstrap';
 import AddTimeAndAmount from '../AddTimeAndAmount/AddTimeAndAmount';
 import dayjs from 'dayjs';
 import Swal from 'sweetalert2';
+import UpdateTimeAndAmount from '../AddTimeAndAmount/UpdateTimeAndAmount';
 
 
 function ManageStops({ id }) {
@@ -17,7 +18,7 @@ function ManageStops({ id }) {
     const [routeInfo, setRouteInfo] = useState({})
     const [availableStops, setAvailableStops] = useState([])
     const [stopsToAdd, setStopsToAdd] = useState([])
-    const [stopUpdate,setStopUpdate]=useState("")
+    const [stopUpdate, setStopUpdate] = useState("")
     const getAssignedRouteInfo = async () => {
         const token = localStorage.getItem('token')
         const headers = {
@@ -31,6 +32,32 @@ function ManageStops({ id }) {
         if (result2.status >= 200 && result2.status < 300) {
             setAvailableStops(result2.data)
         }
+    }
+    const handleDeleteStop = async (id) => {
+        const token = localStorage.getItem('token')
+        const headers = {
+            "Authorization": `Token ${token}`
+        }
+        const result = await deleteStopApi(id, headers)
+        if (result.status >= 200 && result.status < 300) {
+            Swal.fire({
+                icon: "success",
+                title: "Stop deleted successfully",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            getAssignedRouteInfo()
+        }
+        else{
+            console.log(result);
+            Swal.fire({
+                icon: "error",
+                title: "Something went wrong. Please try again later",
+                showConfirmButton: false,
+                timer: 1500
+            }); 
+        }
+        
     }
     const handleSelect = (e) => {
         if (e.target.checked) {
@@ -48,7 +75,7 @@ function ManageStops({ id }) {
                 showConfirmButton: false,
                 timer: 1500
             });
-            
+
         }
         else {
 
@@ -56,9 +83,9 @@ function ManageStops({ id }) {
             const headers = {
                 "Authorization": `Token ${token}`
             }
-            const result = await addStopsApi(id,{stops:stopsToAdd}, headers)
+            const result = await addStopsApi(id, { stops: stopsToAdd }, headers)
             if (result.status >= 200 && result.status < 300) {
-                
+
                 Swal.fire({
                     icon: "success",
                     title: "Stops added successfully",
@@ -83,12 +110,18 @@ function ManageStops({ id }) {
                     <Modal.Body>
                         <ListGroup>
                             {routeInfo?.bus_route_stops?.map(i =>
-                                <ListGroup.Item key={i.id}><div className='d-flex justify-content-between'>{i.stop}
-                                 {i.bus_stop_detail?
-                                 <div><i className="fa-solid fa-clock"></i> {i.bus_stop_detail.time&&dayjs(i.bus_stop_detail.time, 'HH:mm:ss').format('h:mm A')}&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa-solid fa-indian-rupee-sign"></i> {i.bus_stop_detail.amount}</div>
-                                 :
-                                 <AddTimeAndAmount id={i.stopid} setStopUpdate={setStopUpdate}/>}
-                                 </div> </ListGroup.Item>
+                                <ListGroup.Item key={i.stopid}>
+                                    <div className='d-flex justify-content-between align-items-center'>{i.stop}
+                                        {i.bus_stop_detail ?
+                                            <div><i className="fa-solid fa-clock"></i> {i.bus_stop_detail.time && dayjs(i.bus_stop_detail.time, 'HH:mm:ss').format('h:mm A')}&nbsp;&nbsp;&nbsp;&nbsp;<i className="fa-solid fa-indian-rupee-sign"></i> {i.bus_stop_detail.amount} 
+                                            <UpdateTimeAndAmount id={i.bus_stop_detail.id} oTime={i.bus_stop_detail.time} oAmount={i.bus_stop_detail.amount} setStopUpdate={setStopUpdate} />
+                                            </div>
+                                            :
+                                            <AddTimeAndAmount id={i.stopid} setStopUpdate={setStopUpdate} />}
+                                            
+                                        <Button className='btn-red p-1' onClick={()=>handleDeleteStop(i.stopid)}><i className='fa-solid fa-trash' /> </Button>
+                                    </div>
+                                </ListGroup.Item>
                             )}
                         </ListGroup>
 

@@ -49,7 +49,7 @@ export const getProfileApi = async (headers) => {
 export const getCategoriesApi = async (headers) => {
     return await commonApi('GET', `${BASE_URL}busownerapi/category/`, "", headers)
 }
-//Assign api
+//Assign bus api
 export const assignBusApi = async (body,headers) => {
     return await commonApi('POST', `${BASE_URL}busownerapi/routeassign/`, body, headers)
 }
@@ -80,4 +80,20 @@ export const addTimeAndAmountApi = async (id,body,headers) => {
 //get stop details api
 export const getStopDetailApi = async (id,headers) => {
     return await commonApi('GET', `${BASE_URL}busownerapi/stops/${id}/stopdetail/`,"", headers)
+}
+
+// update profile
+export const updateProfileApi = async (reqBody,headers) => {
+    return await commonApi('PUT', `${BASE_URL}busownerapi/profile/`, reqBody, headers)
+}
+
+
+// delete stop
+export const deleteStopApi = async (id,headers) => {
+    return await commonApi('DELETE', `${BASE_URL}busownerapi/stops/${id}/`, "", headers)
+}
+
+//update time and amount stop for api
+export const updateTimeAndAmountApi = async (id,body,headers) => {
+    return await commonApi('PUT', `${BASE_URL}busownerapi/stopdetail/${id}/`,body, headers)
 }
