@@ -101,7 +101,8 @@ function BusOwnerAuth() {
   const handleLogin = async (e) => {
     e.preventDefault()
     const response = await busOwnerLoginApi(authData)
-    if (response.status == 200 && response.user_type=="Bus Owner") {
+
+    if (response.status == 200 && response.data.user_type=="Bus Owner") { 
       Swal.fire({
         icon: "success",
         title: "Login successful",
