@@ -119,6 +119,27 @@ export const addNewCategory=async(body,headers)=>{
   return await commonApi('POST',`${BASE_URL}adminapi/category/`,body,headers)
 }
 
+// delete category
+export const deleteCategoryApi =async(id,headers)=>{
+  return await commonApi('DELETE',`${BASE_URL}adminapi/category/${id}/`,"",headers)
+}
+
+// delete stop
+export const deleteStopApi =async(id,headers)=>{
+  return await commonApi('DELETE',`${BASE_URL}adminapi/stop/${id}/`,"",headers)
+}
+
+export const editStopApi=async(id,body,headers)=>{
+  return await commonApi('PUT',`${BASE_URL}passengerapi/profile/${id}`,body,headers)
+}
+
+// delete stop
+export const getOneStopApi =async(id,headers)=>{
+  return await commonApi('GET',`${BASE_URL}adminapi/stop/${id}/`,"",headers)
+}
+
+
+
 
 
 // __________________________________________________________________________________________________________________________________________________________________________
