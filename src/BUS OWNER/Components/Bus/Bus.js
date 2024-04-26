@@ -112,7 +112,7 @@ function Bus({ data, index, getData }) {
           <div className='d-flex flex-column justify-content-center align-items-center py-2'>
             {preview && <img src={preview} alt='preview' className='img-fluid w-75' />}
             <label>
-              <input type="file" accept='image/.png,image/.jpg' onChange={(e) => setUploadImage(e.target.files[0])} style={{ display: 'none' }} />
+              <input type="file" accept="image/png, image/jpeg" onChange={(e) => setUploadImage(e.target.files[0])} style={{ display: 'none' }} />
               <div className='btn-red'>Upload image</div></label>
             <br />
           </div>
