@@ -97,3 +97,8 @@ export const deleteStopApi = async (id,headers) => {
 export const updateTimeAndAmountApi = async (id,body,headers) => {
     return await commonApi('PUT', `${BASE_URL}busownerapi/stopdetail/${id}/`,body, headers)
 }
+
+//update bus image
+export const updateBusImageAPI = async (id,body,headers) => {
+    return await commonApi('PUT', `${BASE_URL}busownerapi/bus/${id}/`,body, headers)
+}

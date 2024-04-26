@@ -104,7 +104,7 @@ function BusOwnerBuses() {
           </thead>
           <tbody>
             {allBuses?.map((i, index) =>
-              <Bus data={i} index={index + 1} key={index} />
+              <Bus data={i} index={index + 1} key={index} getData={getData}/>
             )}
           </tbody>
         </Table>
